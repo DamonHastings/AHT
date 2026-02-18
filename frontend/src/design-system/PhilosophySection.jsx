@@ -16,8 +16,10 @@ export default function PhilosophySection({ title = 'Philosophy', content, image
                   {paragraph}
                 </p>
               ))
-            ) : (
+            ) : typeof content === 'string' ? (
               <p className="text-base md:text-lg">{content}</p>
+            ) : (
+              <div className="text-base md:text-lg">{content}</div>
             )}
           </div>
         </div>
@@ -42,6 +44,7 @@ PhilosophySection.propTypes = {
   content: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
+    PropTypes.node,
   ]).isRequired,
   image: PropTypes.string,
   className: PropTypes.string,

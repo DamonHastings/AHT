@@ -12,16 +12,17 @@ export function Button({
   fullWidth = false,
   onClick,
   type = 'button',
+  className = '',
   ...props
 }) {
   const baseStyles = 'font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
   
   const variants = {
-    primary: 'bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500',
-    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500',
-    outline: 'border-2 border-primary-500 text-primary-500 hover:bg-primary-50 focus:ring-primary-500',
-    ghost: 'text-primary-500 hover:bg-primary-50 focus:ring-primary-500',
-    accent: 'bg-accent-coral-500 text-white hover:bg-accent-coral-600 focus:ring-accent-coral-500',
+    primary: 'bg-therapy-burgundy-600 text-white hover:bg-therapy-burgundy-700 focus:ring-therapy-burgundy-500',
+    secondary: 'bg-therapy-teal-500 text-white hover:bg-therapy-teal-600 focus:ring-therapy-teal-400',
+    outline: 'border-2 border-therapy-burgundy-600 text-therapy-burgundy-600 hover:bg-therapy-burgundy-50 focus:ring-therapy-burgundy-500',
+    ghost: 'text-therapy-burgundy-600 hover:bg-therapy-burgundy-50 focus:ring-therapy-burgundy-500',
+    accent: 'bg-therapy-teal-500 text-white hover:bg-therapy-teal-600 focus:ring-therapy-teal-400 shadow-lg',
   }
   
   const sizes = {
@@ -37,7 +38,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabled ? disabledStyles : ''} ${widthStyles}`}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabled ? disabledStyles : ''} ${widthStyles} ${className}`}
       disabled={disabled}
       onClick={onClick}
       {...props}
@@ -55,6 +56,7 @@ Button.propTypes = {
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  className: PropTypes.string,
 }
 
 export default Button

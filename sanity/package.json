@@ -1,6 +1,7 @@
 {
   "name": "therapist-website-sanity",
   "version": "1.0.0",
+  "type": "module",
   "description": "Sanity Studio configuration for therapist website",
   "main": "sanity.config.js",
   "scripts": {
@@ -8,7 +9,11 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "start": "sanity start",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "seed-pages": "node seedPages.js",
+    "seed-navigation": "node seedNavigation.js",
+    "seed-all": "node seedPages.js && node seedNavigation.js",
+    "seed-home-wireframe": "node seedHomePageWireframe.js"
   },
   "keywords": [],
   "author": "",

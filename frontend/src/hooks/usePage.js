@@ -1,0 +1,99 @@
+import { useState, useEffect } from 'react';
+import client from '../utils/sanityClient';
+
+/**
+ * Hook to fetch a page from Sanity by slug
+ * @param {string} slug - The page slug (e.g., 'about', 'home')
+ * @returns {Object} - { page, loading, error }
+ */
+export function usePage(slug) {
+  const [page, setPage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchPage = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const query = `*[_type == "page" && slug.current == $slug && published == true][0]{
+          _id,
+          title,
+          slug,
+          metaTitle,
+          metaDescription,
+          template,
+          components[]{
+            ...,
+            _type,
+            _key
+          },
+          showHeader,
+          showFooter,
+          published,
+          publishedAt
+        }`;
+
+        const result = await client.fetch(query, { slug });
+
+        setPage(result);
+      } catch (err) {
+        console.error('Error fetching page:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPage();
+  }, [slug]);
+
+  return { page, loading, error };
+}
+
+/**
+ * Hook to fetch all published pages from Sanity
+ * @returns {Object} - { pages, loading, error }
+ */
+export function usePages() {
+  const [pages, setPages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPages = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const query = `*[_type == "page" && published == true] | order(publishedAt desc){
+          _id,
+          title,
+          slug,
+          metaTitle,
+          metaDescription,
+          publishedAt
+        }`;
+
+        const result = await client.fetch(query);
+
+        setPages(result);
+      } catch (err) {
+        console.error('Error fetching pages:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPages();
+  }, []);
+
+  return { pages, loading, error };
+}

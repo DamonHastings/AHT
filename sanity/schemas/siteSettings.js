@@ -12,6 +12,14 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'homePage',
+      title: 'Home Page',
+      type: 'reference',
+      to: [{ type: 'page' }],
+      description: 'Select the page to display at the root URL (/)',
+      validation: Rule => Rule.required(),
+    },
+    {
       name: 'description',
       title: 'Site Description',
       type: 'text',
@@ -84,19 +92,19 @@ export default {
       name: 'socialLinks',
       title: 'Social Media Links',
       type: 'reference',
-      to: [{type: 'socialLinks'}],
+      to: [{ type: 'socialLinks' }],
     },
     {
       name: 'footer',
       title: 'Footer Content',
       type: 'reference',
-      to: [{type: 'footerContent'}],
+      to: [{ type: 'footerContent' }],
     },
     {
       name: 'navigation',
       title: 'Navigation Menu',
       type: 'reference',
-      to: [{type: 'navigation'}],
+      to: [{ type: 'navigation' }],
     },
     {
       name: 'seo',
@@ -107,7 +115,7 @@ export default {
           name: 'keywords',
           title: 'Keywords',
           type: 'array',
-          of: [{type: 'string'}],
+          of: [{ type: 'string' }],
         },
         {
           name: 'author',

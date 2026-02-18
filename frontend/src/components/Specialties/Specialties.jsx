@@ -5,19 +5,41 @@ export default function Specialties({ specialties }) {
   const expertiseAreas = specialties.filter(s => s.category === 'expertise')
 
   return (
-    <section id="specialties" className="py-16 bg-neutral-100">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-wood-300 mb-8">Specialties and Expertise</h2>
+    <section 
+      id="specialties" 
+      className="py-20"
+      style={{ backgroundColor: '#F6F9FB' }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <h2 
+          className="font-heading text-4xl md:text-5xl font-semibold mb-12 text-center"
+          style={{ color: '#3F1006' }}
+        >
+          Areas of Focus
+        </h2>
         
         {topSpecialties.length > 0 && (
-          <div className="mb-8">
-            <h3 className="text-2xl font-semibold text-wood-300 mb-4">Top Specialties</h3>
-            <div className="grid md:grid-cols-2 gap-4">
+          <div className="mb-12">
+            <div className="grid md:grid-cols-3 gap-8">
               {topSpecialties.map((specialty) => (
-                <div key={specialty._id} className="bg-white rounded-lg p-4 shadow-sm border border-neutral-200">
-                  <h4 className="font-semibold text-wood-300 mb-2">{specialty.name}</h4>
+                <div 
+                  key={specialty._id} 
+                  className="bg-white rounded-lg p-8 shadow-sm border-2 transition-all hover:shadow-lg"
+                  style={{ borderColor: '#E5E7EB' }}
+                >
+                  <h3 
+                    className="font-heading text-2xl font-semibold mb-4"
+                    style={{ color: '#65858C' }}
+                  >
+                    {specialty.name}
+                  </h3>
                   {specialty.description && (
-                    <p className="text-neutral-400 text-sm">{specialty.description}</p>
+                    <p 
+                      className="font-body leading-relaxed"
+                      style={{ color: '#43595D' }}
+                    >
+                      {specialty.description}
+                    </p>
                   )}
                 </div>
               ))}
@@ -27,14 +49,25 @@ export default function Specialties({ specialties }) {
 
         {expertiseAreas.length > 0 && (
           <div>
-            <h3 className="text-2xl font-semibold text-wood-300 mb-4">Expertise</h3>
-            <div className="grid md:grid-cols-3 gap-3">
+            <h3 
+              className="font-heading text-2xl font-semibold mb-6 text-center"
+              style={{ color: '#65858C' }}
+            >
+              Additional Expertise
+            </h3>
+            <div className="grid md:grid-cols-4 gap-4">
               {expertiseAreas.map((specialty) => (
-                <div key={specialty._id} className="bg-white rounded-lg p-3 shadow-sm border border-neutral-200">
-                  <h4 className="font-medium text-wood-300">{specialty.name}</h4>
-                  {specialty.description && (
-                    <p className="text-neutral-400 text-xs mt-1">{specialty.description}</p>
-                  )}
+                <div 
+                  key={specialty._id} 
+                  className="bg-white rounded-lg p-4 shadow-sm border text-center"
+                  style={{ borderColor: '#E5E7EB' }}
+                >
+                  <h4 
+                    className="font-body font-semibold text-sm"
+                    style={{ color: '#3F1006' }}
+                  >
+                    {specialty.name}
+                  </h4>
                 </div>
               ))}
             </div>

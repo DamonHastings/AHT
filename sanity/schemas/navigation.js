@@ -30,9 +30,9 @@ export default {
               type: 'string',
               options: {
                 list: [
-                  {title: 'Anchor Link (same page)', value: 'anchor'},
-                  {title: 'Internal Page', value: 'internal'},
-                  {title: 'External URL', value: 'external'},
+                  { title: 'Anchor Link (same page)', value: 'anchor' },
+                  { title: 'Internal Page', value: 'internal' },
+                  { title: 'External URL', value: 'external' },
                 ],
                 layout: 'radio',
               },
@@ -43,26 +43,28 @@ export default {
               title: 'Anchor ID',
               type: 'string',
               description: 'e.g., #about, #contact (include the #)',
-              hidden: ({parent}) => parent?.linkType !== 'anchor',
+              hidden: ({ parent }) => parent?.linkType !== 'anchor',
             },
             {
               name: 'internalPage',
               title: 'Internal Page',
-              type: 'string',
-              hidden: ({parent}) => parent?.linkType !== 'internal',
+              type: 'reference',
+              to: [{ type: 'page' }],
+              description: 'Select a page from your site',
+              hidden: ({ parent }) => parent?.linkType !== 'internal',
             },
             {
               name: 'externalUrl',
               title: 'External URL',
               type: 'url',
-              hidden: ({parent}) => parent?.linkType !== 'external',
+              hidden: ({ parent }) => parent?.linkType !== 'external',
             },
             {
               name: 'openInNewTab',
               title: 'Open in New Tab',
               type: 'boolean',
               initialValue: false,
-              hidden: ({parent}) => parent?.linkType !== 'external',
+              hidden: ({ parent }) => parent?.linkType !== 'external',
             },
           ],
           preview: {
@@ -70,7 +72,7 @@ export default {
               title: 'label',
               subtitle: 'linkType',
             },
-            prepare({title, subtitle}) {
+            prepare({ title, subtitle }) {
               return {
                 title,
                 subtitle: subtitle ? `Link: ${subtitle}` : '',
@@ -85,7 +87,7 @@ export default {
     select: {
       title: 'title',
     },
-    prepare({title}) {
+    prepare({ title }) {
       return {
         title: title || 'Navigation Menu',
       }

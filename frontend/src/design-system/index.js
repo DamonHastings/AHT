@@ -2,12 +2,12 @@
 export { default as Button } from './Button'
 export { default as Card } from './Card'
 export { default as Badge } from './Badge'
-export { Heading, Text } from './Typography'
+export { Heading, Text } from './Typography.jsx'
 export { default as ColorPalette } from './ColorPalette'
 export { default as ColorPaletteBuilder } from './ColorPaletteBuilder'
 export { default as TypographyExplorer } from './TypographyExplorer'
 export { colors, colorUsage } from './colors'
-export { typography, typographyUsage, typographyCSS } from './typography'
+export { typography, typographyUsage, typographyCSS } from './typography.js'
 
 // Wireframe Components
 export { default as Logo } from './Logo'

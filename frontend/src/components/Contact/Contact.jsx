@@ -48,32 +48,80 @@ export default function Contact({ therapist, practice }) {
   if (!therapist) return null
 
   return (
-    <section id="contact" className="py-16 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-wood-300 mb-8">Let's Connect</h2>
+    <section 
+      id="contact" 
+      className="py-20"
+      style={{ backgroundColor: '#65858C' }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <h2 
+          className="font-heading text-4xl md:text-5xl font-bold mb-6 text-white"
+        >
+          Ready to Take the First Step?
+        </h2>
+        <p 
+          className="font-body text-xl mb-10 text-white opacity-90 max-w-2xl mx-auto leading-relaxed"
+        >
+          Reaching out for support is a sign of strength. Let's work together to help you 
+          achieve your goals and live a more fulfilling life.
+        </p>
         
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold text-wood-300 mb-4">Contact Information</h3>
-            <div className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-12 mt-12 text-left max-w-5xl mx-auto">
+          {/* Contact Information */}
+          <div 
+            className="bg-white rounded-xl p-8 shadow-lg"
+          >
+            <h3 
+              className="font-heading text-2xl font-semibold mb-6"
+              style={{ color: '#3F1006' }}
+            >
+              Contact Information
+            </h3>
+            <div className="space-y-6">
               <div>
-                <p className="text-sm text-neutral-400 mb-1">Phone</p>
-                <a href={`tel:${therapist.phone}`} className="text-primary-500 hover:text-primary-600 hover:underline text-lg transition-colors">
+                <p 
+                  className="font-body text-sm font-semibold mb-2"
+                  style={{ color: '#7F7466' }}
+                >
+                  Phone
+                </p>
+                <a 
+                  href={`tel:${therapist.phone}`} 
+                  className="font-body text-xl font-semibold hover:underline transition-colors"
+                  style={{ color: '#65858C' }}
+                >
                   {therapist.phone}
                 </a>
               </div>
               {therapist.email && (
                 <div>
-                  <p className="text-sm text-neutral-400 mb-1">Email</p>
-                  <a href={`mailto:${therapist.email}`} className="text-primary-500 hover:text-primary-600 hover:underline text-lg transition-colors">
+                  <p 
+                    className="font-body text-sm font-semibold mb-2"
+                    style={{ color: '#7F7466' }}
+                  >
+                    Email
+                  </p>
+                  <a 
+                    href={`mailto:${therapist.email}`} 
+                    className="font-body text-xl font-semibold hover:underline transition-colors break-all"
+                    style={{ color: '#65858C' }}
+                  >
                     {therapist.email}
                   </a>
                 </div>
               )}
               {practice?.location && (
                 <div>
-                  <p className="text-sm text-neutral-400 mb-1">Location</p>
-                  <p className="text-wood-300">
+                  <p 
+                    className="font-body text-sm font-semibold mb-2"
+                    style={{ color: '#7F7466' }}
+                  >
+                    Location
+                  </p>
+                  <p 
+                    className="font-body text-base leading-relaxed"
+                    style={{ color: '#43595D' }}
+                  >
                     {[
                       practice.location.address,
                       practice.location.city,
@@ -86,18 +134,39 @@ export default function Contact({ therapist, practice }) {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-xl font-semibold text-wood-300 mb-4">Send a Message</h3>
+          {/* Contact Form */}
+          <div 
+            className="bg-white rounded-xl p-8 shadow-lg"
+          >
+            <h3 
+              className="font-heading text-2xl font-semibold mb-6"
+              style={{ color: '#3F1006' }}
+            >
+              Send a Message
+            </h3>
             {submitted ? (
-              <div className="bg-natural-green-50 border border-natural-green-200 rounded-lg p-4">
-                <p className="text-natural-green-700">
+              <div 
+                className="border-2 rounded-lg p-6"
+                style={{ 
+                  backgroundColor: '#EBF2DF',
+                  borderColor: '#C2D9A0'
+                }}
+              >
+                <p 
+                  className="font-body text-base"
+                  style={{ color: '#414835' }}
+                >
                   Thank you! Your message has been sent. We'll get back to you soon.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-wood-300 mb-1">
+                  <label 
+                    htmlFor="name" 
+                    className="block font-body text-sm font-semibold mb-2"
+                    style={{ color: '#3F1006' }}
+                  >
                     Name
                   </label>
                   <input
@@ -107,11 +176,19 @@ export default function Contact({ therapist, practice }) {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white text-wood-300"
+                    className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 bg-white font-body"
+                    style={{ 
+                      borderColor: '#E5E7EB',
+                      color: '#3F1006'
+                    }}
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-wood-300 mb-1">
+                  <label 
+                    htmlFor="email" 
+                    className="block font-body text-sm font-semibold mb-2"
+                    style={{ color: '#3F1006' }}
+                  >
                     Email
                   </label>
                   <input
@@ -121,11 +198,19 @@ export default function Contact({ therapist, practice }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white text-wood-300"
+                    className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 bg-white font-body"
+                    style={{ 
+                      borderColor: '#E5E7EB',
+                      color: '#3F1006'
+                    }}
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-wood-300 mb-1">
+                  <label 
+                    htmlFor="phone" 
+                    className="block font-body text-sm font-semibold mb-2"
+                    style={{ color: '#3F1006' }}
+                  >
                     Phone (optional)
                   </label>
                   <input
@@ -134,11 +219,19 @@ export default function Contact({ therapist, practice }) {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white text-wood-300"
+                    className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 bg-white font-body"
+                    style={{ 
+                      borderColor: '#E5E7EB',
+                      color: '#3F1006'
+                    }}
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-wood-300 mb-1">
+                  <label 
+                    htmlFor="message" 
+                    className="block font-body text-sm font-semibold mb-2"
+                    style={{ color: '#3F1006' }}
+                  >
                     Message
                   </label>
                   <textarea
@@ -148,18 +241,37 @@ export default function Contact({ therapist, practice }) {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white text-wood-300"
+                    className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 bg-white font-body"
+                    style={{ 
+                      borderColor: '#E5E7EB',
+                      color: '#3F1006'
+                    }}
                   />
                 </div>
                 {error && (
-                  <div className="bg-primary-50 border border-primary-200 rounded-md p-3">
-                    <p className="text-primary-700 text-sm">{error}</p>
+                  <div 
+                    className="border-2 rounded-lg p-3"
+                    style={{ 
+                      backgroundColor: '#FADBD8',
+                      borderColor: '#e74c3c'
+                    }}
+                  >
+                    <p 
+                      className="font-body text-sm"
+                      style={{ color: '#e74c3c' }}
+                    >
+                      {error}
+                    </p>
                   </div>
                 )}
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-primary-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-primary-600 disabled:bg-neutral-300 disabled:cursor-not-allowed transition-colors"
+                  className="w-full px-6 py-4 rounded-lg font-body font-semibold transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    backgroundColor: '#C2D9A0',
+                    color: '#3F1006'
+                  }}
                 >
                   {submitting ? 'Sending...' : 'Send Message'}
                 </button>
