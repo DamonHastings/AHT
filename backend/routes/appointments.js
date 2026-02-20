@@ -1,9 +1,10 @@
 import express from 'express'
 import Appointment from '../models/Appointment.js'
+import { sendConsultationEmail } from '../lib/email.js'
 
 const router = express.Router()
 
-// POST /api/appointments - Create consultation request
+// POST /api/appointments - Create consultation request (V1: compiles to email when configured)
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, preferredDate, preferredTime, message } = req.body
@@ -16,17 +17,28 @@ router.post('/', async (req, res) => {
       name,
       email,
       phone: phone || '',
-      preferredDate,
-      preferredTime,
+      preferredDate: preferredDate || undefined,
+      preferredTime: preferredTime || undefined,
       message: message || '',
       status: 'pending',
     })
 
     await appointment.save()
 
-    res.status(201).json({ 
+    // V1: send compiled email to practitioner when PRACTITIONER_EMAIL + SMTP/MAILER_URL are set
+    sendConsultationEmail(appointment).then((result) => {
+      if (result.sent) {
+        console.log('Consultation email sent to practitioner')
+      } else if (result.reason) {
+        console.log('Consultation email skipped:', result.reason)
+      }
+    }).catch((err) => {
+      console.error('Consultation email error:', err)
+    })
+
+    res.status(201).json({
       message: 'Appointment request submitted successfully',
-      id: appointment._id 
+      id: appointment._id,
     })
   } catch (error) {
     console.error('Appointment creation error:', error)
@@ -72,9 +84,9 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Appointment not found' })
     }
 
-    res.json({ 
+    res.json({
       message: 'Appointment updated successfully',
-      appointment 
+      appointment
     })
   } catch (error) {
     console.error('Update appointment error:', error)

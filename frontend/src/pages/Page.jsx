@@ -1,15 +1,19 @@
-import { usePage } from '../hooks/usePage';
-import PageRenderer from '../components/PageRenderer';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import { useTherapistData } from '../hooks/useTherapistData';
+import { usePage } from "../hooks/usePage";
+import PageRenderer from "../components/PageRenderer";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import { useTherapistData } from "../hooks/useTherapistData";
 
 /**
- * Generic page component that fetches and renders Sanity pages
+ * Generic page component that fetches and renders Sanity pages.
+ * All pages, including home, are rendered from Sanity via PageRenderer.
  */
 export default function Page({ slug }) {
-  const { page, loading, error } = usePage(slug);
+  const { page, loading: pageLoading, error: pageError } = usePage(slug);
   const { therapist } = useTherapistData();
+
+  const loading = pageLoading;
+  const error = pageError;
 
   if (loading) {
     return (
@@ -39,7 +43,7 @@ export default function Page({ slug }) {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-therapy-burgundy-600 mb-4">404</h1>
           <p className="text-therapy-burgundy-500 mb-6">Page not found</p>
-          <a 
+          <a
             href="/"
             className="inline-block bg-therapy-burgundy-600 text-white px-6 py-3 rounded-md hover:bg-therapy-burgundy-700 transition"
           >
@@ -52,9 +56,9 @@ export default function Page({ slug }) {
 
   return (
     <div className="min-h-screen bg-therapy-sand-50">
-      {(page.showHeader !== false) && <Header therapist={therapist} />}
+      {page.showHeader !== false && <Header therapist={therapist} />}
       <PageRenderer pageData={page} />
-      {(page.showFooter !== false) && <Footer />}
+      {page.showFooter !== false && <Footer />}
     </div>
   );
 }

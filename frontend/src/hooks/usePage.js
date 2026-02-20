@@ -13,6 +13,7 @@ export function usePage(slug) {
 
   useEffect(() => {
     if (!slug) {
+      setPage(null);
       setLoading(false);
       return;
     }

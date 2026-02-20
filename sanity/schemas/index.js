@@ -22,6 +22,10 @@ import {
   ctaButtonComponent,
   imageGalleryComponent,
   spacerComponent,
+  previewScrollComponent,
+  profileSectionComponent,
+  consultationFormComponent,
+  consultationFormWideComponent,
 } from './pageComponents'
 import {
   homePageTemplate,
@@ -57,6 +61,10 @@ export const schemaTypes = [
   ctaButtonComponent,
   imageGalleryComponent,
   spacerComponent,
+  previewScrollComponent,
+  profileSectionComponent,
+  consultationFormComponent,
+  consultationFormWideComponent,
 
   // Page templates (objects for template-based pages)
   homePageTemplate,

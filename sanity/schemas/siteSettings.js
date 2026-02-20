@@ -54,7 +54,6 @@ export default {
       name: 'contactEmail',
       title: 'Contact Email',
       type: 'string',
-      validation: Rule => Rule.email(),
     },
     {
       name: 'contactPhone',
@@ -91,14 +90,59 @@ export default {
     {
       name: 'socialLinks',
       title: 'Social Media Links',
-      type: 'reference',
-      to: [{ type: 'socialLinks' }],
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'platform',
+              title: 'Platform',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'LinkedIn', value: 'linkedin' },
+                  { title: 'Twitter', value: 'twitter' },
+                  { title: 'YouTube', value: 'youtube' },
+                ],
+              },
+            },
+            {
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+            },
+          ],
+          preview: {
+            select: {
+              platform: 'platform',
+              url: 'url',
+            },
+            prepare({ platform, url }) {
+              return {
+                title: platform,
+                subtitle: url,
+              };
+            },
+          },
+        },
+      ],
     },
     {
-      name: 'footer',
-      title: 'Footer Content',
-      type: 'reference',
-      to: [{ type: 'footerContent' }],
+      name: 'businessName',
+      title: 'Business Name (Footer)',
+      type: 'string',
+      description: 'Business name displayed in footer',
+      initialValue: 'Arielle Hastings Psychotherapy',
+    },
+    {
+      name: 'copyrightText',
+      title: 'Copyright Text (Footer)',
+      type: 'string',
+      description: 'Copyright notice displayed in footer',
+      initialValue: '© 2026 Arielle Hastings, LMFT. All Rights Reserved.',
     },
     {
       name: 'navigation',

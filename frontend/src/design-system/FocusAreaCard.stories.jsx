@@ -1,40 +1,43 @@
-import FocusAreaCard from './FocusAreaCard';
+import FocusAreaCard from "./FocusAreaCard";
 
 export default {
-  title: 'Design System/FocusAreaCard',
+  title: "Design System/FocusAreaCard",
   component: FocusAreaCard,
   parameters: {
     docs: {
       description: {
-        component: 'Focus area card component for displaying therapeutic specialties or areas of practice.',
+        component:
+          "Focus area card component for displaying therapeutic specialties or areas of practice.",
       },
     },
   },
   argTypes: {
     title: {
-      control: 'text',
+      control: "text",
     },
     description: {
-      control: 'text',
+      control: "text",
     },
     icon: {
-      control: 'text',
+      control: "text",
     },
   },
 };
 
 export const Default = {
   args: {
-    title: 'Anxiety & Stress',
-    description: 'Learn effective strategies to manage anxiety, reduce stress, and develop healthy coping mechanisms for daily challenges.',
-    icon: '🧠',
+    title: "Anxiety & Stress",
+    description:
+      "Learn effective strategies to manage anxiety, reduce stress, and develop healthy coping mechanisms for daily challenges.",
+    icon: "wave",
   },
 };
 
 export const WithoutIcon = {
   args: {
-    title: 'Depression',
-    description: 'Navigate through depression with evidence-based therapeutic approaches tailored to your unique needs.',
+    title: "Depression",
+    description:
+      "Navigate through depression with evidence-based therapeutic approaches tailored to your unique needs.",
   },
 };
 
@@ -44,17 +47,17 @@ export const ThreeCardLayout = {
       <FocusAreaCard
         title="Anxiety & Stress"
         description="Learn effective strategies to manage anxiety, reduce stress, and develop healthy coping mechanisms."
-        icon="🧠"
+        icon="wave"
       />
       <FocusAreaCard
         title="Trauma & PTSD"
         description="Heal from traumatic experiences through compassionate, trauma-informed therapeutic approaches."
-        icon="💙"
+        icon="shield"
       />
       <FocusAreaCard
         title="Relationship Issues"
         description="Improve communication, build healthier connections, and navigate relationship challenges."
-        icon="🤝"
+        icon="people"
       />
     </div>
   ),
@@ -66,12 +69,12 @@ export const TwoCardLayout = {
       <FocusAreaCard
         title="Life Transitions"
         description="Navigate major life changes with support and guidance during challenging transitions."
-        icon="🌱"
+        icon="plant"
       />
       <FocusAreaCard
         title="Self-Esteem"
         description="Build confidence and develop a healthier relationship with yourself."
-        icon="✨"
+        icon="sparkles"
       />
     </div>
   ),
@@ -86,21 +89,21 @@ export const AllExamples = {
           <FocusAreaCard
             title="Anxiety"
             description="Manage anxiety with proven therapeutic techniques."
-            icon="🧠"
+            icon="brain"
           />
           <FocusAreaCard
             title="Depression"
             description="Find hope and healing through compassionate care."
-            icon="💙"
+            icon="sun"
           />
           <FocusAreaCard
             title="Trauma"
             description="Process and heal from past traumatic experiences."
-            icon="🌟"
+            icon="shield"
           />
         </div>
       </div>
-      
+
       <div>
         <h3 className="text-xl font-bold mb-4">Without Icons</h3>
         <div className="grid md:grid-cols-3 gap-6">

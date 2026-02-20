@@ -109,6 +109,19 @@ export const heroComponent = {
       },
       initialValue: 'screen',
     },
+    {
+      name: 'variant',
+      title: 'Layout Variant',
+      type: 'string',
+      description: 'Overlay: content over image. Split: image 7 cols, text 3 cols with gaps on a 12-column grid.',
+      options: {
+        list: [
+          { title: 'Overlay (content over image)', value: 'overlay' },
+          { title: 'Split (image 7 cols, text 3 cols)', value: 'split' },
+        ],
+      },
+      initialValue: 'overlay',
+    },
   ],
   preview: {
     select: {
@@ -231,9 +244,9 @@ export const focusAreasComponent = {
             },
             {
               name: 'icon',
-              title: 'Icon (Emoji)',
+              title: 'Icon',
               type: 'string',
-              description: 'Single emoji character (e.g., 🧠)',
+              description: 'Icon name (e.g., brain, heart, wave, sun, shield, unlock, sparkles, plant, meditation, compass, target) or emoji (🧠)',
             },
           ],
           preview: {
@@ -346,6 +359,30 @@ export const personalStatementComponent = {
   type: 'object',
   fields: [
     {
+      name: 'image',
+      title: 'Profile Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Optional portrait image displayed alongside the statement',
+    },
+    {
+      name: 'imageAlt',
+      title: 'Image Alt Text',
+      type: 'string',
+      description: 'Describe the image for accessibility',
+      hidden: ({ parent }) => !parent?.image,
+    },
+    {
+      name: 'imageOnLeft',
+      title: 'Image Position',
+      type: 'boolean',
+      description: 'Check to place image on the left, uncheck for right',
+      initialValue: true,
+      hidden: ({ parent }) => !parent?.image,
+    },
+    {
       name: 'statement',
       title: 'Statement',
       type: 'text',
@@ -354,13 +391,21 @@ export const personalStatementComponent = {
     },
     {
       name: 'showFullBioLink',
-      title: 'Show "Read Full Bio" Link',
+      title: 'Show Link',
       type: 'boolean',
       initialValue: true,
     },
     {
+      name: 'linkText',
+      title: 'Link Text',
+      type: 'string',
+      description: 'Customize the link/button text (e.g. "Read Full Biography", "Learn more")',
+      initialValue: 'Read Full Biography',
+      hidden: ({ parent }) => !parent?.showFullBioLink,
+    },
+    {
       name: 'fullBioLink',
-      title: 'Full Bio Link',
+      title: 'Link URL',
       type: 'string',
       description: 'URL or anchor (e.g., #about)',
       hidden: ({ parent }) => !parent?.showFullBioLink,
@@ -369,11 +414,13 @@ export const personalStatementComponent = {
   preview: {
     select: {
       statement: 'statement',
+      media: 'image',
     },
-    prepare({ statement }) {
+    prepare({ statement, media }) {
       return {
         title: 'Personal Statement',
         subtitle: statement?.substring(0, 60) + '...',
+        media,
       };
     },
   },
@@ -587,6 +634,315 @@ export const spacerComponent = {
     prepare({ size }) {
       return {
         title: `Spacer (${size || 'md'})`,
+      };
+    },
+  },
+};
+
+export const consultationFormComponent = {
+  name: 'consultationFormComponent',
+  title: 'Consultation / Send a Message',
+  type: 'object',
+  fields: [
+    {
+      name: 'title',
+      title: 'Form Title',
+      type: 'string',
+      initialValue: 'Send a Message',
+    },
+    {
+      name: 'consentText',
+      title: 'Consent / Disclaimer Text',
+      type: 'text',
+      rows: 4,
+      description: 'Shown below the form (e.g. consent to receive communications).',
+      initialValue:
+        'By submitting this form, you consent to receive communications from the practice. If you provide an email address, you may receive an automated confirmation. See our Privacy Policy for details on how we protect your information.',
+    },
+    {
+      name: 'privacyPolicyUrl',
+      title: 'Privacy Policy URL',
+      type: 'string',
+      description: 'Link for "Privacy Policy" in the consent text',
+    },
+    {
+      name: 'buttonText',
+      title: 'Submit Button Text',
+      type: 'string',
+      initialValue: "LET'S CONNECT",
+    },
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare({ title }) {
+      return {
+        title: `Consultation Form: ${title || 'Send a Message'}`,
+      };
+    },
+  },
+};
+
+export const consultationFormWideComponent = {
+  name: 'consultationFormWideComponent',
+  title: 'Consultation (Wide) – Contact + Form',
+  type: 'object',
+  description: '2 columns: contact info on the left, scheduling & messaging form on the right. Contact data comes from Therapist & Practice in Sanity.',
+  fields: [
+    {
+      name: 'contactTitle',
+      title: 'Contact Column Title',
+      type: 'string',
+      initialValue: 'Contact Information',
+    },
+    {
+      name: 'title',
+      title: 'Form Title',
+      type: 'string',
+      initialValue: 'Send a Message',
+    },
+    {
+      name: 'consentText',
+      title: 'Consent / Disclaimer Text',
+      type: 'text',
+      rows: 4,
+      description: 'Shown below the form.',
+      initialValue:
+        'By submitting this form, you consent to receive communications from the practice. If you provide an email address, you may receive an automated confirmation. See our Privacy Policy for details on how we protect your information.',
+    },
+    {
+      name: 'privacyPolicyUrl',
+      title: 'Privacy Policy URL',
+      type: 'string',
+    },
+    {
+      name: 'buttonText',
+      title: 'Submit Button Text',
+      type: 'string',
+      initialValue: "LET'S CONNECT",
+    },
+  ],
+  preview: {
+    select: {
+      contactTitle: 'contactTitle',
+      title: 'title',
+    },
+    prepare({ contactTitle, title }) {
+      return {
+        title: 'Consultation (Wide)',
+        subtitle: `${contactTitle || 'Contact'} | ${title || 'Send a Message'}`,
+      };
+    },
+  },
+};
+
+export const previewScrollComponent = {
+  name: 'previewScrollComponent',
+  title: 'Preview Scroll',
+  type: 'object',
+  fields: [
+    {
+      name: 'title',
+      title: 'Section Title',
+      type: 'string',
+      description: 'Optional title for the scroll section',
+    },
+    {
+      name: 'items',
+      title: 'Scroll Items',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'icon',
+              title: 'Icon',
+              type: 'string',
+              description: 'Icon name (e.g., brain, heart, wave, sun, shield, unlock, sparkles, plant, meditation, compass, target) or emoji (🧠)',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              icon: 'icon',
+            },
+            prepare({ title, icon }) {
+              return {
+                title: `${icon || '•'} ${title}`,
+              };
+            },
+          },
+        },
+      ],
+      validation: Rule => Rule.min(3).max(12),
+      description: 'Add items to display in the scrollable carousel',
+    },
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      items: 'items',
+    },
+    prepare({ title, items }) {
+      return {
+        title: `Preview Scroll: ${title || 'Untitled'}`,
+        subtitle: `${items?.length || 0} items`,
+      };
+    },
+  },
+};
+
+const credentialIconOptions = [
+  { title: 'Graduation cap', value: 'graduation' },
+  { title: 'License/Badge', value: 'license' },
+  { title: 'Book', value: 'book' },
+];
+
+export const profileSectionComponent = {
+  name: 'profileSectionComponent',
+  title: 'Profile Section',
+  type: 'object',
+  fields: [
+    {
+      name: 'image',
+      title: 'Profile Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Portrait-oriented image (3:4 aspect ratio works best)',
+    },
+    {
+      name: 'imageAlt',
+      title: 'Image Alt Text',
+      type: 'string',
+      description: 'Describe the image for accessibility',
+    },
+    {
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+      description: 'Small uppercase label (e.g. "ABOUT MARY DIORIO, LCSW")',
+    },
+    {
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      description: 'Primary heading (e.g. "Deeply experienced.")',
+    },
+    {
+      name: 'subheading',
+      title: 'Subheading',
+      type: 'string',
+      description: 'Secondary line under the heading',
+    },
+    {
+      name: 'tags',
+      title: 'Highlight Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Rounded badges (e.g. "20+ Years Clinical Experience")',
+    },
+    {
+      name: 'content',
+      title: 'Content',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: Rule => Rule.required(),
+      description: 'Main text content for this section',
+    },
+    {
+      name: 'buttonText',
+      title: 'Button Text',
+      type: 'string',
+      initialValue: 'Learn more about me',
+    },
+    {
+      name: 'buttonLink',
+      title: 'Button Link',
+      type: 'string',
+      description: 'URL or anchor (e.g., #about)',
+      initialValue: '#',
+    },
+    {
+      name: 'credentials',
+      title: 'Credentials & Training',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Credentials & Training',
+        },
+        {
+          name: 'items',
+          title: 'Credential Items',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'icon',
+                  title: 'Icon',
+                  type: 'string',
+                  options: { list: credentialIconOptions },
+                },
+                {
+                  name: 'title',
+                  title: 'Title',
+                  type: 'string',
+                  validation: Rule => Rule.required(),
+                },
+                {
+                  name: 'description',
+                  title: 'Description',
+                  type: 'string',
+                },
+              ],
+              preview: {
+                select: { title: 'title' },
+                prepare: ({ title }) => ({ title }),
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'imageOnLeft',
+      title: 'Image Position',
+      type: 'boolean',
+      description: 'Check to place image on the left, uncheck for right',
+      initialValue: true,
+    },
+  ],
+  preview: {
+    select: {
+      media: 'image',
+      imageOnLeft: 'imageOnLeft',
+    },
+    prepare({ media, imageOnLeft }) {
+      return {
+        title: 'Profile Section',
+        subtitle: imageOnLeft ? 'Image on left' : 'Image on right',
+        media,
       };
     },
   },
