@@ -14,11 +14,11 @@ const client = createClient({
 // New home page based on wireframe
 const homePageWireframe = {
   _type: 'page',
-  _id: 'page-home',
-  title: 'Home',
+  _id: 'page-home-wireframe',
+  title: 'Home (Wireframe)',
   slug: {
     _type: 'slug',
-    current: 'home',
+    current: 'home-wireframe',
   },
   metaTitle: 'Home | Arielle Hastings Therapy',
   metaDescription: 'Find your path to wellness with compassionate, evidence-based therapy tailored to your unique needs.',
@@ -198,7 +198,7 @@ async function replaceHomePage() {
     }
 
     console.log('\n🎉 Successfully replaced home page!');
-    console.log('\n📋 New home page structure (based on wireframe):');
+    console.log('\n📋 New wireframe page structure (based on wireframe):');
     console.log('   1. Header (Logo + Book Consultation button)');
     console.log('   2. Identity Quote');
     console.log('   3. Hero Image section (placeholder)');

@@ -1,34 +1,35 @@
-import Card from './Card'
-import { Heading, Text } from './Typography'
-import Button from './Button'
+import Card from "./Card";
+import { Heading, Text } from "./Typography.jsx";
+import Button from "./Button";
 
 export default {
-  title: 'Design System/Card',
+  title: "Design System/Card",
   component: Card,
   parameters: {
     docs: {
       description: {
-        component: 'Card component for content containers. Supports multiple variants and padding options.',
+        component:
+          "Card component for content containers. Supports multiple variants and padding options.",
       },
     },
   },
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'elevated', 'outlined', 'filled'],
+      control: "select",
+      options: ["default", "elevated", "outlined", "filled"],
     },
     padding: {
-      control: 'select',
-      options: ['none', 'sm', 'md', 'lg'],
+      control: "select",
+      options: ["none", "sm", "md", "lg"],
     },
   },
-}
+};
 
 export const Default = {
   args: {
-    children: 'Default card content',
+    children: "Default card content",
   },
-}
+};
 
 export const Variants = {
   render: () => (
@@ -51,7 +52,7 @@ export const Variants = {
       </Card>
     </div>
   ),
-}
+};
 
 export const PaddingSizes = {
   render: () => (
@@ -70,7 +71,7 @@ export const PaddingSizes = {
       </Card>
     </div>
   ),
-}
+};
 
 export const WithContent = {
   render: () => (
@@ -80,14 +81,20 @@ export const WithContent = {
         Individual therapy sessions are tailored to your unique needs and goals.
       </Text>
       <div className="space-y-2 mb-6">
-        <Text variant="small"><strong>Duration:</strong> 50 minutes</Text>
-        <Text variant="small"><strong>Format:</strong> In-person or Online</Text>
-        <Text variant="small"><strong>Cost:</strong> $150 per session</Text>
+        <Text variant="small">
+          <strong>Duration:</strong> 50 minutes
+        </Text>
+        <Text variant="small">
+          <strong>Format:</strong> In-person or Online
+        </Text>
+        <Text variant="small">
+          <strong>Cost:</strong> $150 per session
+        </Text>
       </div>
       <Button fullWidth>Book Session</Button>
     </Card>
   ),
-}
+};
 
 export const Grid = {
   render: () => (
@@ -106,4 +113,4 @@ export const Grid = {
       </Card>
     </div>
   ),
-}
+};

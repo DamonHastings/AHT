@@ -1,15 +1,15 @@
-import { Heading, Text } from './Typography'
+import { Heading, Text } from "./Typography.jsx";
 
 export default {
-  title: 'Design System/Typography',
+  title: "Design System/Typography",
   parameters: {
     docs: {
       description: {
-        component: 'Typography system for consistent text styling throughout the application.',
+        component: "Typography system for consistent text styling throughout the application.",
       },
     },
   },
-}
+};
 
 export const Headings = {
   render: () => (
@@ -22,19 +22,21 @@ export const Headings = {
       <Heading level={6}>Heading 6</Heading>
     </div>
   ),
-}
+};
 
 export const TextVariants = {
   render: () => (
     <div className="space-y-4">
-      <Text variant="lead">Lead Text - Used for introductory paragraphs and important content.</Text>
+      <Text variant="lead">
+        Lead Text - Used for introductory paragraphs and important content.
+      </Text>
       <Text variant="large">Large Text - For emphasis and important information.</Text>
       <Text variant="body">Body Text - Standard paragraph text for general content.</Text>
       <Text variant="small">Small Text - For captions, labels, and secondary information.</Text>
       <Text variant="muted">Muted Text - For less important or secondary content.</Text>
     </div>
   ),
-}
+};
 
 export const TextAs = {
   render: () => (
@@ -44,7 +46,7 @@ export const TextAs = {
       <Text as="div">This is a div using Text component.</Text>
     </div>
   ),
-}
+};
 
 export const Example = {
   render: () => (
@@ -55,21 +57,21 @@ export const Example = {
       </Text>
       <Heading level={2}>Our Approach</Heading>
       <Text variant="body">
-        Our therapeutic approach is tailored to each individual's unique needs. We believe in 
+        Our therapeutic approach is tailored to each individual's unique needs. We believe in
         creating a safe space where you can explore your thoughts and feelings without judgment.
       </Text>
       <Text variant="body">
-        We integrate various evidence-based modalities including cognitive-behavioral therapy, 
+        We integrate various evidence-based modalities including cognitive-behavioral therapy,
         mindfulness practices, and person-centered approaches to support your healing journey.
       </Text>
       <Heading level={3}>Getting Started</Heading>
       <Text variant="body">
-        Ready to begin? We offer a free 15-minute consultation to help you determine if we're 
-        a good fit for your needs.
+        Ready to begin? We offer a free 15-minute consultation to help you determine if we're a good
+        fit for your needs.
       </Text>
       <Text variant="small" className="text-neutral-400">
         * Consultation is free and non-committal
       </Text>
     </div>
   ),
-}
+};

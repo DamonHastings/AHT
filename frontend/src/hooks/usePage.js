@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import client from '../utils/sanityClient';
+import client, { isPreview } from '../utils/sanityClient';
 
 /**
  * Hook to fetch a page from Sanity by slug
+ * In preview mode, fetches draft content for visual editing
  * @param {string} slug - The page slug (e.g., 'about', 'home')
  * @returns {Object} - { page, loading, error }
  */
@@ -23,7 +24,8 @@ export function usePage(slug) {
         setLoading(true);
         setError(null);
 
-        const query = `*[_type == "page" && slug.current == $slug && published == true][0]{
+        const publishedFilter = isPreview() ? '' : '&& published == true';
+        const query = `*[_type == "page" && slug.current == $slug ${publishedFilter}][0]{
           _id,
           title,
           slug,
@@ -41,9 +43,38 @@ export function usePage(slug) {
           publishedAt
         }`;
 
-        const result = await client.fetch(query, { slug });
+        const fetchOptions = isPreview() ? { perspective: 'previewDrafts' } : {};
+        const params = { slug };
+        const result = await client.fetch(query, params, fetchOptions);
 
         setPage(result);
+
+        // In preview/Presentation mode, subscribe to live updates for this page
+        if (isPreview()) {
+          const subscription = client
+            .listen(
+              '*[_type == "page" && slug.current == $slug][0]',
+              params,
+              {
+                visibility: 'query',
+                // We only need to know that something changed; we re-fetch below.
+                includeResult: false,
+              },
+            )
+            .subscribe(() => {
+              client
+                .fetch(query, params, fetchOptions)
+                .then((next) => setPage(next))
+                .catch((err) => {
+                  console.error('Error refetching page after live update:', err);
+                  setError(err.message);
+                });
+            });
+
+          return () => {
+            subscription.unsubscribe();
+          };
+        }
       } catch (err) {
         console.error('Error fetching page:', err);
         setError(err.message);
@@ -52,7 +83,13 @@ export function usePage(slug) {
       }
     };
 
-    fetchPage();
+    const maybeCleanup = fetchPage();
+
+    return () => {
+      if (typeof maybeCleanup === 'function') {
+        maybeCleanup();
+      }
+    };
   }, [slug]);
 
   return { page, loading, error };

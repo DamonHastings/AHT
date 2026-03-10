@@ -12,6 +12,34 @@ import {
   ConsultationForm,
   ConsultationFormWide,
 } from "../design-system";
+import {
+  HeroV3,
+  PullQuoteV3,
+  WhoIHelpV3,
+  TheSpaceV3,
+  ExpressiveV3,
+  MeetV3,
+  FeelingsCheckInV3,
+  CTAV3,
+} from "../design-system/v3";
+
+/**
+ * Lightweight wrapper to give each Sanity component a consistent outer section
+ * while keeping the original component object (and its visual-editing metadata)
+ * attached at the DOM boundary.
+ */
+function EditableSection({ component, children, className }) {
+  // We intentionally keep this wrapper minimal so it doesn't affect layout,
+  // but still provides a generous click target for Presentation mode.
+  return (
+    <section
+      data-component-type={component?._type}
+      className={className}
+    >
+      {children}
+    </section>
+  );
+}
 
 /**
  * Component mapper for rendering Sanity page components
@@ -28,74 +56,81 @@ export const renderPageComponent = (component, index) => {
   switch (component._type) {
     case "heroComponent":
       return (
-        <HeroSection
-          key={key}
-          backgroundImage={
-            component.backgroundImage
-              ? urlFor(component.backgroundImage).width(1920).url()
-              : undefined
-          }
-          overlay={component.overlay === "none" ? null : component.overlay}
-          overlayOpacity={component.overlayOpacity}
-          heading={component.heading}
-          subheading={component.subheading}
-          ctaText={component.ctaButton?.text}
-          onCtaClick={() => {
-            if (component.ctaButton?.link) {
-              if (component.ctaButton.link.startsWith("#")) {
-                document
-                  .querySelector(component.ctaButton.link)
-                  ?.scrollIntoView({ behavior: "smooth" });
-              } else {
-                window.location.href = component.ctaButton.link;
-              }
+        <EditableSection key={key} component={component}>
+          <HeroSection
+            backgroundImage={
+              component.backgroundImage
+                ? urlFor(component.backgroundImage).width(1920).url()
+                : undefined
             }
-          }}
-          ctaVariant={component.ctaButton?.variant}
-          alignment={component.alignment}
-          height={component.height}
-          variant={component.variant}
-        />
+            overlay={component.overlay === "none" ? null : component.overlay}
+            overlayOpacity={component.overlayOpacity}
+            heading={component.heading}
+            subheading={component.subheading}
+            ctaText={component.ctaButton?.text}
+            onCtaClick={() => {
+              if (component.ctaButton?.link) {
+                if (component.ctaButton.link.startsWith("#")) {
+                  document
+                    .querySelector(component.ctaButton.link)
+                    ?.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.location.href = component.ctaButton.link;
+                }
+              }
+            }}
+            ctaVariant={component.ctaButton?.variant}
+            alignment={component.alignment}
+            height={component.height}
+            variant={component.variant}
+          />
+        </EditableSection>
       );
 
     case "identityQuoteComponent":
       return (
-        <section key={key} className={`${CONTAINER} py-8`}>
+        <EditableSection key={key} component={component} className={`${CONTAINER} py-8`}>
           <IdentityQuote quote={component.quote} author={component.author} />
-        </section>
+        </EditableSection>
       );
 
     case "philosophySectionComponent":
       return (
-        <section key={key} className={`${CONTAINER} py-8`}>
+        <EditableSection key={key} component={component} className={`${CONTAINER} py-8`}>
           <PhilosophySection
             title={component.title}
             content={<PortableText value={component.content} />}
             image={component.image ? urlFor(component.image).width(800).url() : undefined}
           />
-        </section>
+        </EditableSection>
       );
 
     case "focusAreasComponent":
       return (
-        <PreviewScroll key={key} title={component.sectionTitle} items={component.areas || []} />
+        <EditableSection key={key} component={component}>
+          <PreviewScroll title={component.sectionTitle} items={component.areas || []} />
+        </EditableSection>
       );
 
     case "headshotProfileComponent":
       return (
-        <section key={key} className={`${CONTAINER} py-8 flex justify-center`}>
+        <EditableSection
+          key={key}
+          component={component}
+          className={`${CONTAINER} py-8 flex justify-center`}
+        >
           <HeadshotProfile
             image={component.image ? urlFor(component.image).width(600).url() : undefined}
             name={component.name}
             shape={component.shape}
             size={component.size}
           />
-        </section>
+        </EditableSection>
       );
 
     case "personalStatementComponent":
       return (
-        <section key={key} className={`${CONTAINER} py-12`}>
+        <EditableSection key={key} component={component} className={`${CONTAINER} py-12`}>
           <ProfileSection
             image={component.image ? urlFor(component.image).width(600).url() : undefined}
             imageAlt={component.imageAlt}
@@ -106,7 +141,7 @@ export const renderPageComponent = (component, index) => {
             buttonLink={component.fullBioLink || "#"}
             imageOnLeft={component.imageOnLeft ?? true}
           />
-        </section>
+        </EditableSection>
       );
 
     case "textContentComponent":
@@ -117,7 +152,11 @@ export const renderPageComponent = (component, index) => {
       };
 
       return (
-        <section key={key} className={`${CONTAINER} max-w-4xl py-8`}>
+        <EditableSection
+          key={key}
+          component={component}
+          className={`${CONTAINER} max-w-4xl py-8`}
+        >
           {component.title && (
             <h2
               className={`text-3xl font-bold mb-6 ${
@@ -134,7 +173,7 @@ export const renderPageComponent = (component, index) => {
           >
             {component.content && <PortableText value={component.content} />}
           </div>
-        </section>
+        </EditableSection>
       );
 
     case "ctaButtonComponent":
@@ -145,8 +184,9 @@ export const renderPageComponent = (component, index) => {
       };
 
       return (
-        <section
+        <EditableSection
           key={key}
+          component={component}
           className={`${CONTAINER} max-w-4xl py-8 flex ${
             buttonAlignmentClasses[component.alignment] || "justify-center"
           }`}
@@ -166,7 +206,7 @@ export const renderPageComponent = (component, index) => {
           >
             {component.text}
           </Button>
-        </section>
+        </EditableSection>
       );
 
     case "imageGalleryComponent":
@@ -178,7 +218,7 @@ export const renderPageComponent = (component, index) => {
       };
 
       return (
-        <section key={key} className={`${CONTAINER} py-12`}>
+        <EditableSection key={key} component={component} className={`${CONTAINER} py-12`}>
           {component.title && (
             <h2 className="text-3xl font-bold mb-8 text-center">{component.title}</h2>
           )}
@@ -198,7 +238,7 @@ export const renderPageComponent = (component, index) => {
               </div>
             ))}
           </div>
-        </section>
+        </EditableSection>
       );
 
     case "spacerComponent":
@@ -210,15 +250,21 @@ export const renderPageComponent = (component, index) => {
       };
 
       return (
-        <div key={key} className={spacingClasses[component.size] || "h-16"} aria-hidden="true" />
+        <EditableSection key={key} component={component}>
+          <div className={spacingClasses[component.size] || "h-16"} aria-hidden="true" />
+        </EditableSection>
       );
 
     case "previewScrollComponent":
-      return <PreviewScroll key={key} title={component.title} items={component.items || []} />;
+      return (
+        <EditableSection key={key} component={component}>
+          <PreviewScroll title={component.title} items={component.items || []} />
+        </EditableSection>
+      );
 
     case "profileSectionComponent":
       return (
-        <section key={key} className={`${CONTAINER} py-12`}>
+        <EditableSection key={key} component={component} className={`${CONTAINER} py-12`}>
           <ProfileSection
             image={component.image ? urlFor(component.image).width(600).url() : undefined}
             imageAlt={component.imageAlt}
@@ -232,30 +278,139 @@ export const renderPageComponent = (component, index) => {
             credentials={component.credentials}
             imageOnLeft={component.imageOnLeft}
           />
-        </section>
+        </EditableSection>
       );
 
     case "consultationFormComponent":
       return (
-        <ConsultationForm
-          key={key}
-          title={component.title}
-          consentText={component.consentText}
-          privacyPolicyUrl={component.privacyPolicyUrl}
-          buttonText={component.buttonText}
-        />
+        <EditableSection key={key} component={component}>
+          <ConsultationForm
+            title={component.title}
+            consentText={component.consentText}
+            privacyPolicyUrl={component.privacyPolicyUrl}
+            buttonText={component.buttonText}
+          />
+        </EditableSection>
       );
 
     case "consultationFormWideComponent":
       return (
-        <ConsultationFormWide
-          key={key}
-          contactTitle={component.contactTitle}
-          formTitle={component.title}
-          consentText={component.consentText}
-          privacyPolicyUrl={component.privacyPolicyUrl}
-          buttonText={component.buttonText}
-        />
+        <EditableSection key={key} component={component}>
+          <ConsultationFormWide
+            contactTitle={component.contactTitle}
+            formTitle={component.title}
+            consentText={component.consentText}
+            privacyPolicyUrl={component.privacyPolicyUrl}
+            buttonText={component.buttonText}
+          />
+        </EditableSection>
+      );
+
+    // V3 Design System Components
+    case "heroV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-hero">
+          <HeroV3
+            kickerText={component.kickerText}
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            body={component.body}
+            primaryCtaText={component.primaryCtaText}
+            primaryCtaHref={component.primaryCtaHref}
+            secondaryCtaText={component.secondaryCtaText}
+            secondaryCtaHref={component.secondaryCtaHref}
+          />
+        </EditableSection>
+      );
+
+    case "pullQuoteV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-pullquote">
+          <PullQuoteV3
+            eyebrow={component.eyebrow}
+            quote={component.quote}
+            body={component.body}
+          />
+        </EditableSection>
+      );
+
+    case "whoIHelpV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-who-i-help">
+          <WhoIHelpV3
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            cards={component.cards}
+          />
+        </EditableSection>
+      );
+
+    case "theSpaceV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-space">
+          <TheSpaceV3
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            paragraphs={component.paragraphs}
+            imageSrc={component.image ? urlFor(component.image).width(800).url() : undefined}
+            photoTag={component.photoTag}
+          />
+        </EditableSection>
+      );
+
+    case "expressiveV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-expressive">
+          <ExpressiveV3
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            paragraphs={component.paragraphs}
+            modalities={component.modalities}
+            quotes={component.quotes}
+          />
+        </EditableSection>
+      );
+
+    case "meetV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-meet">
+          <MeetV3
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            paragraphs={component.paragraphs}
+            credentials={component.credentials}
+            badgeText={component.badgeText}
+            imageSrc={component.image ? urlFor(component.image).width(600).url() : undefined}
+          />
+        </EditableSection>
+      );
+
+    case "feelingsCheckInV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-feelings">
+          <FeelingsCheckInV3
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            subheading={component.subheading}
+            swatches={component.swatches}
+          />
+        </EditableSection>
+      );
+
+    case "ctaV3Component":
+      return (
+        <EditableSection key={key} component={component} className="v3-section-cta">
+          <CTAV3
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            subheading={component.subheading}
+            buttonText={component.buttonText}
+            buttonHref={component.buttonHref}
+          />
+        </EditableSection>
       );
 
     default:

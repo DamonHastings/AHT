@@ -15,11 +15,11 @@ const client = createClient({
 const pages = [
   {
     _type: 'page',
-    _id: 'page-home',
-    title: 'Home',
+    _id: 'page-home-v1',
+    title: 'Home (V1 layout)',
     slug: {
       _type: 'slug',
-      current: 'home',
+      current: 'home-v1',
     },
     metaTitle: 'Home | Healing Minds Therapy',
     metaDescription: 'Find your path to wellness with compassionate, evidence-based therapy tailored to your unique needs. Book your free consultation today.',
@@ -712,7 +712,7 @@ async function seedPages() {
 
     console.log('\n🎉 Successfully seeded all sample pages!');
     console.log('\n📋 Pages created:');
-    console.log('   • Home (/home)');
+    console.log('   • Home V1 (/home-v1)');
     console.log('   • About Me (/about)');
     console.log('   • Services (/services)');
     console.log('\n🚀 View them in Sanity Studio: http://localhost:3333');

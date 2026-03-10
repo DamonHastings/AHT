@@ -15,9 +15,11 @@
     "@portabletext/react": "^3.0.11",
     "@sanity/client": "^6.8.6",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/visual-editing": "^3.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "styled-components": "^6.3.11"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",

@@ -13,7 +13,8 @@
     "seed-pages": "node seedPages.js",
     "seed-navigation": "node seedNavigation.js",
     "seed-all": "node seedPages.js && node seedNavigation.js",
-    "seed-home-wireframe": "node seedHomePageWireframe.js"
+    "seed-home-wireframe": "node seedHomePageWireframe.js",
+    "seed-v3-home": "node seedV3Home.js"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +31,8 @@
   "devDependencies": {
     "@sanity/eslint-config-studio": "^3.0.0",
     "eslint": "^8.55.0"
+  },
+  "overrides": {
+    "esbuild": "0.25.6"
   }
 }

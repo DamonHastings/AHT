@@ -1,8 +1,8 @@
-import { useSiteSettings } from '../../hooks/useSiteSettings'
-import { urlFor } from '../../utils/sanityClient'
+import { useSiteSettings } from "../../hooks/useSiteSettings";
+import { urlFor } from "../../utils/sanityClient";
 
 export default function Footer() {
-  const { siteSettings, loading } = useSiteSettings()
+  const { siteSettings, loading } = useSiteSettings();
 
   if (loading) {
     return (
@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-    )
+    );
   }
 
   if (!siteSettings?.footer) {
@@ -25,17 +25,15 @@ export default function Footer() {
             <p className="mb-2">
               &copy; {new Date().getFullYear()} Therapist Profile Website. All rights reserved.
             </p>
-            <p className="text-sm">
-              Licensed Marriage and Family Therapist in California
-            </p>
+            <p className="text-sm">Licensed Marriage and Family Therapist in California</p>
           </div>
         </div>
       </footer>
-    )
+    );
   }
 
-  const footer = siteSettings.footer
-  const socialLinks = footer.socialLinks?.links || []
+  const footer = siteSettings.footer;
+  const socialLinks = footer.socialLinks?.links || [];
 
   return (
     <footer className="bg-wood-400 text-neutral-200 py-8">
@@ -44,18 +42,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {footer.columns.map((column, index) => (
               <div key={index}>
-                {column.title && (
-                  <h3 className="text-white font-semibold mb-4">{column.title}</h3>
-                )}
+                {column.title && <h3 className="text-white font-semibold mb-4">{column.title}</h3>}
                 {column.content && (
                   <ul className="space-y-2">
                     {column.content.map((item, itemIndex) => (
                       <li key={itemIndex}>
                         {item.link ? (
-                          <a
-                            href={item.link}
-                            className="hover:text-white transition-colors"
-                          >
+                          <a href={item.link} className="hover:text-white transition-colors">
                             {item.text}
                           </a>
                         ) : (
@@ -79,17 +72,17 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
-                aria-label={link.platform || 'Social link'}
+                aria-label={link.platform || "Social link"}
               >
-                {link.platform === 'facebook' && '📘'}
-                {link.platform === 'twitter' && '🐦'}
-                {link.platform === 'instagram' && '📷'}
-                {link.platform === 'linkedin' && '💼'}
-                {link.platform === 'youtube' && '📺'}
-                {link.platform === 'pinterest' && '📌'}
-                {link.platform === 'tiktok' && '🎵'}
-                {link.platform === 'psychologyToday' && '🧠'}
-                {link.platform === 'other' && '🔗'}
+                {link.platform === "facebook" && "📘"}
+                {link.platform === "twitter" && "🐦"}
+                {link.platform === "instagram" && "📷"}
+                {link.platform === "linkedin" && "💼"}
+                {link.platform === "youtube" && "📺"}
+                {link.platform === "pinterest" && "📌"}
+                {link.platform === "tiktok" && "🎵"}
+                {link.platform === "psychologyToday" && "🧠"}
+                {link.platform === "other" && "🔗"}
               </a>
             ))}
           </div>
@@ -97,13 +90,12 @@ export default function Footer() {
 
         <div className="text-center border-t border-wood-300 pt-6">
           <p className="mb-2">
-            &copy; {new Date().getFullYear()} {footer.copyrightText || 'Therapist Profile Website. All rights reserved.'}
+            &copy; {new Date().getFullYear()}{" "}
+            {footer.copyrightText || "Therapist Profile Website. All rights reserved."}
           </p>
-          {footer.licenseText && (
-            <p className="text-sm">{footer.licenseText}</p>
-          )}
+          {footer.licenseText && <p className="text-sm">{footer.licenseText}</p>}
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,0 +1,4722 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g., LMFT",
+        "name": "credentials",
+        "type": "string"
+      },
+      {
+        "name": "licenseNumber",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "phone",
+        "type": "string",
+        "title": "Phone Number"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "initialValue": true,
+        "description": "Verified badge display",
+        "name": "verified",
+        "type": "boolean"
+      },
+      {
+        "description": "Brief welcome message displayed in hero section",
+        "name": "welcomeMessage",
+        "type": "text"
+      },
+      {
+        "description": "Main biography and approach description",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "bio",
+        "type": "array"
+      },
+      {
+        "description": "Personal philosophy and approach description",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "philosophy",
+        "type": "array",
+        "title": "Therapeutic Philosophy"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "profileImage",
+        "type": "image"
+      }
+    ],
+    "name": "therapist",
+    "type": "document",
+    "title": "Therapist Profile"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "address",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "name": "zipCode",
+            "type": "string"
+          }
+        ],
+        "name": "location",
+        "type": "object"
+      },
+      {
+        "initialValue": true,
+        "name": "inPerson",
+        "type": "boolean",
+        "title": "In-Person Sessions"
+      },
+      {
+        "initialValue": true,
+        "name": "telehealth",
+        "type": "boolean",
+        "title": "Telehealth Sessions"
+      },
+      {
+        "fields": [
+          {
+            "description": "Fee in USD",
+            "name": "individual",
+            "type": "number",
+            "title": "Individual Session Fee"
+          },
+          {
+            "description": "Fee in USD",
+            "name": "couple",
+            "type": "number",
+            "title": "Couple Session Fee"
+          },
+          {
+            "description": "Fee in USD",
+            "name": "family",
+            "type": "number",
+            "title": "Family Session Fee"
+          }
+        ],
+        "name": "fees",
+        "type": "object",
+        "title": "Session Fees"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Cash",
+              "value": "cash"
+            },
+            {
+              "title": "Check",
+              "value": "check"
+            },
+            {
+              "title": "Venmo",
+              "value": "venmo"
+            },
+            {
+              "title": "Zelle",
+              "value": "zelle"
+            },
+            {
+              "title": "Visa",
+              "value": "visa"
+            },
+            {
+              "title": "Mastercard",
+              "value": "mastercard"
+            },
+            {
+              "title": "American Express",
+              "value": "amex"
+            },
+            {
+              "title": "Discover",
+              "value": "discover"
+            },
+            {
+              "title": "Ivy Pay",
+              "value": "ivyPay"
+            }
+          ]
+        },
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "paymentMethods",
+        "type": "array"
+      },
+      {
+        "description": "Information about insurance, superbills, sliding scale, etc.",
+        "name": "insuranceInfo",
+        "type": "text",
+        "title": "Insurance Information"
+      },
+      {
+        "initialValue": true,
+        "name": "consultationOffer",
+        "type": "boolean",
+        "title": "Free Consultation Offered"
+      },
+      {
+        "initialValue": 15,
+        "name": "consultationDuration",
+        "type": "number",
+        "title": "Consultation Duration (minutes)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Background image for the hero section",
+        "name": "heroBackgroundImage",
+        "type": "image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Neutral 50 (Light Cream)",
+              "value": "neutral-50"
+            },
+            {
+              "title": "Neutral 100 (Warm Off-White)",
+              "value": "neutral-100"
+            },
+            {
+              "title": "Neutral 200 (Light Beige)",
+              "value": "neutral-200"
+            },
+            {
+              "title": "Neutral 300 (Medium Beige)",
+              "value": "neutral-300"
+            },
+            {
+              "title": "Wood 50 (Saddle Brown)",
+              "value": "wood-50"
+            },
+            {
+              "title": "Wood 100 (Sienna)",
+              "value": "wood-100"
+            },
+            {
+              "title": "Wood 200 (Rosy Brown)",
+              "value": "wood-200"
+            },
+            {
+              "title": "Wood 300 (Charcoal)",
+              "value": "wood-300"
+            },
+            {
+              "title": "Primary 50 (Light Pink)",
+              "value": "primary-50"
+            },
+            {
+              "title": "Primary 100 (Pale Red)",
+              "value": "primary-100"
+            },
+            {
+              "title": "Primary 200 (Light Coral)",
+              "value": "primary-200"
+            },
+            {
+              "title": "Primary 300 (Coral)",
+              "value": "primary-300"
+            },
+            {
+              "title": "Primary 400 (Medium Rust)",
+              "value": "primary-400"
+            },
+            {
+              "title": "Primary 500 (Rust)",
+              "value": "primary-500"
+            },
+            {
+              "title": "Primary 600 (Deep Rust)",
+              "value": "primary-600"
+            },
+            {
+              "title": "Secondary 50 (Light Teal)",
+              "value": "secondary-50"
+            },
+            {
+              "title": "Secondary 100 (Pale Teal)",
+              "value": "secondary-100"
+            },
+            {
+              "title": "Secondary 200 (Light Aqua)",
+              "value": "secondary-200"
+            },
+            {
+              "title": "Secondary 300 (Aqua)",
+              "value": "secondary-300"
+            },
+            {
+              "title": "Secondary 400 (Cyan)",
+              "value": "secondary-400"
+            },
+            {
+              "title": "Secondary 500 (Teal)",
+              "value": "secondary-500"
+            },
+            {
+              "title": "Secondary 600 (Medium Teal)",
+              "value": "secondary-600"
+            },
+            {
+              "title": "Accent Navy 500 (Deep Navy)",
+              "value": "accent-navy-500"
+            },
+            {
+              "title": "Accent Coral 500 (Coral)",
+              "value": "accent-coral-500"
+            },
+            {
+              "title": "Accent Burgundy 500 (Dusty Rose)",
+              "value": "accent-burgundy-500"
+            },
+            {
+              "title": "Accent Gold 500 (Gold)",
+              "value": "accent-gold-500"
+            },
+            {
+              "title": "Artwork Blue 200 (Light Blue)",
+              "value": "artwork-blue-200"
+            },
+            {
+              "title": "Artwork Blue 500 (Blue)",
+              "value": "artwork-blue-500"
+            },
+            {
+              "title": "Artwork Teal 200 (Teal)",
+              "value": "artwork-teal-200"
+            },
+            {
+              "title": "Artwork Teal 500 (Deep Teal)",
+              "value": "artwork-teal-500"
+            },
+            {
+              "title": "Natural Green 500 (Forest Green)",
+              "value": "natural-green-500"
+            }
+          ]
+        },
+        "initialValue": "neutral-50",
+        "description": "Background color for the hero section (used when no image is set)",
+        "name": "heroBackgroundColor",
+        "type": "string"
+      }
+    ],
+    "name": "practice",
+    "type": "document",
+    "title": "Practice Details"
+  },
+  {
+    "fields": [
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g., Master of Arts, Counseling Psychology",
+                "name": "degree",
+                "type": "string"
+              },
+              {
+                "name": "school",
+                "type": "string",
+                "title": "School/Institution"
+              },
+              {
+                "description": "e.g., Expressive Arts",
+                "name": "specialization",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "education",
+        "type": "array"
+      },
+      {
+        "name": "yearsInPractice",
+        "type": "number",
+        "title": "Years in Practice"
+      },
+      {
+        "description": "Personal background and experience description",
+        "name": "livedExperience",
+        "type": "text"
+      }
+    ],
+    "name": "qualification",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Specialty Name"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Top Specialty",
+              "value": "top"
+            },
+            {
+              "title": "Expertise Area",
+              "value": "expertise"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "expertise",
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "specialty",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g., Cognitive Behavioral (CBT), Art Therapy, etc.",
+        "name": "name",
+        "type": "string",
+        "title": "Therapy Type Name"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "treatmentApproach",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The main title of the website",
+        "name": "title",
+        "type": "string",
+        "title": "Site Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Select the page to display at the root URL (/)",
+        "to": [
+          {
+            "type": "page"
+          }
+        ],
+        "name": "homePage",
+        "type": "reference"
+      },
+      {
+        "description": "Meta description for SEO",
+        "name": "description",
+        "type": "text",
+        "title": "Site Description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "logo",
+        "type": "image",
+        "title": "Site Logo"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "favicon",
+        "type": "image"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Image for social media sharing",
+        "name": "ogImage",
+        "type": "image",
+        "title": "Open Graph Image"
+      },
+      {
+        "name": "contactEmail",
+        "type": "string"
+      },
+      {
+        "name": "contactPhone",
+        "type": "string"
+      },
+      {
+        "fields": [
+          {
+            "name": "street",
+            "type": "string",
+            "title": "Street Address"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "name": "zipCode",
+            "type": "string"
+          }
+        ],
+        "name": "address",
+        "type": "object",
+        "title": "Business Address"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Facebook",
+                      "value": "facebook"
+                    },
+                    {
+                      "title": "Instagram",
+                      "value": "instagram"
+                    },
+                    {
+                      "title": "LinkedIn",
+                      "value": "linkedin"
+                    },
+                    {
+                      "title": "Twitter",
+                      "value": "twitter"
+                    },
+                    {
+                      "title": "YouTube",
+                      "value": "youtube"
+                    }
+                  ]
+                },
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array",
+        "title": "Social Media Links"
+      },
+      {
+        "initialValue": "Arielle Hastings Psychotherapy",
+        "description": "Business name displayed in footer",
+        "name": "businessName",
+        "type": "string",
+        "title": "Business Name (Footer)"
+      },
+      {
+        "initialValue": "© 2026 Arielle Hastings, LMFT. All Rights Reserved.",
+        "description": "Copyright notice displayed in footer",
+        "name": "copyrightText",
+        "type": "string",
+        "title": "Copyright Text (Footer)"
+      },
+      {
+        "to": [
+          {
+            "type": "navigation"
+          }
+        ],
+        "name": "navigation",
+        "type": "reference",
+        "title": "Navigation Menu"
+      },
+      {
+        "fields": [
+          {
+            "of": [
+              {
+                "type": "string"
+              }
+            ],
+            "name": "keywords",
+            "type": "array"
+          },
+          {
+            "name": "author",
+            "type": "string"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "SEO Settings"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Main Navigation",
+        "description": "Internal name for this navigation menu",
+        "name": "title",
+        "type": "string",
+        "title": "Menu Title"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Anchor Link (same page)",
+                      "value": "anchor"
+                    },
+                    {
+                      "title": "Internal Page",
+                      "value": "internal"
+                    },
+                    {
+                      "title": "External URL",
+                      "value": "external"
+                    }
+                  ],
+                  "layout": "radio"
+                },
+                "initialValue": "anchor",
+                "name": "linkType",
+                "type": "string"
+              },
+              {
+                "description": "e.g., #about, #contact (include the #)",
+                "hidden": "conditional",
+                "name": "anchor",
+                "type": "string",
+                "title": "Anchor ID"
+              },
+              {
+                "description": "Select a page from your site",
+                "to": [
+                  {
+                    "type": "page"
+                  }
+                ],
+                "hidden": "conditional",
+                "name": "internalPage",
+                "type": "reference"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "hidden": "conditional",
+                "name": "externalUrl",
+                "type": "url",
+                "title": "External URL"
+              },
+              {
+                "initialValue": false,
+                "hidden": "conditional",
+                "name": "openInNewTab",
+                "type": "boolean",
+                "title": "Open in New Tab"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Menu Items"
+      }
+    ],
+    "name": "navigation",
+    "type": "document",
+    "title": "Navigation Menu"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Main Footer",
+        "description": "Internal name for this footer",
+        "name": "title",
+        "type": "string",
+        "title": "Footer Title"
+      },
+      {
+        "initialValue": "Therapist Profile Website. All rights reserved.",
+        "description": "Copyright notice (year will be auto-added)",
+        "name": "copyrightText",
+        "type": "string"
+      },
+      {
+        "description": "License information displayed below copyright",
+        "name": "licenseText",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Column Title"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "text",
+                        "type": "string"
+                      },
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "uri",
+                                "constraint": {
+                                  "options": {
+                                    "scheme": [
+                                      "/^http$/",
+                                      "/^https$/"
+                                    ],
+                                    "allowRelative": false,
+                                    "relativeOnly": false,
+                                    "allowCredentials": false
+                                  }
+                                }
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "name": "link",
+                        "type": "url",
+                        "title": "Link (optional)"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "content",
+                "type": "array"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "columns",
+        "type": "array",
+        "title": "Footer Columns"
+      },
+      {
+        "to": [
+          {
+            "type": "socialLinks"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "reference",
+        "title": "Social Media Links"
+      }
+    ],
+    "name": "footerContent",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Social Media Links",
+        "description": "Internal name for this set of social links",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Facebook",
+                      "value": "facebook"
+                    },
+                    {
+                      "title": "Twitter",
+                      "value": "twitter"
+                    },
+                    {
+                      "title": "Instagram",
+                      "value": "instagram"
+                    },
+                    {
+                      "title": "LinkedIn",
+                      "value": "linkedin"
+                    },
+                    {
+                      "title": "YouTube",
+                      "value": "youtube"
+                    },
+                    {
+                      "title": "Pinterest",
+                      "value": "pinterest"
+                    },
+                    {
+                      "title": "TikTok",
+                      "value": "tiktok"
+                    },
+                    {
+                      "title": "Psychology Today",
+                      "value": "psychologyToday"
+                    },
+                    {
+                      "title": "Other",
+                      "value": "other"
+                    }
+                  ]
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          "facebook",
+                          "twitter",
+                          "instagram",
+                          "linkedin",
+                          "youtube",
+                          "pinterest",
+                          "tiktok",
+                          "psychologyToday",
+                          "other"
+                        ]
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              },
+              {
+                "hidden": "conditional",
+                "name": "label",
+                "type": "string",
+                "title": "Label (for \"Other\" platform)"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "links",
+        "type": "array",
+        "title": "Social Links"
+      }
+    ],
+    "name": "socialLinks",
+    "type": "document",
+    "title": "Social Media Links"
+  },
+  {
+    "description": "Reusable content blocks that can be used across multiple pages",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Internal name for this content block",
+        "name": "title",
+        "type": "string",
+        "title": "Block Title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Text Block",
+              "value": "text"
+            },
+            {
+              "title": "CTA (Call to Action)",
+              "value": "cta"
+            },
+            {
+              "title": "Testimonial",
+              "value": "testimonial"
+            },
+            {
+              "title": "Feature List",
+              "value": "featureList"
+            },
+            {
+              "title": "Image with Text",
+              "value": "imageText"
+            },
+            {
+              "title": "FAQ Section",
+              "value": "faq"
+            }
+          ]
+        },
+        "initialValue": "text",
+        "name": "blockType",
+        "type": "string"
+      },
+      {
+        "description": "Main content (for text blocks)",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      },
+      {
+        "description": "Simple text content (for CTAs, testimonials)",
+        "name": "text",
+        "type": "text",
+        "title": "Text Content"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Image for image-text blocks",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "description": "Anchor link (e.g., #contact) or URL",
+            "name": "link",
+            "type": "string",
+            "title": "Button Link"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Primary",
+                  "value": "primary"
+                },
+                {
+                  "title": "Secondary",
+                  "value": "secondary"
+                },
+                {
+                  "title": "Outline",
+                  "value": "outline"
+                }
+              ]
+            },
+            "initialValue": "primary",
+            "name": "style",
+            "type": "string",
+            "title": "Button Style"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "ctaButton",
+        "type": "object",
+        "title": "CTA Button"
+      },
+      {
+        "fields": [
+          {
+            "name": "author",
+            "type": "string",
+            "title": "Author Name"
+          },
+          {
+            "name": "authorTitle",
+            "type": "string",
+            "title": "Author Title/Role"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 1
+                  },
+                  {
+                    "flag": "max",
+                    "constraint": 5
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "description": "Rating out of 5",
+            "name": "rating",
+            "type": "number"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "testimonial",
+        "type": "object",
+        "title": "Testimonial Details"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Feature Title"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Feature Description"
+              },
+              {
+                "description": "Icon identifier (for future icon system)",
+                "name": "icon",
+                "type": "string",
+                "title": "Icon Name"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "features",
+        "type": "array",
+        "title": "Features List"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "marks": {
+                      "annotations": [
+                        {
+                          "i18nTitleKey": "inputs.portable-text.annotation.link",
+                          "options": {
+                            "modal": {
+                              "type": "popover"
+                            }
+                          },
+                          "fields": [
+                            {
+                              "validation": [
+                                {
+                                  "rules": [
+                                    {
+                                      "flag": "uri",
+                                      "constraint": {
+                                        "options": {
+                                          "scheme": [
+                                            "/^http$/",
+                                            "/^https$/",
+                                            "/^tel$/",
+                                            "/^mailto$/"
+                                          ],
+                                          "allowRelative": true,
+                                          "relativeOnly": false,
+                                          "allowCredentials": false
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "level": "error"
+                                }
+                              ],
+                              "description": "A valid web, email, phone, or relative link.",
+                              "name": "href",
+                              "type": "url",
+                              "title": "Link"
+                            }
+                          ],
+                          "name": "link",
+                          "type": "object"
+                        }
+                      ],
+                      "decorators": [
+                        {
+                          "value": "strong",
+                          "title": "Strong"
+                        },
+                        {
+                          "value": "em",
+                          "title": "Italic"
+                        },
+                        {
+                          "value": "code",
+                          "title": "Code"
+                        },
+                        {
+                          "value": "underline",
+                          "title": "Underline"
+                        },
+                        {
+                          "value": "strike-through",
+                          "title": "Strike"
+                        }
+                      ]
+                    },
+                    "lists": [
+                      {
+                        "value": "bullet",
+                        "title": "Bulleted list"
+                      },
+                      {
+                        "value": "number",
+                        "title": "Numbered list"
+                      }
+                    ],
+                    "styles": [
+                      {
+                        "value": "normal",
+                        "title": "Normal"
+                      },
+                      {
+                        "value": "h1",
+                        "title": "Heading 1"
+                      },
+                      {
+                        "value": "h2",
+                        "title": "Heading 2"
+                      },
+                      {
+                        "value": "h3",
+                        "title": "Heading 3"
+                      },
+                      {
+                        "value": "h4",
+                        "title": "Heading 4"
+                      },
+                      {
+                        "value": "h5",
+                        "title": "Heading 5"
+                      },
+                      {
+                        "value": "h6",
+                        "title": "Heading 6"
+                      },
+                      {
+                        "value": "blockquote",
+                        "title": "Quote"
+                      }
+                    ],
+                    "of": [],
+                    "type": "block"
+                  }
+                ],
+                "name": "answer",
+                "type": "array"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs"
+      },
+      {
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "White",
+                  "value": "white"
+                },
+                {
+                  "title": "Gray",
+                  "value": "gray"
+                },
+                {
+                  "title": "Blue",
+                  "value": "blue"
+                }
+              ]
+            },
+            "initialValue": "white",
+            "name": "backgroundColor",
+            "type": "string"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Left",
+                  "value": "left"
+                },
+                {
+                  "title": "Center",
+                  "value": "center"
+                },
+                {
+                  "title": "Right",
+                  "value": "right"
+                }
+              ]
+            },
+            "initialValue": "left",
+            "name": "textAlignment",
+            "type": "string"
+          }
+        ],
+        "name": "displaySettings",
+        "type": "object"
+      }
+    ],
+    "name": "contentBlock",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Internal title for the page",
+        "name": "title",
+        "type": "string",
+        "title": "Page Title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "URL path for this page (e.g., \"about\" for /about)",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Title shown in search results and browser tabs",
+        "name": "metaTitle",
+        "type": "string",
+        "title": "Meta Title (SEO)"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Description shown in search results",
+        "name": "metaDescription",
+        "type": "text",
+        "title": "Meta Description (SEO)"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Custom (Build with Components)",
+              "value": "custom"
+            },
+            {
+              "title": "Home Page",
+              "value": "home"
+            },
+            {
+              "title": "About Page",
+              "value": "about"
+            },
+            {
+              "title": "Services Page",
+              "value": "services"
+            },
+            {
+              "title": "Contact Page",
+              "value": "contact"
+            }
+          ]
+        },
+        "initialValue": "custom",
+        "description": "Use a template or build custom with components below",
+        "name": "template",
+        "type": "string",
+        "title": "Page Template"
+      },
+      {
+        "description": "Add and arrange components to build your page",
+        "of": [
+          {
+            "type": "heroComponent",
+            "title": "Hero Section"
+          },
+          {
+            "type": "identityQuoteComponent",
+            "title": "Identity Quote"
+          },
+          {
+            "type": "philosophySectionComponent",
+            "title": "Philosophy Section"
+          },
+          {
+            "type": "focusAreasComponent",
+            "title": "Focus Areas"
+          },
+          {
+            "type": "headshotProfileComponent",
+            "title": "Headshot & Profile"
+          },
+          {
+            "type": "personalStatementComponent",
+            "title": "Personal Statement"
+          },
+          {
+            "type": "textContentComponent",
+            "title": "Text Content"
+          },
+          {
+            "type": "ctaButtonComponent",
+            "title": "CTA Button"
+          },
+          {
+            "type": "imageGalleryComponent",
+            "title": "Image Gallery"
+          },
+          {
+            "type": "spacerComponent",
+            "title": "Spacer"
+          },
+          {
+            "type": "previewScrollComponent",
+            "title": "Preview Scroll"
+          },
+          {
+            "type": "profileSectionComponent",
+            "title": "Profile Section"
+          },
+          {
+            "type": "consultationFormComponent",
+            "title": "Consultation / Send a Message"
+          },
+          {
+            "description": "2 columns: contact info on the left, scheduling & messaging form on the right. Contact data comes from Therapist & Practice in Sanity.",
+            "type": "consultationFormWideComponent",
+            "title": "Consultation (Wide) – Contact + Form"
+          },
+          {
+            "type": "heroV3Component",
+            "title": "V3 Hero"
+          },
+          {
+            "type": "pullQuoteV3Component",
+            "title": "V3 Pull Quote"
+          },
+          {
+            "type": "whoIHelpV3Component",
+            "title": "V3 Who I Help"
+          },
+          {
+            "type": "theSpaceV3Component",
+            "title": "V3 The Space"
+          },
+          {
+            "type": "expressiveV3Component",
+            "title": "V3 Expressive Arts"
+          },
+          {
+            "type": "meetV3Component",
+            "title": "V3 Meet / Profile"
+          },
+          {
+            "type": "feelingsCheckInV3Component",
+            "title": "V3 Feelings Check-In"
+          },
+          {
+            "type": "ctaV3Component",
+            "title": "V3 CTA"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "components",
+        "type": "array",
+        "title": "Page Components"
+      },
+      {
+        "initialValue": true,
+        "description": "Display the site header/navigation",
+        "name": "showHeader",
+        "type": "boolean",
+        "title": "Show Site Header"
+      },
+      {
+        "initialValue": true,
+        "description": "Display the site footer",
+        "name": "showFooter",
+        "type": "boolean",
+        "title": "Show Site Footer"
+      },
+      {
+        "initialValue": false,
+        "description": "Make this page visible on the website",
+        "name": "published",
+        "type": "boolean"
+      },
+      {
+        "description": "When this page was published",
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date"
+      }
+    ],
+    "name": "page",
+    "type": "document",
+    "title": "Pages"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "subheading",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "backgroundImage",
+        "type": "image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Dark (Black)",
+              "value": "dark"
+            },
+            {
+              "title": "Light (White)",
+              "value": "light"
+            },
+            {
+              "title": "Burgundy",
+              "value": "burgundy"
+            },
+            {
+              "title": "Teal",
+              "value": "teal"
+            },
+            {
+              "title": "None",
+              "value": "none"
+            }
+          ]
+        },
+        "initialValue": "dark",
+        "name": "overlay",
+        "type": "string",
+        "title": "Overlay Color"
+      },
+      {
+        "initialValue": 0.4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Value between 0 and 1 (e.g., 0.4)",
+        "name": "overlayOpacity",
+        "type": "number"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Book Consultation",
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "description": "URL or anchor (e.g., #contact)",
+            "name": "link",
+            "type": "string",
+            "title": "Button Link"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Accent (Teal)",
+                  "value": "accent"
+                },
+                {
+                  "title": "Primary (Burgundy)",
+                  "value": "primary"
+                },
+                {
+                  "title": "Secondary",
+                  "value": "secondary"
+                },
+                {
+                  "title": "Outline",
+                  "value": "outline"
+                }
+              ]
+            },
+            "initialValue": "accent",
+            "name": "variant",
+            "type": "string",
+            "title": "Button Style"
+          }
+        ],
+        "name": "ctaButton",
+        "type": "object",
+        "title": "CTA Button"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Left",
+              "value": "left"
+            },
+            {
+              "title": "Center",
+              "value": "center"
+            },
+            {
+              "title": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        "initialValue": "center",
+        "name": "alignment",
+        "type": "string",
+        "title": "Content Alignment"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Small",
+              "value": "small"
+            },
+            {
+              "title": "Medium",
+              "value": "medium"
+            },
+            {
+              "title": "Large",
+              "value": "large"
+            },
+            {
+              "title": "Full Screen",
+              "value": "screen"
+            }
+          ]
+        },
+        "initialValue": "screen",
+        "name": "height",
+        "type": "string",
+        "title": "Section Height"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Overlay (content over image)",
+              "value": "overlay"
+            },
+            {
+              "title": "Split (image 7 cols, text 3 cols)",
+              "value": "split"
+            }
+          ]
+        },
+        "initialValue": "overlay",
+        "description": "Overlay: content over image. Split: image 7 cols, text 3 cols with gaps on a 12-column grid.",
+        "name": "variant",
+        "type": "string",
+        "title": "Layout Variant"
+      }
+    ],
+    "name": "heroComponent",
+    "type": "object",
+    "title": "Hero Section"
+  },
+  {
+    "fields": [
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "name": "author",
+        "type": "string"
+      }
+    ],
+    "name": "identityQuoteComponent",
+    "type": "object",
+    "title": "Identity Quote"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "My Philosophy",
+        "name": "title",
+        "type": "string",
+        "title": "Section Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "philosophySectionComponent",
+    "type": "object",
+    "title": "Philosophy Section"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Focus Areas",
+        "name": "sectionTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 6
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "description": "Icon name (e.g., brain, heart, wave, sun, shield, unlock, sparkles, plant, meditation, compass, target) or emoji (🧠)",
+                "name": "icon",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "areas",
+        "type": "array",
+        "title": "Focus Area Cards"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "2 Columns",
+              "value": "2col"
+            },
+            {
+              "title": "3 Columns",
+              "value": "3col"
+            }
+          ]
+        },
+        "initialValue": "3col",
+        "name": "layout",
+        "type": "string"
+      }
+    ],
+    "name": "focusAreasComponent",
+    "type": "object",
+    "title": "Focus Areas"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "Profile Image"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Rounded",
+              "value": "rounded"
+            },
+            {
+              "title": "Circle",
+              "value": "circle"
+            },
+            {
+              "title": "Square",
+              "value": "square"
+            }
+          ]
+        },
+        "initialValue": "rounded",
+        "name": "shape",
+        "type": "string",
+        "title": "Image Shape"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Small",
+              "value": "sm"
+            },
+            {
+              "title": "Medium",
+              "value": "md"
+            },
+            {
+              "title": "Large",
+              "value": "lg"
+            },
+            {
+              "title": "Extra Large",
+              "value": "xl"
+            }
+          ]
+        },
+        "initialValue": "lg",
+        "name": "size",
+        "type": "string"
+      }
+    ],
+    "name": "headshotProfileComponent",
+    "type": "object",
+    "title": "Headshot & Profile"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Optional portrait image displayed alongside the statement",
+        "name": "image",
+        "type": "image",
+        "title": "Profile Image"
+      },
+      {
+        "description": "Describe the image for accessibility",
+        "hidden": "conditional",
+        "name": "imageAlt",
+        "type": "string",
+        "title": "Image Alt Text"
+      },
+      {
+        "initialValue": true,
+        "description": "Check to place image on the left, uncheck for right",
+        "hidden": "conditional",
+        "name": "imageOnLeft",
+        "type": "boolean",
+        "title": "Image Position"
+      },
+      {
+        "rows": 6,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "statement",
+        "type": "text"
+      },
+      {
+        "initialValue": true,
+        "name": "showFullBioLink",
+        "type": "boolean",
+        "title": "Show Link"
+      },
+      {
+        "initialValue": "Read Full Biography",
+        "description": "Customize the link/button text (e.g. \"Read Full Biography\", \"Learn more\")",
+        "hidden": "conditional",
+        "name": "linkText",
+        "type": "string"
+      },
+      {
+        "description": "URL or anchor (e.g., #about)",
+        "hidden": "conditional",
+        "name": "fullBioLink",
+        "type": "string",
+        "title": "Link URL"
+      }
+    ],
+    "name": "personalStatementComponent",
+    "type": "object",
+    "title": "Personal Statement"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Section Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Left",
+              "value": "left"
+            },
+            {
+              "title": "Center",
+              "value": "center"
+            },
+            {
+              "title": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        "initialValue": "left",
+        "name": "alignment",
+        "type": "string",
+        "title": "Text Alignment"
+      }
+    ],
+    "name": "textContentComponent",
+    "type": "object",
+    "title": "Text Content"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "text",
+        "type": "string",
+        "title": "Button Text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "link",
+        "type": "string",
+        "title": "Button Link"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Primary",
+              "value": "primary"
+            },
+            {
+              "title": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "title": "Accent",
+              "value": "accent"
+            },
+            {
+              "title": "Outline",
+              "value": "outline"
+            }
+          ]
+        },
+        "initialValue": "primary",
+        "name": "variant",
+        "type": "string",
+        "title": "Button Style"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Small",
+              "value": "sm"
+            },
+            {
+              "title": "Medium",
+              "value": "md"
+            },
+            {
+              "title": "Large",
+              "value": "lg"
+            }
+          ]
+        },
+        "initialValue": "md",
+        "name": "size",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Left",
+              "value": "left"
+            },
+            {
+              "title": "Center",
+              "value": "center"
+            },
+            {
+              "title": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        "initialValue": "center",
+        "name": "alignment",
+        "type": "string"
+      }
+    ],
+    "name": "ctaButtonComponent",
+    "type": "object",
+    "title": "CTA Button"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Gallery Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "caption",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Grid (2 columns)",
+              "value": "grid-2"
+            },
+            {
+              "title": "Grid (3 columns)",
+              "value": "grid-3"
+            },
+            {
+              "title": "Grid (4 columns)",
+              "value": "grid-4"
+            },
+            {
+              "title": "Masonry",
+              "value": "masonry"
+            }
+          ]
+        },
+        "initialValue": "grid-3",
+        "name": "layout",
+        "type": "string"
+      }
+    ],
+    "name": "imageGalleryComponent",
+    "type": "object",
+    "title": "Image Gallery"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Small (2rem)",
+              "value": "sm"
+            },
+            {
+              "title": "Medium (4rem)",
+              "value": "md"
+            },
+            {
+              "title": "Large (6rem)",
+              "value": "lg"
+            },
+            {
+              "title": "Extra Large (8rem)",
+              "value": "xl"
+            }
+          ]
+        },
+        "initialValue": "md",
+        "name": "size",
+        "type": "string",
+        "title": "Spacing Size"
+      }
+    ],
+    "name": "spacerComponent",
+    "type": "object",
+    "title": "Spacer"
+  },
+  {
+    "fields": [
+      {
+        "description": "Optional title for the scroll section",
+        "name": "title",
+        "type": "string",
+        "title": "Section Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 12
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Add items to display in the scrollable carousel",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "description": "Icon name (e.g., brain, heart, wave, sun, shield, unlock, sparkles, plant, meditation, compass, target) or emoji (🧠)",
+                "name": "icon",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Scroll Items"
+      }
+    ],
+    "name": "previewScrollComponent",
+    "type": "object",
+    "title": "Preview Scroll"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Portrait-oriented image (3:4 aspect ratio works best)",
+        "name": "image",
+        "type": "image",
+        "title": "Profile Image"
+      },
+      {
+        "description": "Describe the image for accessibility",
+        "name": "imageAlt",
+        "type": "string",
+        "title": "Image Alt Text"
+      },
+      {
+        "description": "Small uppercase label (e.g. \"ABOUT MARY DIORIO, LCSW\")",
+        "name": "subtitle",
+        "type": "string"
+      },
+      {
+        "description": "Primary heading (e.g. \"Deeply experienced.\")",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "description": "Secondary line under the heading",
+        "name": "subheading",
+        "type": "string"
+      },
+      {
+        "description": "Rounded badges (e.g. \"20+ Years Clinical Experience\")",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "tags",
+        "type": "array",
+        "title": "Highlight Tags"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Main text content for this section",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      },
+      {
+        "initialValue": "Learn more about me",
+        "name": "buttonText",
+        "type": "string"
+      },
+      {
+        "initialValue": "#",
+        "description": "URL or anchor (e.g., #about)",
+        "name": "buttonLink",
+        "type": "string"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Credentials & Training",
+            "name": "title",
+            "type": "string",
+            "title": "Section Title"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "options": {
+                      "list": [
+                        {
+                          "title": "Graduation cap",
+                          "value": "graduation"
+                        },
+                        {
+                          "title": "License/Badge",
+                          "value": "license"
+                        },
+                        {
+                          "title": "Book",
+                          "value": "book"
+                        }
+                      ]
+                    },
+                    "name": "icon",
+                    "type": "string"
+                  },
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          }
+                        ],
+                        "level": "error"
+                      }
+                    ],
+                    "name": "title",
+                    "type": "string"
+                  },
+                  {
+                    "name": "description",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "items",
+            "type": "array",
+            "title": "Credential Items"
+          }
+        ],
+        "name": "credentials",
+        "type": "object",
+        "title": "Credentials & Training"
+      },
+      {
+        "initialValue": true,
+        "description": "Check to place image on the left, uncheck for right",
+        "name": "imageOnLeft",
+        "type": "boolean",
+        "title": "Image Position"
+      }
+    ],
+    "name": "profileSectionComponent",
+    "type": "object",
+    "title": "Profile Section"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Send a Message",
+        "name": "title",
+        "type": "string",
+        "title": "Form Title"
+      },
+      {
+        "rows": 4,
+        "initialValue": "By submitting this form, you consent to receive communications from the practice. If you provide an email address, you may receive an automated confirmation. See our Privacy Policy for details on how we protect your information.",
+        "description": "Shown below the form (e.g. consent to receive communications).",
+        "name": "consentText",
+        "type": "text",
+        "title": "Consent / Disclaimer Text"
+      },
+      {
+        "description": "Link for \"Privacy Policy\" in the consent text",
+        "name": "privacyPolicyUrl",
+        "type": "string",
+        "title": "Privacy Policy URL"
+      },
+      {
+        "initialValue": "LET'S CONNECT",
+        "name": "buttonText",
+        "type": "string",
+        "title": "Submit Button Text"
+      }
+    ],
+    "name": "consultationFormComponent",
+    "type": "object",
+    "title": "Consultation / Send a Message"
+  },
+  {
+    "description": "2 columns: contact info on the left, scheduling & messaging form on the right. Contact data comes from Therapist & Practice in Sanity.",
+    "fields": [
+      {
+        "initialValue": "Contact Information",
+        "name": "contactTitle",
+        "type": "string",
+        "title": "Contact Column Title"
+      },
+      {
+        "initialValue": "Send a Message",
+        "name": "title",
+        "type": "string",
+        "title": "Form Title"
+      },
+      {
+        "rows": 4,
+        "initialValue": "By submitting this form, you consent to receive communications from the practice. If you provide an email address, you may receive an automated confirmation. See our Privacy Policy for details on how we protect your information.",
+        "description": "Shown below the form.",
+        "name": "consentText",
+        "type": "text",
+        "title": "Consent / Disclaimer Text"
+      },
+      {
+        "name": "privacyPolicyUrl",
+        "type": "string",
+        "title": "Privacy Policy URL"
+      },
+      {
+        "initialValue": "LET'S CONNECT",
+        "name": "buttonText",
+        "type": "string",
+        "title": "Submit Button Text"
+      }
+    ],
+    "name": "consultationFormWideComponent",
+    "type": "object",
+    "title": "Consultation (Wide) – Contact + Form"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Expressive Arts Therapy · Davis, CA",
+        "name": "kickerText",
+        "type": "string",
+        "title": "Kicker"
+      },
+      {
+        "initialValue": "You don't have to find the words.",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "initialValue": "words.",
+        "name": "headingEmphasis",
+        "type": "string",
+        "title": "Heading Emphasis (italic)"
+      },
+      {
+        "rows": 4,
+        "name": "body",
+        "type": "text",
+        "title": "Body Text"
+      },
+      {
+        "initialValue": "Start with a free consultation",
+        "name": "primaryCtaText",
+        "type": "string",
+        "title": "Primary CTA Text"
+      },
+      {
+        "initialValue": "#",
+        "name": "primaryCtaHref",
+        "type": "string",
+        "title": "Primary CTA Link"
+      },
+      {
+        "initialValue": "How it works →",
+        "name": "secondaryCtaText",
+        "type": "string",
+        "title": "Secondary CTA Text"
+      },
+      {
+        "initialValue": "#",
+        "name": "secondaryCtaHref",
+        "type": "string",
+        "title": "Secondary CTA Link"
+      }
+    ],
+    "name": "heroV3Component",
+    "type": "object",
+    "title": "V3 Hero"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "a different kind of therapy",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "rows": 4,
+        "name": "body",
+        "type": "text"
+      }
+    ],
+    "name": "pullQuoteV3Component",
+    "type": "object",
+    "title": "V3 Pull Quote"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "who I work with",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "Everyone deserves a way in.",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "initialValue": "way in.",
+        "name": "headingEmphasis",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Children",
+                      "value": "children"
+                    },
+                    {
+                      "title": "Teens",
+                      "value": "teens"
+                    },
+                    {
+                      "title": "Women",
+                      "value": "women"
+                    },
+                    {
+                      "title": "SEED Scholars",
+                      "value": "seed"
+                    }
+                  ]
+                },
+                "name": "variant",
+                "type": "string"
+              },
+              {
+                "name": "tag",
+                "type": "string"
+              },
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 4,
+                "name": "body",
+                "type": "text"
+              },
+              {
+                "name": "linkText",
+                "type": "string"
+              },
+              {
+                "name": "linkHref",
+                "type": "string",
+                "title": "Link URL"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "cards",
+        "type": "array"
+      }
+    ],
+    "name": "whoIHelpV3Component",
+    "type": "object",
+    "title": "V3 Who I Help"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "the studio",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "A room that feels like permission to breathe.",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "initialValue": "permission to breathe.",
+        "name": "headingEmphasis",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "rows": 3,
+            "type": "text"
+          }
+        ],
+        "name": "paragraphs",
+        "type": "array"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Room Image"
+      },
+      {
+        "initialValue": "✦ Davis, CA",
+        "name": "photoTag",
+        "type": "string"
+      }
+    ],
+    "name": "theSpaceV3Component",
+    "type": "object",
+    "title": "V3 The Space"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "the approach",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "Therapy that makes something with the mess.",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "rows": 4,
+            "type": "text"
+          }
+        ],
+        "name": "paragraphs",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "detail",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "modalities",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "rows": 3,
+                "name": "text",
+                "type": "text",
+                "title": "Quote Text"
+              },
+              {
+                "name": "attrib",
+                "type": "string",
+                "title": "Attribution"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "quotes",
+        "type": "array",
+        "title": "Testimonial Quotes"
+      }
+    ],
+    "name": "expressiveV3Component",
+    "type": "object",
+    "title": "V3 Expressive Arts"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "a little about me",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "name": "headingEmphasis",
+        "type": "string",
+        "title": "Heading Emphasis (name)"
+      },
+      {
+        "of": [
+          {
+            "rows": 4,
+            "type": "text"
+          }
+        ],
+        "name": "paragraphs",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "credentials",
+        "type": "array"
+      },
+      {
+        "name": "badgeText",
+        "type": "string",
+        "title": "Badge Text (e.g. LMFT Davis, CA)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Photo"
+      }
+    ],
+    "name": "meetV3Component",
+    "type": "object",
+    "title": "V3 Meet / Profile"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "a moment for you",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "How are you feeling right now?",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "initialValue": "Choose a color. No explanation needed.",
+        "name": "subheading",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g. var(--terracotta)",
+                "name": "color",
+                "type": "string",
+                "title": "Color (CSS var)"
+              },
+              {
+                "name": "feel",
+                "type": "string",
+                "title": "Feeling Label"
+              },
+              {
+                "rows": 2,
+                "name": "reply",
+                "type": "text",
+                "title": "Reply Message"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "swatches",
+        "type": "array"
+      }
+    ],
+    "name": "feelingsCheckInV3Component",
+    "type": "object",
+    "title": "V3 Feelings Check-In"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Ready to find a different way in?",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "initialValue": "The first conversation is free.",
+        "name": "headingEmphasis",
+        "type": "string"
+      },
+      {
+        "initialValue": "15-minute consultations · No commitment · Telehealth & in-person available",
+        "name": "subheading",
+        "type": "string"
+      },
+      {
+        "initialValue": "Schedule a free consultation",
+        "name": "buttonText",
+        "type": "string"
+      },
+      {
+        "initialValue": "#",
+        "name": "buttonHref",
+        "type": "string",
+        "title": "Button Link"
+      }
+    ],
+    "name": "ctaV3Component",
+    "type": "object",
+    "title": "V3 CTA"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "heroHeading",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "heroSubheading",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroBackgroundImage",
+        "type": "image"
+      },
+      {
+        "rows": 3,
+        "name": "welcomeQuote",
+        "type": "text"
+      },
+      {
+        "name": "quoteAuthor",
+        "type": "string"
+      },
+      {
+        "initialValue": "My Philosophy",
+        "name": "philosophyTitle",
+        "type": "string",
+        "title": "Philosophy Section Title"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "philosophyContent",
+        "type": "array"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "philosophyImage",
+        "type": "image"
+      },
+      {
+        "initialValue": true,
+        "name": "showFocusAreas",
+        "type": "boolean",
+        "title": "Show Focus Areas Section"
+      },
+      {
+        "initialValue": true,
+        "name": "showPersonalStatement",
+        "type": "boolean",
+        "title": "Show Personal Statement Section"
+      }
+    ],
+    "name": "homePageTemplate",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "pageHeading",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "introText",
+        "type": "array",
+        "title": "Introduction Text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "profileImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "fullBiography",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "degree",
+                "type": "string",
+                "title": "Degree/Certification"
+              },
+              {
+                "name": "institution",
+                "type": "string"
+              },
+              {
+                "name": "year",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "education",
+        "type": "array",
+        "title": "Education & Training"
+      },
+      {
+        "initialValue": true,
+        "name": "showQualifications",
+        "type": "boolean",
+        "title": "Show Qualifications Section"
+      }
+    ],
+    "name": "aboutPageTemplate",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "pageHeading",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "name": "introText",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "serviceName",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "marks": {
+                      "annotations": [
+                        {
+                          "i18nTitleKey": "inputs.portable-text.annotation.link",
+                          "options": {
+                            "modal": {
+                              "type": "popover"
+                            }
+                          },
+                          "fields": [
+                            {
+                              "validation": [
+                                {
+                                  "rules": [
+                                    {
+                                      "flag": "uri",
+                                      "constraint": {
+                                        "options": {
+                                          "scheme": [
+                                            "/^http$/",
+                                            "/^https$/",
+                                            "/^tel$/",
+                                            "/^mailto$/"
+                                          ],
+                                          "allowRelative": true,
+                                          "relativeOnly": false,
+                                          "allowCredentials": false
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "level": "error"
+                                }
+                              ],
+                              "description": "A valid web, email, phone, or relative link.",
+                              "name": "href",
+                              "type": "url",
+                              "title": "Link"
+                            }
+                          ],
+                          "name": "link",
+                          "type": "object"
+                        }
+                      ],
+                      "decorators": [
+                        {
+                          "value": "strong",
+                          "title": "Strong"
+                        },
+                        {
+                          "value": "em",
+                          "title": "Italic"
+                        },
+                        {
+                          "value": "code",
+                          "title": "Code"
+                        },
+                        {
+                          "value": "underline",
+                          "title": "Underline"
+                        },
+                        {
+                          "value": "strike-through",
+                          "title": "Strike"
+                        }
+                      ]
+                    },
+                    "lists": [
+                      {
+                        "value": "bullet",
+                        "title": "Bulleted list"
+                      },
+                      {
+                        "value": "number",
+                        "title": "Numbered list"
+                      }
+                    ],
+                    "styles": [
+                      {
+                        "value": "normal",
+                        "title": "Normal"
+                      },
+                      {
+                        "value": "h1",
+                        "title": "Heading 1"
+                      },
+                      {
+                        "value": "h2",
+                        "title": "Heading 2"
+                      },
+                      {
+                        "value": "h3",
+                        "title": "Heading 3"
+                      },
+                      {
+                        "value": "h4",
+                        "title": "Heading 4"
+                      },
+                      {
+                        "value": "h5",
+                        "title": "Heading 5"
+                      },
+                      {
+                        "value": "h6",
+                        "title": "Heading 6"
+                      },
+                      {
+                        "value": "blockquote",
+                        "title": "Quote"
+                      }
+                    ],
+                    "of": [],
+                    "type": "block"
+                  }
+                ],
+                "name": "description",
+                "type": "array"
+              },
+              {
+                "description": "e.g., \"50 minutes\"",
+                "name": "duration",
+                "type": "string",
+                "title": "Session Duration"
+              },
+              {
+                "description": "e.g., \"$150\" or \"Sliding scale available\"",
+                "name": "fee",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "services",
+        "type": "array",
+        "title": "Services Offered"
+      },
+      {
+        "initialValue": true,
+        "name": "showTreatmentApproach",
+        "type": "boolean",
+        "title": "Show Treatment Approach Section"
+      },
+      {
+        "initialValue": true,
+        "name": "showSpecialties",
+        "type": "boolean",
+        "title": "Show Specialties Section"
+      }
+    ],
+    "name": "servicesPageTemplate",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Get in Touch",
+        "name": "pageHeading",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "introText",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "initialValue": true,
+        "name": "showContactForm",
+        "type": "boolean"
+      },
+      {
+        "initialValue": false,
+        "name": "showMap",
+        "type": "boolean",
+        "title": "Show Location Map"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g., \"Monday - Friday\"",
+                "name": "days",
+                "type": "string"
+              },
+              {
+                "description": "e.g., \"9:00 AM - 5:00 PM\"",
+                "name": "hours",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "officeHours",
+        "type": "array"
+      },
+      {
+        "description": "Any additional contact information or instructions",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "additionalInfo",
+        "type": "array",
+        "title": "Additional Information"
+      }
+    ],
+    "name": "contactPageTemplate",
+    "type": "object"
+  }
+]

@@ -28,6 +28,16 @@ import {
   consultationFormWideComponent,
 } from './pageComponents'
 import {
+  heroV3Component,
+  pullQuoteV3Component,
+  whoIHelpV3Component,
+  theSpaceV3Component,
+  expressiveV3Component,
+  meetV3Component,
+  feelingsCheckInV3Component,
+  ctaV3Component,
+} from './v3PageComponents'
+import {
   homePageTemplate,
   aboutPageTemplate,
   servicesPageTemplate,
@@ -65,6 +75,16 @@ export const schemaTypes = [
   profileSectionComponent,
   consultationFormComponent,
   consultationFormWideComponent,
+
+  // V3 design system components
+  heroV3Component,
+  pullQuoteV3Component,
+  whoIHelpV3Component,
+  theSpaceV3Component,
+  expressiveV3Component,
+  meetV3Component,
+  feelingsCheckInV3Component,
+  ctaV3Component,
 
   // Page templates (objects for template-based pages)
   homePageTemplate,
