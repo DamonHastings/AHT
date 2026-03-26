@@ -13,19 +13,18 @@
     "seed-pages": "node seedPages.js",
     "seed-navigation": "node seedNavigation.js",
     "seed-all": "node seedPages.js && node seedNavigation.js",
-    "seed-home-wireframe": "node seedHomePageWireframe.js",
-    "seed-v3-home": "node seedV3Home.js"
+    "seed-home": "node seedHome.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sanity/client": "^6.8.6",
-    "@sanity/vision": "^3.0.0",
+    "@sanity/vision": "^4.22.0",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sanity": "^3.45.0",
+    "sanity": "^4.22.0",
     "styled-components": "^6.3.5"
   },
   "devDependencies": {

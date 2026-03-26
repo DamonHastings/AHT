@@ -3,7 +3,6 @@ import imageUrlBuilder from '@sanity/image-url'
 
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || ''
 const dataset = import.meta.env.VITE_SANITY_DATASET || 'production'
-export const studioUrl = import.meta.env.VITE_SANITY_STUDIO_URL || 'http://localhost:3333'
 
 /** Detect if running inside Presentation tool iframe or with preview param */
 export const isPreview = () => {
@@ -11,6 +10,24 @@ export const isPreview = () => {
   const params = new URLSearchParams(window.location.search)
   return params.has('sanity-preview') || window.self !== window.top
 }
+
+/**
+ * Studio URL for visual editing / stega. When embedded in Presentation mode (iframe),
+ * use the parent (studio) origin so production works without a separate env.
+ */
+function getStudioUrl() {
+  if (typeof window === 'undefined') return import.meta.env.VITE_SANITY_STUDIO_URL || 'http://localhost:3333'
+  if (isPreview() && document.referrer) {
+    try {
+      return new URL(document.referrer).origin
+    } catch {
+      // fall through to env/default
+    }
+  }
+  return import.meta.env.VITE_SANITY_STUDIO_URL || 'http://localhost:3333'
+}
+
+export const studioUrl = getStudioUrl()
 
 export const client = createClient({
   projectId,

@@ -1,5 +1,5 @@
 import '../src/index.css';
-import '../src/styles/v3-theme.css';
+import '../src/styles/site-theme.css';
 
 /** @type { import('@storybook/react-vite').Preview } */
 const preview = {
@@ -19,20 +19,14 @@ const preview = {
     },
 
     backgrounds: {
-      default: 'neutral-50',
+      default: 'powder-blue-200',
       values: [
-        {
-          name: 'neutral-50',
-          value: '#F8F7F2',
-        },
-        {
-          name: 'white',
-          value: '#FFFFFF',
-        },
-        {
-          name: 'wood-50',
-          value: '#8B4513',
-        },
+        { name: 'powder-blue-200', value: '#EDF3F6' },
+        { name: 'powder-blue-300', value: '#E4EDF2' },
+        { name: 'white', value: '#FFFFFF' },
+        { name: 'linen', value: '#F4F0E8' },
+        { name: 'slate-blue-400', value: '#43595D' },
+        { name: 'ink', value: '#1C2730' },
       ],
     },
   },

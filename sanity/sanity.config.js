@@ -6,6 +6,8 @@ import { schemaTypes } from "./schemas";
 import deskStructure from "./deskStructure";
 import { locations, mainDocuments } from "./presentationResolve";
 
+// Set SANITY_STUDIO_PREVIEW_URL to your hosted frontend URL when deploying the studio
+// (e.g. https://yoursite.com). Otherwise Presentation mode will point at localhost.
 const frontendUrl = process.env.SANITY_STUDIO_PREVIEW_URL || "http://localhost:5173";
 
 export default defineConfig({

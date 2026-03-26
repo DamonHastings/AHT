@@ -12,31 +12,17 @@ import contentBlock from './contentBlock'
 // Page builder schemas
 import page from './page'
 import {
-  heroComponent,
-  identityQuoteComponent,
-  philosophySectionComponent,
-  focusAreasComponent,
-  headshotProfileComponent,
-  personalStatementComponent,
-  textContentComponent,
-  ctaButtonComponent,
-  imageGalleryComponent,
-  spacerComponent,
-  previewScrollComponent,
-  profileSectionComponent,
-  consultationFormComponent,
-  consultationFormWideComponent,
-} from './pageComponents'
-import {
-  heroV3Component,
-  pullQuoteV3Component,
-  whoIHelpV3Component,
-  theSpaceV3Component,
-  expressiveV3Component,
-  meetV3Component,
-  feelingsCheckInV3Component,
-  ctaV3Component,
-} from './v3PageComponents'
+  heroBlock,
+  pullQuoteBlock,
+  whoIHelpBlock,
+  theSpaceBlock,
+  expressiveArtsBlock,
+  meetBlock,
+  feelingsCheckInBlock,
+  ctaBlock,
+  proseSectionBlock,
+  spacerBlock,
+} from './pageBlocks'
 import {
   homePageTemplate,
   aboutPageTemplate,
@@ -60,31 +46,17 @@ export const schemaTypes = [
   // Page builder
   page,
 
-  // Page components (objects used within pages)
-  heroComponent,
-  identityQuoteComponent,
-  philosophySectionComponent,
-  focusAreasComponent,
-  headshotProfileComponent,
-  personalStatementComponent,
-  textContentComponent,
-  ctaButtonComponent,
-  imageGalleryComponent,
-  spacerComponent,
-  previewScrollComponent,
-  profileSectionComponent,
-  consultationFormComponent,
-  consultationFormWideComponent,
-
-  // V3 design system components
-  heroV3Component,
-  pullQuoteV3Component,
-  whoIHelpV3Component,
-  theSpaceV3Component,
-  expressiveV3Component,
-  meetV3Component,
-  feelingsCheckInV3Component,
-  ctaV3Component,
+  // Page blocks (objects used within pages)
+  heroBlock,
+  pullQuoteBlock,
+  whoIHelpBlock,
+  theSpaceBlock,
+  expressiveArtsBlock,
+  meetBlock,
+  feelingsCheckInBlock,
+  ctaBlock,
+  proseSectionBlock,
+  spacerBlock,
 
   // Page templates (objects for template-based pages)
   homePageTemplate,
