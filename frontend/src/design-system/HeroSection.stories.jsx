@@ -7,7 +7,7 @@ export default {
     docs: {
       description: {
         component:
-          "Hero section component with background image, large heading, and consultation booking CTA. Perfect for landing pages and top-of-page content.",
+          "Hero section with background image, large heading, and CTA. Use `variant=\"overlay\"` (default), `variant=\"split\"` for a side-by-side grid, or `variant=\"organic\"` for a split layout with expressive-style typography (Playfair Display + Roboto Condensed, terracotta emphasis, pill CTAs) and a photo clipped by an animated organic mask (`blobMorph` only — the photo stays fixed; oversized slightly so edges do not show). Image column: `blobSide` `\"left\"` / `\"right\"`, or default right when only `variant=\"organic\"` is set.",
       },
     },
     layout: "fullscreen",
@@ -40,13 +40,24 @@ export default {
       control: "select",
       options: ["left", "center", "right"],
     },
+    ctaAlignment: {
+      control: "select",
+      options: ["left", "center", "right"],
+    },
+    blobSide: {
+      control: "select",
+      options: [null, "left", "right"],
+    },
+    blobImage: {
+      control: "text",
+    },
     height: {
       control: "select",
       options: ["small", "medium", "large", "screen"],
     },
     variant: {
       control: "select",
-      options: ["overlay", "split"],
+      options: ["overlay", "split", "organic"],
     },
     onCtaClick: { action: "CTA clicked" },
   },
@@ -92,6 +103,100 @@ export const RightAligned = {
     ctaVariant: "accent",
     alignment: "right",
     height: "screen",
+  },
+};
+
+/** Hero image clipped by a morphing superellipse mask (`blobMorph`); photo is static and oversized inside the mask. */
+export const OrganicImageMask = {
+  args: {
+    backgroundImage: "/photos/IMG_0346.JPG",
+    variant: "organic",
+    overlay: null,
+    kickerText: "Expressive Arts Therapy · Davis, CA",
+    heading: "Healing in a space that meets you where you are",
+    headingEmphasis: "where you are",
+    subheading:
+      "Expressive arts therapy in Davis — when words are hard to find, we find another way in together.",
+    ctaText: "Book Free Consultation",
+    primaryCtaHref: "#contact",
+    secondaryCtaText: "Who I help →",
+    secondaryCtaHref: "/#audience-children",
+    ctaVariant: "accent",
+    alignment: "left",
+    height: "large",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Uses `variant=\"organic\"` (image defaults to the right). Typography and CTAs mirror `site/Hero`. Only the mask border-radius animates; the image does not drift.",
+      },
+    },
+  },
+};
+
+export const BlobLeft = {
+  args: {
+    backgroundImage: "/photos/IMG_0346.JPG",
+    variant: "organic",
+    blobSide: "left",
+    overlay: null,
+    kickerText: "Expressive Arts Therapy · Davis, CA",
+    heading: "Healing in a space that meets you where you are",
+    headingEmphasis: "where you are",
+    subheading:
+      "Expressive arts therapy in Davis — when words are hard to find, we find another way in together.",
+    ctaText: "Book Free Consultation",
+    primaryCtaHref: "#contact",
+    secondaryCtaText: "Who I help →",
+    secondaryCtaHref: "/#audience-children",
+    ctaVariant: "accent",
+    alignment: "left",
+    height: "large",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Photo masked by morphing organic corners (`blobMorph`); image stays fixed inside the mask. On large screens the image sits on the left; stacks on small viewports.",
+      },
+    },
+  },
+};
+
+export const BlobRight = {
+  args: {
+    backgroundImage: "/photos/IMG_0346.JPG",
+    variant: "organic",
+    blobSide: "right",
+    overlay: null,
+    kickerText: "Expressive Arts Therapy · Davis, CA",
+    heading: "Your journey toward balance starts with one conversation",
+    headingEmphasis: "one conversation",
+    subheading: "Evidence-based care with room for creativity, movement, and play.",
+    ctaText: "Schedule a visit",
+    primaryCtaHref: "#contact",
+    secondaryCtaText: "Learn more →",
+    secondaryCtaHref: "/about",
+    ctaVariant: "accent",
+    alignment: "right",
+    height: "large",
+  },
+};
+
+export const CtaAlignment = {
+  args: {
+    backgroundImage: "/photos/IMG_0346.JPG",
+    overlay: "dark",
+    overlayOpacity: 0.45,
+    heading: "Left-aligned copy, CTA on the right",
+    subheading:
+      "Use ctaAlignment when the headline stays left-aligned but you want the button tucked to the opposite side.",
+    ctaText: "Book Consultation",
+    ctaVariant: "accent",
+    alignment: "left",
+    ctaAlignment: "right",
+    height: "medium",
   },
 };
 

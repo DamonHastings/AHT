@@ -5,18 +5,19 @@ import PropTypes from "prop-types";
  */
 export default function ExpressiveArts({
   eyebrow = "the approach",
-  heading = "Therapy that makes something with the mess.",
+  heading = "Collaborative, directive, and tuned to the moment.",
   paragraphs = [
-    "Expressive Arts therapy is an evidence-informed approach that weaves together multiple creative modalities — not because you need to be an artist, but because the body, the imagination, and the hands sometimes know things the mind hasn't caught up to yet.",
-    "You might draw what you can't say. Write a letter you'll never send. Move through something instead of sitting still with it. The form follows what you need.",
+    "Expressive arts therapy weaves drawing, movement, writing, music, metaphor, symbolism, and play — not because you need to be an artist, but because imagination and the body sometimes know things the mind hasn't caught up to yet. We can go outside or stay in the room; we can stay verbal when that's what you need.",
+    "I'm responsive to what you bring and direct when that's useful — so you're not carrying the whole hour alone, and you're also not being talked at. Loving challenge and tolerable discomfort are part of growth; so is humor and curiosity. The form follows what you need.",
   ],
   modalities = [
     { name: "Drawing & painting", detail: "for what has no shape yet" },
-    { name: "Sandtray play", detail: "especially for children & teens" },
-    { name: "Movement & embodiment", detail: "what the body holds" },
-    { name: "Writing & poetry", detail: "finding language sideways" },
+    { name: "Sandtray & play", detail: "especially for children & teens" },
+    { name: "Movement & embodiment", detail: "optional, never forced" },
+    { name: "Metaphor & symbolism", detail: "thinking sideways" },
+    { name: "Writing & poetry", detail: "letters you never send" },
     { name: "Music & sound", detail: "rhythm as regulation" },
-    { name: "Drama & storytelling", detail: "new ways to hold old stories" },
+    { name: "Nature & space", detail: "when the room isn't enough" },
   ],
   quotes = [
     {
@@ -55,18 +56,15 @@ export default function ExpressiveArts({
 
       <div>
         <span
-          className="block mb-2"
+          className="site-eyebrow block mb-2"
           style={{
-            fontFamily: "'Caveat', cursive",
-            fontSize: "1.15rem",
             color: "var(--terracotta)",
           }}
         >
           {eyebrow}
         </span>
         <h2
-          className="font-serif text-xl md:text-2xl font-normal leading-snug mb-6"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="site-heading text-2xl md:text-3xl mb-6"
         >
           {heading}
         </h2>
@@ -74,8 +72,7 @@ export default function ExpressiveArts({
         {paragraphs.map((p, idx) => (
           <p
             key={idx}
-            className="text-base leading-[1.88] font-light mb-4"
-            style={{ opacity: 0.82 }}
+            className="site-body-copy text-base mb-4"
           >
             {p}
           </p>
@@ -89,11 +86,10 @@ export default function ExpressiveArts({
             >
               <span className="font-normal">{m.name}</span>
               <span
-                className="text-base"
+                className="site-ui-label text-[0.75rem]"
                 style={{
-                  fontFamily: "'Caveat', cursive",
                   color: "var(--terracotta)",
-                  opacity: 0.7,
+                  opacity: 0.78,
                 }}
               >
                 {m.detail}
@@ -112,9 +108,9 @@ export default function ExpressiveArts({
           >
             <span
               className="absolute -top-5 left-4 text-8xl font-serif opacity-20 leading-none"
-              style={{ fontFamily: "'Playfair Display', serif", color: "var(--teal)" }}
+              style={{ fontFamily: "var(--font-display)", color: "var(--teal)" }}
             >
-              "
+              {"\u201C"}
             </span>
             <div
               className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-[1.5px] border-[rgba(91,158,160,0.25)]"
@@ -122,14 +118,13 @@ export default function ExpressiveArts({
               aria-hidden
             />
             <p
-              className="font-serif italic text-lg leading-[1.65] mb-4 relative z-10"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              className="site-heading italic text-lg mb-4 relative z-10"
             >
               {q.text}
             </p>
             <span
-              className="text-xs tracking-[0.1em] uppercase opacity-45 font-medium"
-              style={{ fontFamily: "'Jost', sans-serif", fontStyle: "normal" }}
+              className="site-ui-label opacity-55"
+              style={{ fontStyle: "normal" }}
             >
               {q.attrib}
             </span>

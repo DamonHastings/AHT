@@ -39,7 +39,16 @@ export function useSiteSettings() {
           "navigation": navigation->{
             _id,
             title,
-            items
+            items[]{
+              _key,
+              label,
+              linkType,
+              anchor,
+              internalPage,
+              "internalPageSlug": internalPage->slug.current,
+              externalUrl,
+              openInNewTab
+            }
           },
           seo
         }`

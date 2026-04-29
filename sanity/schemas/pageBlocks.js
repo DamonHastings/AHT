@@ -5,18 +5,168 @@ export const heroBlock = {
   title: 'Hero',
   type: 'object',
   fields: [
-    { name: 'kickerText', title: 'Kicker', type: 'string', initialValue: 'Expressive Arts Therapy · Davis, CA' },
+    {
+      name: 'presentation',
+      title: 'Layout style',
+      type: 'string',
+      description:
+        'Expressive arts: split layout with kicker and two text links. Photo hero: design-system hero with optional backdrop, split image, or organic masked image.',
+      options: {
+        list: [
+          { title: 'Expressive arts (kicker, two CTAs)', value: 'expressive' },
+          { title: 'Photo hero', value: 'photo' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'expressive',
+    },
+    {
+      name: 'kickerText',
+      title: 'Kicker',
+      type: 'string',
+      description: 'Shown above the headline for expressive layout; also supported on photo / organic hero.',
+      initialValue: 'Expressive Arts Therapy · Davis, CA',
+    },
     { name: 'heading', title: 'Heading', type: 'string', validation: Rule => Rule.required(), initialValue: "You don't have to find the words." },
-    { name: 'headingEmphasis', title: 'Heading Emphasis (italic)', type: 'string', initialValue: 'words.' },
-    { name: 'body', title: 'Body Text', type: 'text', rows: 4 },
+    {
+      name: 'headingEmphasis',
+      title: 'Heading Emphasis (italic)',
+      type: 'string',
+      description: 'Substring rendered in terracotta italic (same as expressive hero).',
+      initialValue: 'words.',
+    },
+    {
+      name: 'body',
+      title: 'Body Text',
+      description: 'Expressive arts: main paragraph. Photo hero: subheading below the headline.',
+      type: 'text',
+      rows: 4,
+    },
     { name: 'primaryCtaText', title: 'Primary CTA Text', type: 'string', initialValue: 'Start with a free consultation' },
     { name: 'primaryCtaHref', title: 'Primary CTA Link', type: 'string', initialValue: '#' },
-    { name: 'secondaryCtaText', title: 'Secondary CTA Text', type: 'string', initialValue: 'How it works →' },
-    { name: 'secondaryCtaHref', title: 'Secondary CTA Link', type: 'string', initialValue: '#' },
+    {
+      name: 'secondaryCtaText',
+      title: 'Secondary CTA Text',
+      type: 'string',
+      initialValue: 'How it works →',
+    },
+    {
+      name: 'secondaryCtaHref',
+      title: 'Secondary CTA Link',
+      type: 'string',
+      initialValue: '#',
+    },
+    {
+      name: 'photoBackgroundImage',
+      title: 'Photo hero — background image',
+      type: 'image',
+      options: { hotspot: true },
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
+    {
+      name: 'photoVariant',
+      title: 'Photo hero — layout variant',
+      type: 'string',
+      description: 'Organic: image in an animated soft mask; pick image column below.',
+      options: {
+        list: [
+          { title: 'Backdrop (full-bleed + overlay)', value: 'overlay' },
+          { title: 'Split (image + text grid)', value: 'split' },
+          { title: 'Organic masked image', value: 'organic' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'overlay',
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
+    {
+      name: 'photoBlobSide',
+      title: 'Photo hero — image column (organic only)',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Left', value: 'left' },
+          { title: 'Right', value: 'right' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'right',
+      hidden: ({ parent }) =>
+        (parent?.presentation ?? 'expressive') !== 'photo' || parent?.photoVariant !== 'organic',
+    },
+    {
+      name: 'photoOverlay',
+      title: 'Photo hero — backdrop tint',
+      type: 'string',
+      description: 'Applies to backdrop and split layouts (organic hero uses a linen background, no tint).',
+      options: {
+        list: [
+          { title: 'None', value: 'none' },
+          { title: 'Dark', value: 'dark' },
+          { title: 'Light', value: 'light' },
+          { title: 'Burgundy', value: 'burgundy' },
+          { title: 'Teal', value: 'teal' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'dark',
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
+    {
+      name: 'photoOverlayOpacity',
+      title: 'Photo hero — tint strength',
+      type: 'number',
+      validation: Rule => Rule.min(0).max(1),
+      initialValue: 0.4,
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
+    {
+      name: 'photoTextAlignment',
+      title: 'Photo hero — text alignment',
+      description: 'Overlay and split layouts only. Organic / expressive-style hero is always left-aligned like the main expressive hero.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Left', value: 'left' },
+          { title: 'Center', value: 'center' },
+          { title: 'Right', value: 'right' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'left',
+      hidden: ({ parent }) =>
+        (parent?.presentation ?? 'expressive') !== 'photo' || parent?.photoVariant === 'organic',
+    },
+    {
+      name: 'photoHeight',
+      title: 'Photo hero — height',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Small', value: 'small' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Large', value: 'large' },
+          { title: 'Full screen', value: 'screen' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'screen',
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
   ],
   preview: {
-    select: { heading: 'heading' },
-    prepare: ({ heading }) => ({ title: 'Hero', subtitle: heading }),
+    select: {
+      heading: 'heading',
+      presentation: 'presentation',
+      photoVariant: 'photoVariant',
+    },
+    prepare: ({ heading, presentation, photoVariant }) => {
+      const isPhoto = (presentation ?? 'expressive') === 'photo';
+      return {
+        title: isPhoto ? 'Hero (photo)' : 'Hero (expressive)',
+        subtitle: isPhoto && photoVariant ? `${heading} · ${photoVariant}` : heading,
+      };
+    },
   },
 };
 
@@ -59,8 +209,14 @@ export const whoIHelpBlock = {
                 list: [
                   { title: 'Children', value: 'children' },
                   { title: 'Teens', value: 'teens' },
-                  { title: 'Women', value: 'women' },
+                  { title: 'Women / legacy', value: 'women' },
+                  { title: 'Young adults', value: 'youngAdults' },
+                  { title: 'Parents & co-parents', value: 'parents' },
+                  { title: 'Grief & transitions', value: 'grief' },
+                  { title: 'ADHD & neurodivergence', value: 'adhd' },
+                  { title: 'Anxiety & stress', value: 'anxiety' },
                   { title: 'SEED Scholars', value: 'seed' },
+                  { title: 'Groups (forming)', value: 'groups' },
                 ],
               },
             },

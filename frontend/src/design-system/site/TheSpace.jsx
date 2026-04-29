@@ -78,7 +78,8 @@ export default function TheSpace({
             style={{
               color: "var(--ink)",
               opacity: 0.5,
-              fontFamily: "'Caveat', cursive",
+              fontFamily: "var(--font-display)",
+              fontStyle: "italic",
               fontSize: "1rem",
             }}
           >
@@ -93,7 +94,9 @@ export default function TheSpace({
           className="absolute bottom-6 left-6 px-4 py-2 rounded-full backdrop-blur-lg text-sm"
           style={{
             background: "rgba(253,251,247,0.92)",
-            fontFamily: "'Caveat', cursive",
+            fontFamily: "var(--font-ui-condensed)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
             color: "var(--ink)",
             opacity: 0.85,
           }}
@@ -104,18 +107,15 @@ export default function TheSpace({
 
       <div>
         <span
-          className="block mb-2"
+          className="site-eyebrow block mb-2"
           style={{
-            fontFamily: "'Caveat', cursive",
-            fontSize: "1.15rem",
             color: "var(--teal-deep)",
           }}
         >
           {eyebrow}
         </span>
         <h2
-          className="font-serif text-2xl md:text-3xl font-normal leading-snug mb-7"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="site-heading text-3xl md:text-4xl mb-7"
         >
           {heading.replace(headingEmphasis, "")}
           <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>{headingEmphasis}</em>
@@ -124,8 +124,7 @@ export default function TheSpace({
         {paragraphs.map((p, idx) => (
           <p
             key={idx}
-            className="text-base leading-[1.88] font-light mb-4"
-            style={{ opacity: 0.82 }}
+            className="site-body-copy text-base mb-4"
           >
             {p}
           </p>
@@ -135,10 +134,8 @@ export default function TheSpace({
           {colorStory.map((item, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-2"
+              className="site-ui-label flex items-center gap-2"
               style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "1rem",
                 color: "var(--ink)",
                 opacity: 0.7,
               }}

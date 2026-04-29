@@ -32,6 +32,11 @@ const DEFAULT_SWATCHES = [
     feel: "lost",
     reply: "Lost is a real feeling. And sometimes what looks like lost is actually a beginning.",
   },
+  {
+    color: "var(--teal-deep)",
+    feel: "wired / anxious",
+    reply: "Wired usually means something matters. We can slow it down together — and sometimes use that energy instead of only fighting it.",
+  },
 ];
 
 /**
@@ -74,18 +79,17 @@ export default function FeelingsCheckIn({
 
       <div className="relative z-10 max-w-[640px] mx-auto">
         <span
-          className="block mb-2 text-lg"
-          style={{ fontFamily: "'Caveat', cursive", color: "var(--teal)" }}
+          className="site-eyebrow block mb-2"
+          style={{ color: "var(--teal)" }}
         >
           {eyebrow}
         </span>
         <h2
-          className="font-serif italic text-2xl md:text-3xl font-normal mb-2"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="site-heading italic text-3xl md:text-4xl mb-3"
         >
           {heading}
         </h2>
-        <p className="text-[0.9rem] opacity-55 mb-12 font-light">{subheading}</p>
+        <p className="text-[0.95rem] opacity-70 mb-12 font-normal">{subheading}</p>
 
         <div className="flex justify-center flex-wrap gap-5 mb-12">
           {swatches.map((s) => (
@@ -103,9 +107,8 @@ export default function FeelingsCheckIn({
               onClick={() => handleClick(s)}
             >
               <span
-                className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[0.85rem] transition-opacity"
+                className="site-ui-label absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap transition-opacity"
                 style={{
-                  fontFamily: "'Caveat', cursive",
                   color: "var(--linen)",
                   opacity: picked === s.feel ? 0.75 : 0,
                 }}
@@ -117,9 +120,8 @@ export default function FeelingsCheckIn({
         </div>
 
         <p
-          className="font-serif italic text-xl leading-relaxed min-h-[3rem] transition-opacity duration-400"
+          className="site-heading italic text-xl md:text-2xl min-h-[3rem] transition-opacity duration-400"
           style={{
-            fontFamily: "'Playfair Display', serif",
             opacity: 0.9,
           }}
         >

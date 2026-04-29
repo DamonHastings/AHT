@@ -5,6 +5,7 @@
  */
 import { createClient } from '@sanity/client';
 import dotenv from 'dotenv';
+import { WHO_I_HELP_BLOCK_DEFAULTS } from '../frontend/src/content/whoIHelpDefaults.js';
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ const homePage = {
   slug: { _type: 'slug', current: 'home' },
   metaTitle: '[Practice Name] — Expressive Arts Therapy | Davis, CA',
   metaDescription:
-    "Therapy doesn't have to look like sitting still and explaining yourself. Together we find another way in — through color, movement, making, and play.",
+    'Expressive arts therapy in Davis, CA — kids, teens, young adults, parents, grief, anxiety, ADHD, and SEED scholars. Schedule a free consultation.',
   template: 'custom',
   showHeader: false,
   showFooter: false,
@@ -34,71 +35,34 @@ const homePage = {
       _type: 'heroBlock',
       _key: 'hero',
       kickerText: 'Expressive Arts Therapy · Davis, CA',
-      heading: "You don't have to find the words.",
-      headingEmphasis: 'words.',
+      heading: "If reaching out was hard, I'm glad you landed here.",
+      headingEmphasis: 'glad you landed here.',
       body:
-        "Therapy doesn't have to look like sitting still and explaining yourself. Together, we find another way in — through color, movement, making, and play — so that healing can happen even when language falls short.",
-      primaryCtaText: 'Start with a free consultation',
-      primaryCtaHref: '#',
-      secondaryCtaText: 'How it works →',
-      secondaryCtaHref: '#',
+        "I'm an expressive arts therapist — warm and playful, and also willing to bring loving challenge when it helps. We can use movement, color, metaphor, making, and nature when they fit you; we can also talk it through. The next step is a free consultation so we can see if we're a good match.",
+      primaryCtaText: 'Schedule a free consultation',
+      primaryCtaHref: '#contact',
+      secondaryCtaText: 'Who I help →',
+      secondaryCtaHref: '/#audience-children',
     },
     {
       _type: 'pullQuoteBlock',
       _key: 'pullquote',
       eyebrow: 'a different kind of therapy',
-      quote: '"What if the way through isn\'t talking about it — but making something with it?"',
+      quote:
+        '"What if the way through isn\'t only talking about it — but making, moving, or shaping something with it?"',
       body:
-        "Expressive Arts therapy uses drawing, movement, writing, music, and play to open doors that words alone can't. It's not about being creative. It's about being human — and trusting that some things are easier to show than to say. Whether you're 8 or 28, this work meets you where you are.",
+        "Expressive arts therapy uses drawing, movement, writing, music, and play to open doors that words alone can't. It's not about being “good at art.” It's about being human — and trusting that some things are easier to show than to say. Taking this first step is brave; if we meet, I'll celebrate that with you.",
     },
     {
       _type: 'whoIHelpBlock',
       _key: 'who',
-      eyebrow: 'who I work with',
-      heading: 'Everyone deserves a way in.',
-      headingEmphasis: 'way in.',
-      cards: [
-        {
-          _key: 'card-children',
-          variant: 'children',
-          tag: 'Children · Ages 8–12',
-          title: "Little ones with big feelings",
-          body:
-            "Kids don't always have the vocabulary for what they're carrying. Through play, art, and sandtray, I give children a safe space to work through anxiety, transitions, and family changes — without ever needing to put it perfectly into words.",
-          linkText: 'For parents →',
-          linkHref: '#',
-        },
-        {
-          _key: 'card-teens',
-          variant: 'teens',
-          tag: 'Teens · Ages 13–18',
-          title: 'For teens who are over being told to "just open up"',
-          body:
-            "You've probably heard that enough. This isn't that. We work with what actually interests you — music, movement, writing, making things — and let that be the door. No forced conversation. No performance of wellness. Real work, real connection.",
-          linkText: 'Read more →',
-          linkHref: '#',
-        },
-        {
-          _key: 'card-women',
-          variant: 'women',
-          tag: 'Women & Young Adults',
-          title: 'For women in transition, growth, or grief',
-          body:
-            "Identity. Relationships. Burnout. Becoming. Therapy for women isn't one-size-fits-all. I offer a warm, unhurried space to explore who you are, who you've been, and who you're becoming — at whatever pace feels right for you.",
-          linkText: 'Learn more →',
-          linkHref: '#',
-        },
-        {
-          _key: 'card-seed',
-          variant: 'seed',
-          tag: 'SEED Scholars · UC Davis',
-          title: "For students carrying more than a backpack",
-          body:
-            "Being a SEED scholar means navigating college while holding your family's hopes, your community's expectations, and your own. I work with SEED students to build support that honors all of who you are — not just the student part.",
-          linkText: 'For SEED scholars →',
-          linkHref: '#',
-        },
-      ],
+      eyebrow: WHO_I_HELP_BLOCK_DEFAULTS.eyebrow,
+      heading: WHO_I_HELP_BLOCK_DEFAULTS.heading,
+      headingEmphasis: WHO_I_HELP_BLOCK_DEFAULTS.headingEmphasis,
+      cards: WHO_I_HELP_BLOCK_DEFAULTS.cards.map((c, i) => ({
+        ...c,
+        _key: `card-${c.variant}-${i}`,
+      })),
     },
     {
       _type: 'theSpaceBlock',
@@ -117,18 +81,19 @@ const homePage = {
       _type: 'expressiveArtsBlock',
       _key: 'expressive',
       eyebrow: 'the approach',
-      heading: 'Therapy that makes something with the mess.',
+      heading: 'Collaborative, directive, and tuned to the moment.',
       paragraphs: [
-        "Expressive Arts therapy is an evidence-informed approach that weaves together multiple creative modalities — not because you need to be an artist, but because the body, the imagination, and the hands sometimes know things the mind hasn't caught up to yet.",
-        "You might draw what you can't say. Write a letter you'll never send. Move through something instead of sitting still with it. The form follows what you need.",
+        "Expressive arts therapy weaves drawing, movement, writing, music, metaphor, symbolism, and play — not because you need to be an artist, but because imagination and the body sometimes know things the mind hasn't caught up to yet. We can go outside or stay in the room; we can stay verbal when that's what you need.",
+        "I'm responsive to what you bring and direct when that's useful — so you're not carrying the whole hour alone, and you're also not being talked at. Loving challenge and tolerable discomfort are part of growth; so is humor and curiosity. The form follows what you need.",
       ],
       modalities: [
         { name: 'Drawing & painting', detail: 'for what has no shape yet' },
-        { name: 'Sandtray play', detail: 'especially for children & teens' },
-        { name: 'Movement & embodiment', detail: 'what the body holds' },
-        { name: 'Writing & poetry', detail: 'finding language sideways' },
+        { name: 'Sandtray & play', detail: 'especially for children & teens' },
+        { name: 'Movement & embodiment', detail: 'optional, never forced' },
+        { name: 'Metaphor & symbolism', detail: 'thinking sideways' },
+        { name: 'Writing & poetry', detail: 'letters you never send' },
         { name: 'Music & sound', detail: 'rhythm as regulation' },
-        { name: 'Drama & storytelling', detail: 'new ways to hold old stories' },
+        { name: 'Nature & space', detail: "when the room isn't enough" },
       ],
       quotes: [
         {
@@ -152,9 +117,9 @@ const homePage = {
       heading: "Hi, I'm [Her Name] — and I became a therapist because I know what it's like to need a way through.",
       headingEmphasis: '[Her Name]',
       paragraphs: [
-        'I trained at the California Institute of Integral Studies in San Francisco with a deep emphasis in Expressive Arts therapy — a field that treats creativity not as a nice-to-have, but as the center of healing.',
-        "I work with children, teens, and women in Davis and the surrounding area. I'm also proud to work alongside SEED scholars at UC Davis — students who are doing something remarkable, often without a roadmap or a safety net.",
-        "My practice is warm and playful, but also genuinely rigorous. I'll meet you where you are, I'll stay curious about who you are, and I genuinely believe that where you are right now is already a good place to start.",
+        'I trained at the California Institute of Integral Studies in San Francisco with a deep emphasis in expressive arts therapy — a field that treats creativity not as a nice-to-have, but as a real pathway for healing.',
+        'In Davis I work with kids, teens, young adults, parents, people carrying grief or anxiety, folks navigating ADHD (and related neurodivergence), and SEED scholars at UC Davis — often with family or program context woven in.',
+        "My style is warm, accepting, curious, and playful — and I'm not afraid of challenge when it serves you. I work collaboratively and can be directive when you want a clear co-pilot; the point is that therapy feels alive, not like a performance.",
       ],
       credentials: ['LMFT · Licensed 2024', 'MA, CIIS San Francisco', 'Expressive Arts Emphasis', 'SEED Scholar Partner'],
       badgeText: 'LMFT\nDavis, CA',
@@ -172,16 +137,22 @@ const homePage = {
         { color: 'var(--gold)', feel: 'hopeful', reply: "Hopeful is a good place to begin. Let's build something from that." },
         { color: 'var(--terra-light)', feel: 'tender', reply: "Tender means something is close to the surface. That's worth attending to." },
         { color: 'var(--navy)', feel: 'lost', reply: "Lost is a real feeling. And sometimes what looks like lost is actually a beginning." },
+        {
+          color: 'var(--teal-deep)',
+          feel: 'wired / anxious',
+          reply: "Wired usually means something matters. We can slow it down together — and sometimes use that energy instead of only fighting it.",
+        },
       ],
     },
     {
       _type: 'ctaBlock',
       _key: 'cta',
-      heading: 'Ready to find a different way in?',
+      heading: "Curious if we're a fit?",
       headingEmphasis: 'The first conversation is free.',
-      subheading: '15-minute consultations · No commitment · Telehealth & in-person available',
+      subheading:
+        "Most people reach out the same way you might have — email or voicemail after reading a profile. We'll schedule a short consultation (about 15 minutes), no commitment. Telehealth and in-person in Davis when available.",
       buttonText: 'Schedule a free consultation',
-      buttonHref: '#',
+      buttonHref: '#contact',
     },
   ],
 };

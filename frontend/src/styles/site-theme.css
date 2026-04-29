@@ -5,6 +5,10 @@ html {
 }
 
 :root {
+  --font-display: "Playfair Display", serif;
+  --font-body: "Roboto", sans-serif;
+  --font-ui-condensed: "Roboto Condensed", "Roboto", sans-serif;
+  --font-script: "Selfie", "Playfair Display", serif;
   --teal: #5b9ea0;
   --teal-deep: #3e7d80;
   --teal-pale: #d6ecec;
@@ -23,15 +27,60 @@ html {
 }
 
 .site-theme {
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-body);
   background: var(--warm-white);
   color: var(--ink);
+  font-weight: 400;
 }
 
 .site-theme h1,
 .site-theme h2,
 .site-theme h3 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.site-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.site-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.16;
+}
+
+.site-body-copy {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.72;
+  color: rgba(28, 39, 48, 0.82);
+}
+
+.site-eyebrow,
+.site-ui-label {
+  font-family: var(--font-ui-condensed);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-eyebrow {
+  font-size: 0.78rem;
+}
+
+.site-ui-label {
+  font-size: 0.76rem;
+}
+
+.site-button-text {
+  font-family: var(--font-ui-condensed);
+  font-weight: 500;
+  letter-spacing: 0.08em;
 }
 
 .site-prose a {
@@ -60,6 +109,26 @@ html {
   75% {
     transform: translate(12px, 8px) rotate(6deg) scale(1.02);
     border-radius: 45% 55% 65% 35% / 55% 45% 60% 40%;
+  }
+}
+
+/*
+ * Mask (border-radius only) — clip layer; photo stays fixed.
+ * Midway organic elliptical look; keyframes use a wider corner spread (~28–42%) so the morph reads clearly.
+ */
+@keyframes blobMorph {
+  0%,
+  100% {
+    border-radius: 36% 34% 39% 31% / 34% 37% 33% 36%;
+  }
+  25% {
+    border-radius: 28% 40% 32% 42% / 40% 30% 38% 34%;
+  }
+  50% {
+    border-radius: 42% 30% 38% 34% / 32% 42% 34% 38%;
+  }
+  75% {
+    border-radius: 32% 38% 40% 28% / 36% 34% 32% 40%;
   }
 }
 

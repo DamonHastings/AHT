@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
  */
 export default function SiteNav({
   logoName = "[Practice Name]",
-  logoSubtext = "LMFT · Expressive Arts · Davis, CA",
   links = [
     { label: "About", href: "#" },
     { label: "Who I Help", href: "#" },
@@ -27,17 +26,17 @@ export default function SiteNav({
     >
       <div className="flex flex-col">
         <span
-          className="font-serif italic text-lg md:text-[1.2rem]"
-          style={{ fontFamily: "'Playfair Display', serif", color: "var(--ink)" }}
+          className="font-serif italic text-lg md:text-[1.2rem] tracking-[-0.01em]"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
         >
           {logoName}
         </span>
-        <span
+        {/* <span
           className="text-[0.65rem] tracking-[0.14em] uppercase block mt-0.5"
-          style={{ color: "var(--teal)", fontFamily: "'Jost', sans-serif", fontWeight: 400 }}
+          style={{ color: "var(--teal)", fontFamily: "var(--font-ui-condensed)", fontWeight: 400 }}
         >
           {logoSubtext}
-        </span>
+        </span> */}
       </div>
 
       <ul className="hidden md:flex gap-10 list-none">
@@ -45,19 +44,20 @@ export default function SiteNav({
           <li key={link.label}>
             <a
               href={link.href}
-              className="text-[0.78rem] tracking-[0.12em] uppercase transition-opacity hover:opacity-100"
+              target={link.openInNewTab ? "_blank" : undefined}
+              rel={link.openInNewTab ? "noopener noreferrer" : undefined}
+              className="site-ui-label transition-opacity hover:opacity-100"
               style={{
                 color: "var(--ink)",
-                opacity: 0.55,
+                opacity: 0.62,
                 textDecoration: "none",
-                fontWeight: 400,
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
                 e.currentTarget.style.color = "var(--teal-deep)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "0.55";
+                e.currentTarget.style.opacity = "0.62";
                 e.currentTarget.style.color = "var(--ink)";
               }}
             >
@@ -69,11 +69,10 @@ export default function SiteNav({
 
       <a
         href={ctaHref}
-        className="rounded-full px-6 py-2.5 text-[0.76rem] tracking-[0.1em] uppercase font-medium transition-all hover:-translate-y-px"
+        className="site-button-text rounded-full px-6 py-2.5 text-[0.8rem] uppercase transition-all hover:-translate-y-px"
         style={{
           background: "var(--terracotta)",
           color: "white",
-          fontFamily: "'Jost', sans-serif",
           textDecoration: "none",
         }}
       >
@@ -85,12 +84,12 @@ export default function SiteNav({
 
 SiteNav.propTypes = {
   logoName: PropTypes.string,
-  logoSubtext: PropTypes.string,
   links: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       href: PropTypes.string.isRequired,
-    })
+      openInNewTab: PropTypes.bool,
+    }),
   ),
   ctaText: PropTypes.string,
   ctaHref: PropTypes.string,

@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 
 /**
  * Typography component for consistent text styling
- * Using Crimson Text for headings and Nunito Sans for body text
+ * Using Playfair Display for headings and Roboto for body text
  */
 export function Heading({ level = 1, children, className = '', ...props }) {
-  const baseStyles = 'font-heading font-semibold text-wood-300'
+  const baseStyles = 'font-heading font-normal text-wood-300'
   
   const styles = {
     1: 'text-5xl md:text-6xl leading-tight',

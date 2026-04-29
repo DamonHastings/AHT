@@ -1,8 +1,8 @@
 import { usePage } from "../hooks/usePage";
 import PageRenderer from "../components/PageRenderer";
 import SiteLayout from "../layouts/SiteLayout";
+import { HeroSection } from "../design-system";
 import {
-  Hero,
   PullQuote,
   WhoIHelp,
   TheSpace,
@@ -95,7 +95,23 @@ export default function HomePage() {
 function StaticHomeLayout() {
   return (
     <>
-      <Hero headingLines={["You don't have to", "find the words."]} />
+      <HeroSection
+        backgroundImage="/photos/IMG_0346.JPG"
+        variant="organic"
+        blobSide="left"
+        overlay={null}
+        kickerText="Expressive Arts Therapy · Davis, CA"
+        heading="If reaching out was hard, I'm glad you landed here."
+        headingEmphasis="glad you landed here."
+        subheading="I'm an expressive arts therapist in Davis — warm and playful, and also willing to bring loving challenge when it helps. We can use movement, color, metaphor, making, and nature when they fit you; we can also talk it through. When you're ready, the next step is a free consultation so we can see if we're a good match."
+        ctaText="Schedule a free consultation"
+        primaryCtaHref="#contact"
+        secondaryCtaText="Who I help →"
+        secondaryCtaHref="/#audience-children"
+        ctaVariant="accent"
+        alignment="left"
+        className="pt-[4.5rem]"
+      />
       <PullQuote />
       <WhoIHelp />
       <TheSpace />

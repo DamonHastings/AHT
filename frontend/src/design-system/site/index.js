@@ -8,5 +8,6 @@ export { default as ExpressiveArts } from "./ExpressiveArts";
 export { default as Meet } from "./Meet";
 export { default as FeelingsCheckIn } from "./FeelingsCheckIn";
 export { default as CTA } from "./CTA";
+export { default as ConsultationModal } from "./ConsultationModal";
 export { default as PageFooter } from "./PageFooter";
 export { default as ProseSection } from "./ProseSection";

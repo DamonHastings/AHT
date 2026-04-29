@@ -1,14 +1,5 @@
 import Ca from "react";
 var Ee = {}, Co = { exports: {} }, xo = {};
-/**
- * @license React
- * scheduler.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 (function(e) {
   function n(C, z) {
     var P = C.length;
@@ -208,15 +199,6 @@ var Ee = {}, Co = { exports: {} }, xo = {};
 })(xo);
 Co.exports = xo;
 var xa = Co.exports;
-/**
- * @license React
- * react-dom.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var Na = Ca, me = xa;
 function y(e) {
   for (var n = "https://reactjs.org/docs/error-decoder.html?invariant=" + e, t = 1; t < arguments.length; t++) n += "&args[]=" + encodeURIComponent(arguments[t]);
@@ -3403,7 +3385,7 @@ la = function(e, n, t, r) {
     } else d !== "dangerouslySetInnerHTML" && d !== "children" && d !== "suppressContentEditableWarning" && d !== "suppressHydrationWarning" && d !== "autoFocus" && (_t.hasOwnProperty(d) ? u || (u = []) : (u = u || []).push(d, null));
     for (d in r) {
       var s = r[d];
-      if (o = l != null ? l[d] : void 0, r.hasOwnProperty(d) && s !== o && (s != null || o != null)) if (d === "style") if (o) {
+      if (o = l?.[d], r.hasOwnProperty(d) && s !== o && (s != null || o != null)) if (d === "style") if (o) {
         for (i in o) !o.hasOwnProperty(i) || s && s.hasOwnProperty(i) || (t || (t = {}), t[i] = "");
         for (i in s) s.hasOwnProperty(i) && o[i] !== s[i] && (t || (t = {}), t[i] = s[i]);
       } else t || (u || (u = []), u.push(

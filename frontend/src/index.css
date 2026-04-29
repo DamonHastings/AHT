@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.6;
   font-weight: 400;
 
@@ -87,8 +87,10 @@
   --color-black: #000000;
 
   /* Typography */
-  --font-heading: "Crimson Text", serif;
-  --font-body: "Nunito Sans", sans-serif;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Roboto", sans-serif;
+  --font-ui-condensed: "Roboto Condensed", "Roboto", sans-serif;
+  --font-script: "Selfie", "Playfair Display", serif;
 }
 
 body {
@@ -108,7 +110,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
 }
 

@@ -8,14 +8,14 @@ import PropTypes from 'prop-types'
 
 const fontPairings = [
   {
-    id: 'playfair-source',
-    name: 'Playfair Display + Source Sans Pro',
-    mood: 'Elegant & Trustworthy',
+    id: 'sarah-pablo',
+    name: 'Playfair Display + Roboto + Roboto Condensed',
+    mood: 'Elegant Editorial',
     heading: 'Playfair Display',
-    body: 'Source Sans Pro',
-    googleFonts: 'family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600',
+    body: 'Roboto',
+    googleFonts: 'family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@300;400;500&family=Roboto+Condensed:wght@300;400;500;600',
     headingFont: '"Playfair Display", serif',
-    bodyFont: '"Source Sans Pro", sans-serif',
+    bodyFont: '"Roboto", sans-serif',
   },
   {
     id: 'lora-opensans',
@@ -117,7 +117,7 @@ function SampleLandingPage({ pairing }) {
               style={{ color: '#43595D' }}
             >
               Compassionate, evidence-based therapy for anxiety, depression, and life transitions. 
-              You don't have to face life's challenges alone.
+              You don&apos;t have to face life&apos;s challenges alone.
             </p>
             <div className="flex flex-wrap gap-4">
               <button 
@@ -159,8 +159,8 @@ function SampleLandingPage({ pairing }) {
               feelings, and experiences at your own pace.
             </p>
             <p className="text-lg mb-6 leading-relaxed" style={{ color: '#43595D' }}>
-              Whether you're struggling with anxiety, navigating a difficult transition, or simply 
-              seeking greater self-understanding, I'm here to support you every step of the way.
+              Whether you&apos;re struggling with anxiety, navigating a difficult transition, or simply 
+              seeking greater self-understanding, I&apos;m here to support you every step of the way.
             </p>
           </div>
         </div>
@@ -311,7 +311,7 @@ function SampleLandingPage({ pairing }) {
             Ready to Take the First Step?
           </h2>
           <p className="text-xl mb-8 text-white opacity-90 max-w-2xl mx-auto">
-            Reaching out for support is a sign of strength. Let's work together to help you 
+            Reaching out for support is a sign of strength. Let&apos;s work together to help you 
             achieve your goals and live a more fulfilling life.
           </p>
           <button 

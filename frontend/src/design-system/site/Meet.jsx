@@ -8,9 +8,9 @@ export default function Meet({
   heading = "Hi, I'm [Her Name] — and I became a therapist because I know what it's like to need a way through.",
   headingEmphasis = "[Her Name]",
   paragraphs = [
-    "I trained at the California Institute of Integral Studies in San Francisco with a deep emphasis in Expressive Arts therapy — a field that treats creativity not as a nice-to-have, but as the center of healing.",
-    "I work with children, teens, and women in Davis and the surrounding area. I'm also proud to work alongside SEED scholars at UC Davis — students who are doing something remarkable, often without a roadmap or a safety net.",
-    "My practice is warm and playful, but also genuinely rigorous. I'll meet you where you are, I'll stay curious about who you are, and I genuinely believe that where you are right now is already a good place to start.",
+    "I trained at the California Institute of Integral Studies in San Francisco with a deep emphasis in expressive arts therapy — a field that treats creativity not as a nice-to-have, but as a real pathway for healing.",
+    "In Davis I work with kids, teens, young adults, parents, people carrying grief or anxiety, folks navigating ADHD (and related neurodivergence), and SEED scholars at UC Davis — often with family or program context woven in.",
+    "My style is warm, accepting, curious, and playful — and I'm not afraid of challenge when it serves you. I work collaboratively and can be directive when you want a clear co-pilot; the point is that therapy feels alive, not like a performance.",
   ],
   credentials = [
     "LMFT · Licensed 2024",
@@ -70,7 +70,8 @@ export default function Meet({
             <span
               className="text-center p-4"
               style={{
-                fontFamily: "'Caveat', cursive",
+                fontFamily: "var(--font-display)",
+                fontStyle: "italic",
                 fontSize: "1.1rem",
                 color: "var(--ink)",
                 opacity: 0.45,
@@ -84,7 +85,9 @@ export default function Meet({
           className="absolute -bottom-4 -right-4 w-24 h-24 md:w-[110px] md:h-[110px] rounded-full flex flex-col items-center justify-center text-center text-sm leading-snug text-white shadow-lg"
           style={{
             background: "var(--terracotta)",
-            fontFamily: "'Caveat', cursive",
+            fontFamily: "var(--font-ui-condensed)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
             boxShadow: "0 8px 24px rgba(176,90,74,0.35)",
           }}
         >
@@ -96,14 +99,13 @@ export default function Meet({
 
       <div>
         <span
-          className="block mb-2"
-          style={{ fontFamily: "'Caveat', cursive", fontSize: "1.15rem", color: "var(--gold)" }}
+          className="site-eyebrow block mb-2"
+          style={{ color: "var(--gold)" }}
         >
           {eyebrow}
         </span>
         <h2
-          className="font-serif text-2xl md:text-3xl font-normal leading-snug mb-6"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="site-heading text-3xl md:text-4xl mb-6"
         >
           {heading.replace(headingEmphasis, "")}
           <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>{headingEmphasis}</em>
@@ -112,8 +114,7 @@ export default function Meet({
         {paragraphs.map((p, idx) => (
           <p
             key={idx}
-            className="text-base leading-[1.88] font-light mb-4"
-            style={{ opacity: 0.82 }}
+            className="site-body-copy text-base mb-4"
           >
             {p}
           </p>
@@ -123,12 +124,11 @@ export default function Meet({
           {credentials.map((c, idx) => (
             <span
               key={idx}
-              className="py-1 px-4 rounded-full text-[0.78rem] font-normal border-[1.5px]"
+              className="site-ui-label py-1 px-4 rounded-full border-[1.5px]"
               style={{
                 background: "white",
                 borderColor: "rgba(91,158,160,0.3)",
                 color: "var(--ink)",
-                letterSpacing: "0.03em",
               }}
             >
               {c}

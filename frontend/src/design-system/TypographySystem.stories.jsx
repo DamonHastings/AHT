@@ -10,19 +10,23 @@ export default {
         component: `
 # Typography System
 
-Complete documentation of the Crimson Text + Nunito Sans typography system.
+Complete documentation of the Playfair Display + Roboto + Roboto Condensed typography system.
 
-## Font Pairing: Classic & Compassionate
+## Font Pairing: Elegant Editorial
 
-**Crimson Text (Headings)**
-- Traditional serif with modern touch
-- Conveys authority without intimidation
-- Perfect for establishing credibility
+**Playfair Display (Headings)**
+- High-contrast serif with an editorial feel
+- Strong in regular and italic display settings
+- Matches the romantic tone of the Sarah & Pablo reference
 
-**Nunito Sans (Body)**
-- Rounded, gentle terminals
-- Highly accessible and readable
-- Warm and nurturing feel
+**Roboto (Body)**
+- Neutral, readable sans-serif
+- Keeps long-form content calm and practical
+- Pairs cleanly with expressive headings
+
+**Roboto Condensed (UI)**
+- Narrow uppercase rhythm for navigation, labels, and buttons
+- Adds structure without competing with Playfair
 
 ## Implementation
 
@@ -43,7 +47,7 @@ import { Heading, Text } from './design-system'
 <Text variant="body">Regular body text</Text>
 
 // Using Tailwind classes
-<h1 className="font-heading text-6xl font-semibold">
+<h1 className="font-heading text-6xl font-normal">
 <p className="font-body text-base leading-relaxed">
 \`\`\`
         `,

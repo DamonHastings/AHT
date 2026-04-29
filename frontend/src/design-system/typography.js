@@ -1,24 +1,28 @@
 /**
  * Typography System
- * Font Pairing: Crimson Text + Nunito Sans
- * Mood: Classic & Compassionate
+ * Font Pairing: Playfair Display + Roboto + Roboto Condensed
+ * Mood: Elegant editorial with clean modern support
  * 
- * Crimson Text - Headings (serif)
- * - Traditional with modern touch
- * - Excellent readability
- * - Conveys authority without intimidation
+ * Playfair Display - Headings (serif)
+ * - High-contrast editorial display face
+ * - Works well for soft italic emphasis
+ * - Brings the romantic tone of the Sarah & Pablo pairing
  * 
- * Nunito Sans - Body Text (sans-serif)
- * - Rounded, gentle terminals
- * - Highly accessible and readable
- * - Warm and nurturing feel
+ * Roboto - Body Text (sans-serif)
+ * - Neutral and readable
+ * - Keeps the expressive display moments grounded
+ * 
+ * Roboto Condensed - Labels / UI
+ * - Narrow uppercase rhythm for navigation and small labels
  */
 
 export const typography = {
   // Font Families
   fonts: {
-    heading: '"Crimson Text", serif',
-    body: '"Nunito Sans", sans-serif',
+    heading: '"Playfair Display", serif',
+    body: '"Roboto", sans-serif',
+    condensed: '"Roboto Condensed", "Roboto", sans-serif',
+    script: '"Selfie", "Playfair Display", serif',
   },
 
   // Font Weights
@@ -151,9 +155,11 @@ export const typographyUsage = {
 
 // CSS Custom Properties generator
 export const typographyCSS = `
-  /* Typography System - Crimson Text + Nunito Sans */
+  /* Typography System - Playfair Display + Roboto + Roboto Condensed */
   --font-heading: ${typography.fonts.heading};
   --font-body: ${typography.fonts.body};
+  --font-ui-condensed: ${typography.fonts.condensed};
+  --font-script: ${typography.fonts.script};
   
   /* Font Weights */
   --font-weight-light: ${typography.weights.light};

@@ -11,7 +11,7 @@ export default function PageFooter({
   links = [
     { label: "Privacy Policy", href: "#" },
     { label: "Good Faith Estimate", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Contact", href: "#contact" },
   ],
 }) {
   return (
@@ -21,20 +21,20 @@ export default function PageFooter({
     >
       <div>
         <span
-          className="font-serif italic text-[1.15rem]"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="font-serif italic text-[1.15rem] tracking-[-0.01em]"
+          style={{ fontFamily: "var(--font-display)" }}
         >
           {logoName}
         </span>
         <small
-          className="block font-normal text-[0.68rem] tracking-[0.14em] uppercase opacity-40 mt-1"
-          style={{ fontFamily: "'Jost', sans-serif", fontStyle: "normal" }}
+          className="site-ui-label block opacity-45 mt-1"
+          style={{ fontFamily: "var(--font-ui-condensed)", fontStyle: "normal" }}
         >
           {logoSubtext}
         </small>
       </div>
 
-      <div className="text-[0.8rem] leading-[1.9] opacity-40" style={{ whiteSpace: "pre-line" }}>
+      <div className="text-[0.82rem] leading-[1.75] opacity-48" style={{ whiteSpace: "pre-line" }}>
         {info}
       </div>
 
@@ -43,10 +43,10 @@ export default function PageFooter({
           <li key={link.label}>
             <a
               href={link.href}
-              className="text-[0.74rem] tracking-[0.1em] uppercase transition-opacity hover:opacity-100"
+              className="site-ui-label transition-opacity hover:opacity-100"
               style={{
                 color: "var(--linen)",
-                opacity: 0.38,
+                opacity: 0.48,
                 textDecoration: "none",
               }}
             >
@@ -59,10 +59,10 @@ export default function PageFooter({
             href={studioUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[0.74rem] tracking-[0.1em] uppercase transition-opacity hover:opacity-100"
+            className="site-ui-label inline-flex items-center gap-1.5 transition-opacity hover:opacity-100"
             style={{
               color: "var(--linen)",
-              opacity: 0.38,
+              opacity: 0.48,
               textDecoration: "none",
             }}
             aria-label="Sign into Sanity to edit content"

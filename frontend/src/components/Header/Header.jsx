@@ -105,7 +105,7 @@ export default function Header({ therapist }) {
               )}
               <div>
                 <h1 className="text-xl font-semibold ">{therapist.name}</h1>
-                <p className="text-xs ">{therapist.credentials}</p>
+                {/* <p className="text-xs ">{therapist.credentials}</p> */}
               </div>
             </Link>
 

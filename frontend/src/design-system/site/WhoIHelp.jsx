@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import { audienceAnchorId, WHO_I_HELP_BLOCK_DEFAULTS } from "../../content/whoIHelpDefaults";
+
+const WHO_DEFAULTS = WHO_I_HELP_BLOCK_DEFAULTS;
 
 const CARD_VARIANTS = {
   children: {
@@ -15,12 +18,48 @@ const CARD_VARIANTS = {
     blobColor: "var(--teal)",
     arrowColor: "var(--teal-deep)",
   },
+  /** @deprecated use youngAdults; kept for older Sanity documents */
   women: {
     bg: "var(--linen-deep)",
     tagBg: "#8A7060",
     ringColor: "var(--gold)",
     blobColor: "var(--gold)",
     arrowColor: "#7A5E54",
+  },
+  youngAdults: {
+    bg: "#EDE8E2",
+    tagBg: "#7A6558",
+    ringColor: "var(--gold)",
+    blobColor: "var(--gold)",
+    arrowColor: "#5C4A42",
+  },
+  parents: {
+    bg: "#F3E8E4",
+    tagBg: "#A85E52",
+    ringColor: "var(--terracotta)",
+    blobColor: "var(--terra-light)",
+    arrowColor: "var(--terracotta)",
+  },
+  grief: {
+    bg: "#E6EAEF",
+    tagBg: "#3D4F63",
+    ringColor: "var(--navy)",
+    blobColor: "var(--navy)",
+    arrowColor: "#2C3C4D",
+  },
+  adhd: {
+    bg: "#F4EFE3",
+    tagBg: "#9A7B38",
+    ringColor: "var(--gold)",
+    blobColor: "var(--gold)",
+    arrowColor: "#7A612E",
+  },
+  anxiety: {
+    bg: "#EDE8EE",
+    tagBg: "#6B5A72",
+    ringColor: "var(--mauve)",
+    blobColor: "var(--mauve)",
+    arrowColor: "#4F4358",
   },
   seed: {
     bg: "#E8ECF3",
@@ -29,50 +68,25 @@ const CARD_VARIANTS = {
     blobColor: "var(--navy)",
     arrowColor: "#3A5070",
   },
+  groups: {
+    bg: "#ECEAE8",
+    tagBg: "#5C5855",
+    ringColor: "#8A8580",
+    blobColor: "#B0ABA5",
+    arrowColor: "#4A4643",
+  },
 };
 
 /**
  * V3 Who I Help - 4-card grid for audience segments
  */
 export default function WhoIHelp({
-  eyebrow = "who I work with",
-  heading = "Everyone deserves a way in.",
-  headingEmphasis = "way in.",
-  cards = [
-    {
-      variant: "children",
-      tag: "Children · Ages 8–12",
-      title: "Little ones with big feelings",
-      body: "Kids don't always have the vocabulary for what they're carrying. Through play, art, and sandtray, I give children a safe space to work through anxiety, transitions, and family changes — without ever needing to put it perfectly into words.",
-      linkText: "For parents →",
-      linkHref: "#",
-    },
-    {
-      variant: "teens",
-      tag: "Teens · Ages 13–18",
-      title: 'For teens who are over being told to "just open up"',
-      body: "You've probably heard that enough. This isn't that. We work with what actually interests you — music, movement, writing, making things — and let that be the door. No forced conversation. No performance of wellness. Real work, real connection.",
-      linkText: "Read more →",
-      linkHref: "#",
-    },
-    {
-      variant: "women",
-      tag: "Women & Young Adults",
-      title: "For women in transition, growth, or grief",
-      body: "Identity. Relationships. Burnout. Becoming. Therapy for women isn't one-size-fits-all. I offer a warm, unhurried space to explore who you are, who you've been, and who you're becoming — at whatever pace feels right for you.",
-      linkText: "Learn more →",
-      linkHref: "#",
-    },
-    {
-      variant: "seed",
-      tag: "SEED Scholars · UC Davis",
-      title: "For students carrying more than a backpack",
-      body: "Being a SEED scholar means navigating college while holding your family's hopes, your community's expectations, and your own. I work with SEED students to build support that honors all of who you are — not just the student part.",
-      linkText: "For SEED scholars →",
-      linkHref: "#",
-    },
-  ],
+  eyebrow = WHO_DEFAULTS.eyebrow,
+  heading = WHO_DEFAULTS.heading,
+  headingEmphasis = WHO_DEFAULTS.headingEmphasis,
+  cards,
 }) {
+  const resolvedCards = cards?.length ? cards : WHO_DEFAULTS.cards;
   return (
     <section className="py-16 md:py-28 px-6 md:px-20 max-w-[1240px] mx-auto relative">
       {/* Ambient orbs */}
@@ -94,38 +108,37 @@ export default function WhoIHelp({
 
       <div className="mb-14">
         <span
-          className="block mb-1"
+          className="site-eyebrow block mb-2"
           style={{
-            fontFamily: "'Caveat', cursive",
-            fontSize: "1.15rem",
             color: "var(--terracotta)",
           }}
         >
           {eyebrow}
         </span>
         <h2
-          className="font-serif text-2xl md:text-3xl font-normal leading-tight"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="site-heading max-w-[760px] text-3xl md:text-4xl"
         >
           {heading.replace(headingEmphasis, "")}
           <em style={{ fontStyle: "italic", color: "var(--teal-deep)" }}>{headingEmphasis}</em>
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {cards.map((card, idx) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {resolvedCards.map((card, idx) => {
           const v = CARD_VARIANTS[card.variant] || CARD_VARIANTS.children;
-          return <WhoCard key={idx} card={card} variant={v} />;
+          const anchorId = card.anchorId ?? audienceAnchorId(card.variant);
+          return <WhoCard key={card._key ?? idx} card={card} variant={v} anchorId={anchorId} />;
         })}
       </div>
     </section>
   );
 }
 
-function WhoCard({ card, variant }) {
+function WhoCard({ card, variant, anchorId }) {
   return (
     <div
-      className="rounded-3xl p-7 md:p-10 relative overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      id={anchorId}
+      className="rounded-3xl p-7 md:p-10 relative overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl scroll-mt-28"
       style={{
         background: variant.bg,
         boxShadow: "transparent",
@@ -147,29 +160,27 @@ function WhoCard({ card, variant }) {
       />
 
       <span
-        className="inline-block text-[0.7rem] tracking-[0.12em] uppercase font-medium py-1 px-3 rounded-full mb-4 text-white"
+        className="site-ui-label inline-block py-1 px-3 rounded-full mb-4 text-white"
         style={{ background: variant.tagBg }}
       >
         {card.tag}
       </span>
 
       <h3
-        className="font-serif text-xl font-normal mb-4 leading-snug"
-        style={{ fontFamily: "'Playfair Display', serif" }}
+        className="site-heading text-[1.45rem] mb-4"
       >
         {card.title}
       </h3>
 
       <p
-        className="text-[0.94rem] leading-[1.82] font-light opacity-80 mb-6"
-        style={{ opacity: 0.82 }}
+        className="site-body-copy text-[0.95rem] mb-6"
       >
         {card.body}
       </p>
 
       <a
         href={card.linkHref}
-        className="text-[0.78rem] tracking-[0.1em] uppercase font-medium inline-flex items-center gap-2 transition-[gap] hover:gap-4"
+        className="site-ui-label inline-flex items-center gap-2 transition-[gap] hover:gap-4"
         style={{ color: variant.arrowColor, textDecoration: "none" }}
       >
         {card.linkText}
@@ -184,7 +195,20 @@ WhoIHelp.propTypes = {
   headingEmphasis: PropTypes.string,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
-      variant: PropTypes.oneOf(["children", "teens", "women", "seed"]).isRequired,
+      variant: PropTypes.oneOf([
+        "children",
+        "teens",
+        "women",
+        "youngAdults",
+        "parents",
+        "grief",
+        "adhd",
+        "anxiety",
+        "seed",
+        "groups",
+      ]).isRequired,
+      anchorId: PropTypes.string,
+      _key: PropTypes.string,
       tag: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,

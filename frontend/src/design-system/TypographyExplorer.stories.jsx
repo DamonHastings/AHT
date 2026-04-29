@@ -23,9 +23,9 @@ of a real therapy website landing page.
 
 ## Font Pairings
 
-1. **Playfair Display + Source Sans Pro** — Elegant & Trustworthy
+1. **Playfair Display + Roboto + Roboto Condensed** — Elegant Editorial
 2. **Lora + Open Sans** — Warm & Calming (Recommended)
-3. **Crimson Text + Nunito Sans** — Classic & Compassionate (Recommended)
+3. **Crimson Text + Nunito Sans** — Classic & Compassionate
 4. **Cormorant Garamond + Montserrat** — Refined & Contemporary
 5. **Merriweather + Lato** — Grounded & Approachable
 

@@ -8,16 +8,12 @@ export default {
     docs: {
       description: {
         component:
-          "V3 four-card grid for audience segments: Children, Teens, Women, SEED Scholars.",
+          "Audience hub: kids through groups, with card variants and in-page anchor links (see docs/website-content-roadmap.md).",
       },
     },
   },
 };
 
 export const Default = {
-  args: {
-    eyebrow: "who I work with",
-    heading: "Everyone deserves a way in.",
-    headingEmphasis: "way in.",
-  },
+  args: {},
 };

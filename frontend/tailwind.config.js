@@ -7,10 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['"Crimson Text"', 'serif'],
-        body: ['"Nunito Sans"', 'sans-serif'],
-        sans: ['"Nunito Sans"', 'sans-serif'],
-        serif: ['"Crimson Text"', 'serif'],
+        heading: ['"Playfair Display"', 'serif'],
+        body: ['"Roboto"', 'sans-serif'],
+        sans: ['"Roboto"', 'sans-serif'],
+        condensed: ['"Roboto Condensed"', '"Roboto"', 'sans-serif'],
+        serif: ['"Playfair Display"', 'serif'],
       },
       colors: {
         // Slate (for body text)

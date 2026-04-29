@@ -6,18 +6,18 @@ import PropTypes from "prop-types";
  */
 export default function Hero({
   kickerText = "Expressive Arts Therapy · Davis, CA",
-  heading = "You don't have to find the words.",
-  headingEmphasis = "words.",
+  heading = "If reaching out was hard, I'm glad you landed here.",
+  headingEmphasis = "glad you landed here.",
   headingLines,
-  body = "Therapy doesn't have to look like sitting still and explaining yourself. Together, we find another way in — through color, movement, making, and play — so that healing can happen even when language falls short.",
-  primaryCtaText = "Start with a free consultation",
-  primaryCtaHref = "#",
-  secondaryCtaText = "How it works →",
-  secondaryCtaHref = "#",
+  body = "I'm an expressive arts therapist — warm and playful, and also willing to bring loving challenge when it helps. We can use movement, color, metaphor, making, and nature when they fit you; we can also talk it through. The next step is a free consultation so we can see if we're a good match.",
+  primaryCtaText = "Schedule a free consultation",
+  primaryCtaHref = "#contact",
+  secondaryCtaText = "Who I help →",
+  secondaryCtaHref = "/#audience-children",
 }) {
   return (
     <section
-      className="min-h-screen grid grid-cols-1 lg:grid-cols-[55%_45%] pt-[4.5rem] relative overflow-hidden"
+      className="relative grid w-full min-h-0 grid-cols-1 overflow-hidden pt-[4.5rem] lg:grid-cols-[55%_45%]"
       style={{ background: "var(--linen)" }}
     >
       {/* Sheer window-light effect */}
@@ -33,14 +33,14 @@ export default function Hero({
         }}
       />
 
-      <div className="flex flex-col justify-center px-6 md:px-12 lg:px-[5.5rem] py-12 lg:py-20 relative z-[2]">
+      <div className="relative z-[2] flex min-w-0 flex-col justify-center px-6 py-12 md:px-12 lg:px-[5.5rem] lg:py-20">
         <div
           className="flex items-center gap-3 mb-6 opacity-0 animate-[rise_0.8s_ease_0.2s_both]"
           style={{ animationName: "rise" }}
         >
           <div className="w-8 h-[1.5px] bg-[var(--teal)]" />
           <span
-            className="text-[0.72rem] tracking-[0.16em] uppercase font-medium"
+            className="site-eyebrow"
             style={{ color: "var(--teal-deep)" }}
           >
             {kickerText}
@@ -48,9 +48,8 @@ export default function Hero({
         </div>
 
         <h1
-          className="font-serif text-3xl md:text-4xl lg:text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.15] mb-8 opacity-0"
+          className="site-display max-w-[11ch] text-4xl md:text-5xl lg:text-[clamp(3rem,5vw,4.65rem)] mb-7 opacity-0"
           style={{
-            fontFamily: "'Playfair Display', serif",
             color: "var(--ink)",
             animation: "rise 0.8s ease 0.4s both",
           }}
@@ -71,8 +70,8 @@ export default function Hero({
         </h1>
 
         <p
-          className="text-[1.05rem] leading-[1.85] font-light max-w-[430px] mb-11 opacity-0"
-          style={{ color: "var(--ink)", animation: "rise 0.8s ease 0.6s both" }}
+          className="site-body-copy text-[1.02rem] md:text-[1.06rem] max-w-[470px] mb-10 opacity-0"
+          style={{ animation: "rise 0.8s ease 0.6s both" }}
         >
           {body}
         </p>
@@ -83,11 +82,10 @@ export default function Hero({
         >
           <a
             href={primaryCtaHref}
-            className="inline-block py-3.5 px-8 rounded-full text-[0.88rem] font-medium transition-all hover:-translate-y-0.5"
+            className="site-button-text inline-block py-3.5 px-8 rounded-full text-[0.88rem] transition-all hover:-translate-y-0.5"
             style={{
               background: "var(--terracotta)",
               color: "white",
-              fontFamily: "'Jost', sans-serif",
               textDecoration: "none",
               boxShadow: "0 6px 24px rgba(176,90,74,0.28)",
             }}
@@ -96,12 +94,11 @@ export default function Hero({
           </a>
           <a
             href={secondaryCtaHref}
-            className="inline-block py-3.5 px-8 rounded-full text-[0.88rem] border-[1.5px] transition-colors"
+            className="site-button-text inline-block py-3.5 px-8 rounded-full text-[0.88rem] border-[1.5px] transition-colors"
             style={{
               background: "transparent",
               color: "var(--ink)",
               borderColor: "rgba(28,39,48,0.25)",
-              fontFamily: "'Jost', sans-serif",
               textDecoration: "none",
             }}
           >
@@ -112,7 +109,7 @@ export default function Hero({
 
       {/* Hero right: animated composition */}
       <div
-        className="flex items-center justify-center py-12 lg:py-20 px-6 lg:pr-14 lg:pl-4 relative z-[2] opacity-0"
+        className="relative z-[2] flex min-w-0 items-center justify-center px-6 py-12 opacity-0 lg:py-20 lg:pl-4 lg:pr-14"
         style={{ animation: "rise 1.1s ease 0.6s both" }}
       >
         <HeroComposition />
@@ -198,9 +195,9 @@ function HeroComposition() {
 
       <div
         className="absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm opacity-40"
-        style={{ fontFamily: "'Caveat', cursive", color: "var(--ink)" }}
+        style={{ fontFamily: "var(--font-display)", fontStyle: "italic", color: "var(--ink)" }}
       >
-        a room that meets you where you are
+        honest, grounded, a little playful
       </div>
     </div>
   );

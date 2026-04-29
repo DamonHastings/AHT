@@ -1,4 +1,5 @@
 import { urlFor } from "../utils/sanityClient";
+import { HeroSection } from "../design-system";
 import {
   Hero,
   PullQuote,
@@ -11,6 +12,21 @@ import {
   ProseSection,
 } from "../design-system/site";
 import EditableSection from "./EditableSection";
+
+function heroPrimaryCtaHandler(href) {
+  return () => {
+    const target = typeof href === "string" ? href.trim() : "";
+    if (!target || target === "#") {
+      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    if (target.startsWith("#")) {
+      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    window.location.assign(target);
+  };
+}
 
 const SPACER_HEIGHT = {
   sm: "h-8",
@@ -33,7 +49,44 @@ export function renderBlockComponent(component, index) {
   const key = `${component._type}-${index}`;
 
   switch (component._type) {
-    case "heroBlock":
+    case "heroBlock": {
+      const presentation = component.presentation ?? "expressive";
+      if (presentation === "photo") {
+        const photoVariant = component.photoVariant ?? "overlay";
+        const overlayRaw = component.photoOverlay ?? "dark";
+        const overlay =
+          overlayRaw === "none" || overlayRaw === null ? null : overlayRaw;
+        const backgroundImage = component.photoBackgroundImage
+          ? urlFor(component.photoBackgroundImage).width(2000).url()
+          : undefined;
+        const blobSide =
+          photoVariant === "organic" ? component.photoBlobSide ?? null : null;
+
+        return (
+          <EditableSection key={key} component={component} className="site-section-hero">
+            <HeroSection
+              backgroundImage={backgroundImage}
+              variant={photoVariant}
+              blobSide={blobSide}
+              overlay={overlay}
+              overlayOpacity={component.photoOverlayOpacity ?? 0.4}
+              kickerText={component.kickerText}
+              heading={component.heading}
+              headingEmphasis={component.headingEmphasis}
+              subheading={component.body}
+              ctaText={component.primaryCtaText}
+              primaryCtaHref={component.primaryCtaHref}
+              onCtaClick={heroPrimaryCtaHandler(component.primaryCtaHref)}
+              secondaryCtaText={component.secondaryCtaText}
+              secondaryCtaHref={component.secondaryCtaHref}
+              ctaVariant="accent"
+              alignment={component.photoTextAlignment ?? "left"}
+              height={component.photoHeight ?? "screen"}
+            />
+          </EditableSection>
+        );
+      }
+
       return (
         <EditableSection key={key} component={component} className="site-section-hero">
           <Hero
@@ -48,6 +101,7 @@ export function renderBlockComponent(component, index) {
           />
         </EditableSection>
       );
+    }
 
     case "pullQuoteBlock":
       return (
