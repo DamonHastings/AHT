@@ -11,8 +11,8 @@ const client = createClient({
   apiVersion: '2024-01-01',
 });
 
-async function linkNavigationToSiteSettings() {
-  console.log('🔗 Linking navigation to site settings...\n');
+async function removeNavigationFromSiteSettings() {
+  console.log('🧹 Removing navigation from site settings...\n');
 
   try {
     // Get the site settings document
@@ -25,47 +25,25 @@ async function linkNavigationToSiteSettings() {
 
     console.log('✅ Found site settings:', siteSettings._id);
 
-    // Update the navigation reference to point to navigation-main
+    // Remove the deprecated navigation reference from site settings.
     await client
       .patch(siteSettings._id)
-      .set({
-        navigation: {
-          _type: 'reference',
-          _ref: 'navigation-main'
-        }
-      })
+      .unset(['navigation'])
       .commit();
 
-    console.log('✅ Updated site settings to reference navigation-main');
+    console.log('✅ Removed navigation reference from site settings');
 
     // Verify the update
     const updated = await client.fetch(`
       *[_type == "siteSettings"][0]{
         _id,
-        "navigation": navigation->{
-          _id,
-          title,
-          items
-        }
+        navigation
       }
     `);
 
     console.log('\n📋 Verification:');
-    console.log('   Navigation ID:', updated.navigation._id);
-    console.log('   Navigation Title:', updated.navigation.title);
-    console.log('   Navigation Items:');
-    updated.navigation.items.forEach((item, idx) => {
-      const target = item.internalPage || item.anchor || item.externalUrl || 'N/A';
-      console.log(`   ${idx + 1}. ${item.label} → ${item.linkType}: ${target}`);
-    });
-
-    console.log('\n🎉 Site Settings is now linked to the correct navigation!');
-    console.log('   The navbar should now show:');
-    console.log('   • Home (/) - page link');
-    console.log('   • About (/about) - page link');
-    console.log('   • Services (/services) - page link');
-    console.log('   • Contact (#contact) - anchor link');
-    console.log('\n✨ Refresh your frontend to see the changes!\n');
+    console.log('   Navigation field:', updated.navigation ?? 'not set');
+    console.log('\n🎉 Site Settings no longer stores main navigation.\n');
 
   } catch (error) {
     console.error('\n❌ Error:', error.message);
@@ -73,4 +51,4 @@ async function linkNavigationToSiteSettings() {
   }
 }
 
-linkNavigationToSiteSettings();
+removeNavigationFromSiteSettings();

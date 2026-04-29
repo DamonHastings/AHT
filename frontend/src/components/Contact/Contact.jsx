@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { apiUrl } from '../../utils/api'
 
 export default function Contact({ therapist, practice }) {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ export default function Contact({ therapist, practice }) {
     setError(null)
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

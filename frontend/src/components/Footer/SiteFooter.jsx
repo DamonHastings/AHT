@@ -11,15 +11,6 @@ export default function SiteFooter() {
         const query = `*[_type == "siteSettings"][0]{
           businessName,
           copyrightText,
-          "navigationLinks": navigation->items[]{
-            label,
-            "url": select(
-              defined(internalPage) && internalPage == 'home' => '/',
-              defined(internalPage) => '/' + internalPage,
-              defined(anchor) => anchor,
-              externalUrl
-            )
-          },
           socialLinks[]{
             platform,
             url

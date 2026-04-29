@@ -144,6 +144,24 @@ SANITY_API_TOKEN=your_write_token
 2. Configure environment variables in Vercel dashboard
 3. Deploy (Vercel will auto-detect the build settings)
 
+### Render Backend Deployment
+
+The backend can be deployed to Render from the root `render.yaml` blueprint.
+Create a new Render Blueprint from this repository and configure these secret
+environment variables in the Render dashboard:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+CORS_ORIGIN=https://your_frontend_domain
+PRACTITIONER_EMAIL=recipient@example.com
+MAILER_URL=smtp://user:password@smtp.example.com:587
+```
+
+If you do not use `MAILER_URL`, configure `SMTP_HOST`, `SMTP_USER`,
+`SMTP_PASS`, and optionally `SMTP_PORT`, `SMTP_SECURE`, and `MAIL_FROM` instead.
+After Render deploys, set `VITE_API_BASE_URL` in the frontend environment to the
+Render service URL.
+
 ## Content Architecture
 
 The project uses a reusable content architecture that supports:

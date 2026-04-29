@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { CONTAINER } from "./layout";
+import { apiUrl } from "../utils/api";
 
 /**
  * Consultation / "Send a Message" form for scheduling.
@@ -49,7 +50,7 @@ export function ConsultationForm({
       if (onSubmit) {
         await onSubmit(payload);
       } else {
-        const response = await fetch("/api/appointments", {
+        const response = await fetch(apiUrl("/api/appointments"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),

@@ -145,12 +145,6 @@ export default {
       initialValue: '© 2026 Arielle Hastings, LMFT. All Rights Reserved.',
     },
     {
-      name: 'navigation',
-      title: 'Navigation Menu',
-      type: 'reference',
-      to: [{ type: 'navigation' }],
-    },
-    {
       name: 'seo',
       title: 'SEO Settings',
       type: 'object',

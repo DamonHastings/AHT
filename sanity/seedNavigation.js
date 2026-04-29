@@ -98,10 +98,6 @@ async function seedNavigationAndSettings() {
         state: 'CA',
         zipCode: '12345',
       },
-      navigation: {
-        _type: 'reference',
-        _ref: 'navigation-main',
-      },
       seo: {
         keywords: [
           'therapy',

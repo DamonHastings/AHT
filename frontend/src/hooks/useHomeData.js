@@ -48,10 +48,6 @@ export function useHomeData() {
                 licenseText,
                 columns,
                 "socialLinks": socialLinks->{ links }
-              },
-              "navigation": navigation->{
-                _id,
-                items
               }
             }`
           ),

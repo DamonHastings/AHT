@@ -36,20 +36,6 @@ export function useSiteSettings() {
               links
             }
           },
-          "navigation": navigation->{
-            _id,
-            title,
-            items[]{
-              _key,
-              label,
-              linkType,
-              anchor,
-              internalPage,
-              "internalPageSlug": internalPage->slug.current,
-              externalUrl,
-              openInNewTab
-            }
-          },
           seo
         }`
 

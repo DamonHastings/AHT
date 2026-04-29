@@ -446,10 +446,6 @@ async function seed() {
         _type: 'reference',
         _ref: footerContentDoc._id,
       },
-      navigation: {
-        _type: 'reference',
-        _ref: navigationDoc._id,
-      },
     })
     console.log('   ✓ Site settings created\n')
 

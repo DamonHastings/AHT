@@ -40,6 +40,7 @@ export default function SiteNav({
       </div>
 
       <ul className="hidden md:flex gap-10 list-none">
+        {console.log("Links", links)}
         {links.map((link) => (
           <li key={link.label}>
             <a

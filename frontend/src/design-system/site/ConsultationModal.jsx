@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import PropTypes from "prop-types";
+import { apiUrl } from "../../utils/api";
 
 const INITIAL_FORM_DATA = {
   fullName: "",
@@ -68,7 +69,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
     setError("");
 
     try {
-      const response = await fetch("/api/appointments", {
+      const response = await fetch(apiUrl("/api/appointments"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
