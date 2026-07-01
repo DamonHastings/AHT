@@ -19,12 +19,16 @@ export default function TheSpace({
     { color: "var(--sand)", label: "groundedness" },
   ],
   imageSrc,
+  imageSrcSet,
+  imageWebpSrcSet,
+  imageSizes,
   imageAlt = "The therapy office — a warm, light-filled room with a teal sofa, terracotta armchair, and abstract art on cream walls",
   photoTag = "✦ Davis, CA",
 }) {
   return (
     <section
-      className="py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative overflow-hidden"
+      id="the-space"
+      className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative overflow-hidden"
       style={{ background: "var(--mist)" }}
     >
       {/* Ambient mobile */}
@@ -71,7 +75,20 @@ export default function TheSpace({
 
       <div className="relative rounded-t-lg rounded-b-[72px] overflow-hidden shadow-2xl aspect-[4/5] bg-[var(--linen)]">
         {imageSrc ? (
-          <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover block" />
+          <picture>
+            {imageWebpSrcSet && (
+              <source type="image/webp" srcSet={imageWebpSrcSet} sizes={imageSizes} />
+            )}
+            <img
+              src={imageSrc}
+              srcSet={imageSrcSet}
+              sizes={imageSizes}
+              alt={imageAlt}
+              className="w-full h-full object-cover block"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         ) : (
           <div
             className="w-full h-full flex items-center justify-center text-center p-8"
@@ -165,6 +182,9 @@ TheSpace.propTypes = {
     })
   ),
   imageSrc: PropTypes.string,
+  imageSrcSet: PropTypes.string,
+  imageWebpSrcSet: PropTypes.string,
+  imageSizes: PropTypes.string,
   imageAlt: PropTypes.string,
   photoTag: PropTypes.string,
 };

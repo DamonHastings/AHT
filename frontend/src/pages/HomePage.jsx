@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { usePage } from "../hooks/usePage";
+import { useSiteSettings } from "../hooks/useSiteSettings";
 import PageRenderer from "../components/PageRenderer";
 import SiteLayout from "../layouts/SiteLayout";
+import Seo from "../components/Seo";
+import { responsiveImage } from "../utils/responsiveImage";
+import { canonicalFor, buildPracticeJsonLd, buildFaqJsonLd } from "../utils/seo";
+import { urlFor } from "../utils/sanityClient";
 import { HeroSection } from "../design-system";
 import {
   PullQuote,
@@ -9,8 +15,11 @@ import {
   ExpressiveArts,
   Meet,
   FeelingsCheckIn,
+  Fees,
+  Faq,
   CTA,
 } from "../design-system/site";
+import { DEFAULT_FAQ_ITEMS } from "../content/faqDefaults";
 
 const SITE_BLOCK_TYPES = new Set([
   "heroBlock",
@@ -25,8 +34,24 @@ const SITE_BLOCK_TYPES = new Set([
   "spacerBlock",
 ]);
 
+const DEFAULT_TITLE =
+  "Expressive Arts Therapy in Davis, CA | Arielle Hastings, LMFT";
+const DEFAULT_DESCRIPTION =
+  "Warm, playful, collaborative expressive arts therapy in Davis, CA with Arielle Hastings, LMFT. Movement, art, metaphor, and talk for kids, teens, young adults, and parents. Book a free consultation.";
+
 export default function HomePage() {
-  const { page, loading, error } = usePage("home");
+  const { page, loading } = usePage("home");
+  const { siteSettings, loading: settingsLoading } = useSiteSettings();
+
+  // Signal the build-time prerenderer that the page is fully resolved
+  // (see renderAfterDocumentEvent in vite.config.js). Wait for BOTH the page
+  // and site-settings fetches so the snapshot includes the JSON-LD / OG image.
+  // Fires on success, the static fallback, or error — so prerender never hangs.
+  useEffect(() => {
+    if (!loading && !settingsLoading) {
+      document.dispatchEvent(new Event("app-prerender-ready"));
+    }
+  }, [loading, settingsLoading]);
 
   if (loading) {
     return (
@@ -42,29 +67,34 @@ export default function HomePage() {
     );
   }
 
-  if (error) {
-    return (
-      <div
-        className="min-h-screen flex justify-center items-center site-theme"
-        style={{ background: "var(--warm-white)" }}
-      >
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--terracotta)" }}>
-            Error Loading Page
-          </h1>
-          <p style={{ color: "var(--ink)" }}>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
+  // Note: a Sanity fetch error is not surfaced as a full-screen error here.
+  // When `page` is null (error or missing), we fall back to StaticHomeLayout —
+  // the complete hardcoded marketing page — so the site stays up if the CMS is
+  // unreachable and the build-time prerender always captures real content.
   const hasSiteBlocks =
     page?.components?.some((c) => SITE_BLOCK_TYPES.has(c._type)) ?? false;
 
   const showSanityContent = page && hasSiteBlocks;
 
+  const canonical = canonicalFor("/");
+  const ogImage = siteSettings?.ogImage
+    ? urlFor(siteSettings.ogImage).width(1200).height(630).fit("crop").url()
+    : undefined;
+  const jsonLd = [
+    buildPracticeJsonLd(siteSettings, { url: canonical, image: ogImage }),
+    buildFaqJsonLd(DEFAULT_FAQ_ITEMS),
+  ];
+
   return (
-    <SiteLayout>
+    <>
+      <Seo
+        title={page?.metaTitle || DEFAULT_TITLE}
+        description={page?.metaDescription || DEFAULT_DESCRIPTION}
+        image={ogImage}
+        canonical={canonical}
+        jsonLd={jsonLd}
+      />
+      <SiteLayout>
       {showSanityContent ? (
         <PageRenderer pageData={page} variant="bare" />
       ) : (
@@ -88,15 +118,32 @@ export default function HomePage() {
           <StaticHomeLayout />
         </>
       )}
-    </SiteLayout>
+        <Faq />
+        <Fees
+          sessionFee={siteSettings?.fees?.sessionFee}
+          consultNote={siteSettings?.fees?.consultNote}
+          paymentNote={siteSettings?.fees?.paymentNote}
+          slidingScaleNote={siteSettings?.fees?.slidingScaleNote}
+          contactEmail={siteSettings?.contactEmail}
+          contactPhone={siteSettings?.contactPhone}
+        />
+      </SiteLayout>
+    </>
   );
 }
+
+const heroImage = responsiveImage("hero");
+const meetImage = responsiveImage("meet");
 
 function StaticHomeLayout() {
   return (
     <>
       <HeroSection
-        backgroundImage="/photos/IMG_0346.JPG"
+        backgroundImage={heroImage.src}
+        blobImageSrcSet={heroImage.jpegSrcSet}
+        blobImageWebpSrcSet={heroImage.webpSrcSet}
+        blobImageSizes="(min-width: 1024px) 52vw, 100vw"
+        priority
         variant="organic"
         blobSide="left"
         overlay={null}
@@ -107,7 +154,7 @@ function StaticHomeLayout() {
         ctaText="Schedule a free consultation"
         primaryCtaHref="#contact"
         secondaryCtaText="Who I help →"
-        secondaryCtaHref="/#audience-children"
+        secondaryCtaHref="/#who-i-help"
         ctaVariant="accent"
         alignment="left"
         className="pt-[4.5rem]"
@@ -116,7 +163,13 @@ function StaticHomeLayout() {
       <WhoIHelp />
       <TheSpace />
       <ExpressiveArts />
-      <Meet />
+      <Meet
+        imageSrc={meetImage.src}
+        imageSrcSet={meetImage.jpegSrcSet}
+        imageWebpSrcSet={meetImage.webpSrcSet}
+        imageSizes="(min-width: 1024px) 50vw, 100vw"
+        imageAlt="Arielle Hastings, LMFT"
+      />
       <FeelingsCheckIn />
       <CTA />
     </>

@@ -1,4 +1,4 @@
-import { urlFor } from "../utils/sanityClient";
+import { sanityImage } from "../utils/sanityImage";
 import { HeroSection } from "../design-system";
 import {
   Hero,
@@ -56,9 +56,12 @@ export function renderBlockComponent(component, index) {
         const overlayRaw = component.photoOverlay ?? "dark";
         const overlay =
           overlayRaw === "none" || overlayRaw === null ? null : overlayRaw;
-        const backgroundImage = component.photoBackgroundImage
-          ? urlFor(component.photoBackgroundImage).width(2000).url()
-          : undefined;
+        const heroImg = component.photoBackgroundImage
+          ? sanityImage(component.photoBackgroundImage, {
+              widths: [768, 1200, 1800, 2400],
+            })
+          : null;
+        const backgroundImage = heroImg?.src ?? "/photos/IMG_2506.jpeg";
         const blobSide =
           photoVariant === "organic" ? component.photoBlobSide ?? null : null;
 
@@ -66,6 +69,10 @@ export function renderBlockComponent(component, index) {
           <EditableSection key={key} component={component} className="site-section-hero">
             <HeroSection
               backgroundImage={backgroundImage}
+              blobImageSrcSet={heroImg?.jpegSrcSet}
+              blobImageWebpSrcSet={heroImg?.webpSrcSet}
+              blobImageSizes="(min-width: 1024px) 52vw, 100vw"
+              priority
               variant={photoVariant}
               blobSide={blobSide}
               overlay={overlay}
@@ -130,7 +137,10 @@ export function renderBlockComponent(component, index) {
             heading={component.heading}
             headingEmphasis={component.headingEmphasis}
             paragraphs={component.paragraphs}
-            imageSrc={component.image ? urlFor(component.image).width(800).url() : undefined}
+            imageSrc={component.image ? sanityImage(component.image)?.src : undefined}
+            imageSrcSet={component.image ? sanityImage(component.image)?.jpegSrcSet : undefined}
+            imageWebpSrcSet={component.image ? sanityImage(component.image)?.webpSrcSet : undefined}
+            imageSizes="(min-width: 1024px) 50vw, 100vw"
             photoTag={component.photoTag}
           />
         </EditableSection>
@@ -144,7 +154,6 @@ export function renderBlockComponent(component, index) {
             heading={component.heading}
             paragraphs={component.paragraphs}
             modalities={component.modalities}
-            quotes={component.quotes}
           />
         </EditableSection>
       );
@@ -159,7 +168,23 @@ export function renderBlockComponent(component, index) {
             paragraphs={component.paragraphs}
             credentials={component.credentials}
             badgeText={component.badgeText}
-            imageSrc={component.image ? urlFor(component.image).width(600).url() : undefined}
+            imageSrc={
+              component.image
+                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.src
+                : "/photos/IMG_2481.jpeg"
+            }
+            imageSrcSet={
+              component.image
+                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.jpegSrcSet
+                : undefined
+            }
+            imageWebpSrcSet={
+              component.image
+                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.webpSrcSet
+                : undefined
+            }
+            imageSizes="(min-width: 1024px) 50vw, 100vw"
+            imageAlt="Arielle Hastings, LMFT"
           />
         </EditableSection>
       );

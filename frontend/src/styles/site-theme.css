@@ -4,11 +4,38 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Visible keyboard-focus indicator (does not affect mouse users). */
+:focus-visible {
+  outline: 2px solid var(--teal-deep, #3e7d80);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip-to-content link: off-screen until focused. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 300;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--ink, #1c2730);
+  color: var(--warm-white, #fdfbf7);
+  font-family: var(--font-ui-condensed, sans-serif);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
 :root {
   --font-display: "Playfair Display", serif;
   --font-body: "Roboto", sans-serif;
   --font-ui-condensed: "Roboto Condensed", "Roboto", sans-serif;
-  --font-script: "Selfie", "Playfair Display", serif;
+  --font-script: "Playfair Display", serif;
   --teal: #5b9ea0;
   --teal-deep: #3e7d80;
   --teal-pale: #d6ecec;
@@ -92,6 +119,31 @@ html {
   color: var(--terracotta);
 }
 
+/* Footer (on --ink): readable linen text with working hover. Set color via a
+   class rather than inline opacity so hover isn't overridden by inline styles. */
+.site-footer-link {
+  color: rgba(244, 240, 232, 0.74);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.site-footer-link:hover {
+  color: var(--linen);
+}
+.site-footer-muted {
+  color: rgba(244, 240, 232, 0.58);
+}
+.site-footer-label {
+  color: var(--teal);
+}
+.site-footer-admin {
+  color: rgba(244, 240, 232, 0.42);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.site-footer-admin:hover {
+  color: rgba(244, 240, 232, 0.82);
+}
+
 @keyframes blobFloat {
   0%,
   100% {
@@ -114,21 +166,22 @@ html {
 
 /*
  * Mask (border-radius only) — clip layer; photo stays fixed.
- * Midway organic elliptical look; keyframes use a wider corner spread (~28–42%) so the morph reads clearly.
+ * Subtle organic frame: corner spread stays low (~10–22%) so the photo reads as a
+ * near-full rectangle whose outer edges gently wave, rather than a heavy blob crop.
  */
 @keyframes blobMorph {
   0%,
   100% {
-    border-radius: 36% 34% 39% 31% / 34% 37% 33% 36%;
+    border-radius: 16% 14% 18% 13% / 14% 17% 13% 16%;
   }
   25% {
-    border-radius: 28% 40% 32% 42% / 40% 30% 38% 34%;
+    border-radius: 12% 19% 14% 20% / 19% 12% 18% 14%;
   }
   50% {
-    border-radius: 42% 30% 38% 34% / 32% 42% 34% 38%;
+    border-radius: 20% 12% 17% 15% / 13% 20% 14% 18%;
   }
   75% {
-    border-radius: 32% 38% 40% 28% / 36% 34% 32% 40%;
+    border-radius: 14% 18% 20% 11% / 17% 14% 12% 19%;
   }
 }
 
@@ -184,5 +237,46 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Full-screen booking pane slide-in (from the right). */
+@keyframes slideInPanel {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInPanel {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+ * Respect prefers-reduced-motion. Neutralizes the ambient blob/orbit/spin/sway
+ * animations and long transitions while preserving each element's final state.
+ * Important for a mental-health audience that may be sensitive to motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

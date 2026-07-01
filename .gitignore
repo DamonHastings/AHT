@@ -45,3 +45,14 @@ lerna-debug.log*
 
 *storybook.log
 storybook-static
+
+# Build output (nested workspaces — the root /dist above only covers repo root)
+frontend/dist/
+sanity/dist/
+
+# Raw photo originals / working files (kept locally, not tracked). The image
+# pipeline sources live in frontend/photos/; these are unreferenced originals.
+frontend/assets/
+
+# Claude Code session worktrees
+.claude/worktrees/

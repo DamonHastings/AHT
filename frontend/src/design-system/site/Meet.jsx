@@ -19,12 +19,16 @@ export default function Meet({
     "SEED Scholar Partner",
   ],
   badgeText = "LMFT\nDavis, CA",
-  imageSrc,
-  imageAlt,
+  imageSrc = "/photos/IMG_2481.jpeg",
+  imageSrcSet,
+  imageWebpSrcSet,
+  imageSizes,
+  imageAlt = "Arielle Hastings, LMFT",
 }) {
   return (
     <section
-      className="py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative overflow-hidden"
+      id="meet"
+      className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative overflow-hidden"
       style={{ background: "var(--linen)" }}
     >
       {/* Ambient mobile top-left */}
@@ -55,17 +59,33 @@ export default function Meet({
 
       <div className="relative">
         <div
-          className="rounded-t-[60px] rounded-b-xl aspect-[3/4] overflow-hidden flex items-center justify-center border-2 border-dashed border-[rgba(91,158,160,0.3)]"
-          style={{
-            background: "linear-gradient(145deg, var(--teal-pale) 0%, var(--terra-pale) 100%)",
-          }}
+          className={`rounded-t-[60px] rounded-b-xl aspect-[3/4] overflow-hidden flex items-center justify-center ${
+            imageSrc ? "" : "border-2 border-dashed border-[rgba(91,158,160,0.3)]"
+          }`}
+          style={
+            imageSrc
+              ? undefined
+              : {
+                  background:
+                    "linear-gradient(145deg, var(--teal-pale) 0%, var(--terra-pale) 100%)",
+                }
+          }
         >
           {imageSrc ? (
-            <img
-              src={imageSrc}
-              alt={imageAlt || "Therapist"}
-              className="w-full h-full object-cover"
-            />
+            <picture>
+              {imageWebpSrcSet && (
+                <source type="image/webp" srcSet={imageWebpSrcSet} sizes={imageSizes} />
+              )}
+              <img
+                src={imageSrc}
+                srcSet={imageSrcSet}
+                sizes={imageSizes}
+                alt={imageAlt || "Therapist"}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           ) : (
             <span
               className="text-center p-4"
@@ -107,8 +127,20 @@ export default function Meet({
         <h2
           className="site-heading text-3xl md:text-4xl mb-6"
         >
-          {heading.replace(headingEmphasis, "")}
-          <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>{headingEmphasis}</em>
+          {headingEmphasis && heading.includes(headingEmphasis)
+            ? (() => {
+                const [before, after] = heading.split(headingEmphasis);
+                return (
+                  <>
+                    {before}
+                    <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                      {headingEmphasis}
+                    </em>
+                    {after}
+                  </>
+                );
+              })()
+            : heading}
         </h2>
 
         {paragraphs.map((p, idx) => (
@@ -148,5 +180,8 @@ Meet.propTypes = {
   credentials: PropTypes.arrayOf(PropTypes.string),
   badgeText: PropTypes.string,
   imageSrc: PropTypes.string,
+  imageSrcSet: PropTypes.string,
+  imageWebpSrcSet: PropTypes.string,
+  imageSizes: PropTypes.string,
   imageAlt: PropTypes.string,
 };

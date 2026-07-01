@@ -7,7 +7,13 @@ const router = express.Router()
 // POST /api/appointments - Create consultation request (V1: compiles to email when configured)
 router.post('/', async (req, res) => {
   try {
-    const { name, email, phone, preferredDate, preferredTime, message } = req.body
+    const { name, email, phone, preferredDate, preferredTime, message, company } = req.body
+
+    // Honeypot: legitimate clients never fill this hidden field. Respond 200 so
+    // bots don't learn they were filtered, but skip persisting/emailing.
+    if (company) {
+      return res.status(200).json({ message: 'Appointment request submitted successfully' })
+    }
 
     if (!name || !email) {
       return res.status(400).json({ message: 'Name and email are required' })

@@ -22,6 +22,10 @@ export default function HeroSection({
   variant = "overlay",
   blobSide = null,
   blobImage,
+  blobImageSrcSet,
+  blobImageWebpSrcSet,
+  blobImageSizes,
+  priority = false,
   className = "",
 }) {
   const alignmentClasses = {
@@ -114,10 +118,11 @@ export default function HeroSection({
           className="site-display text-4xl lg:text-[clamp(2.8rem,4.6vw,4.4rem)] mb-8 max-w-[min(100%,34rem)]"
           style={{ color: "var(--ink)" }}
         >
-          {headingEmphasis ? (
+          {headingEmphasis && heading.includes(headingEmphasis) ? (
             <>
-              {heading.replace(headingEmphasis, "")}
+              {heading.slice(0, heading.indexOf(headingEmphasis))}
               <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>{headingEmphasis}</em>
+              {heading.slice(heading.indexOf(headingEmphasis) + headingEmphasis.length)}
             </>
           ) : (
             heading
@@ -206,17 +211,32 @@ export default function HeroSection({
           className="absolute inset-0 overflow-hidden shadow-2xl"
           style={{
             animation: "blobMorph 12s ease-in-out infinite",
-            borderRadius: "40% 34% 39% 31% / 40% 37% 33% 36%",
+            borderRadius: "16% 14% 18% 13% / 14% 17% 13% 16%",
             willChange: "border-radius",
           }}
         >
           {blobSrc ? (
-            <img
-              src={blobSrc}
-              alt=""
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[150%] w-[150%] max-w-none object-cover"
-              style={{ transform: "translate(-50%, -60%)" }}
-            />
+            <picture>
+              {blobImageWebpSrcSet && (
+                <source
+                  type="image/webp"
+                  srcSet={blobImageWebpSrcSet}
+                  sizes={blobImageSizes}
+                />
+              )}
+              <img
+                src={blobSrc}
+                srcSet={blobImageSrcSet}
+                sizes={blobImageSizes}
+                alt=""
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                loading={priority ? "eager" : "lazy"}
+                // Lowercase DOM attr: React 18.2 doesn't recognize camelCase
+                // `fetchPriority`; spreading the lowercase key passes it through cleanly.
+                {...(priority ? { fetchpriority: "high" } : {})}
+                decoding="async"
+              />
+            </picture>
           ) : (
             <div
               className="absolute inset-0"
@@ -236,18 +256,6 @@ export default function HeroSection({
         className={`site-theme relative w-full min-h-0 overflow-visible ${className}`}
         style={{ background: "var(--linen)" }}
       >
-        <div
-          className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-[1]"
-          style={{
-            background: `linear-gradient(105deg,
-            transparent 0%,
-            rgba(255,255,255,0.15) 30%,
-            rgba(255,255,255,0.42) 50%,
-            rgba(255,255,255,0.15) 70%,
-            transparent 100%)`,
-          }}
-        />
-
         <div className="relative z-[2] grid w-full min-h-0 pt-20">
           <div className={`grid w-full min-h-0 grid-cols-1 items-stretch ${organicLgGridClass}`}>
             {organicImageSide === "left" && (
@@ -364,5 +372,9 @@ HeroSection.propTypes = {
   variant: PropTypes.oneOf(["overlay", "split", "organic"]),
   blobSide: PropTypes.oneOf(["left", "right", null]),
   blobImage: PropTypes.string,
+  blobImageSrcSet: PropTypes.string,
+  blobImageWebpSrcSet: PropTypes.string,
+  blobImageSizes: PropTypes.string,
+  priority: PropTypes.bool,
   className: PropTypes.string,
 };

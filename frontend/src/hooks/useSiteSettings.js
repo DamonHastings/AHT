@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import sanityClient from '../utils/sanityClient'
+import { mergeSiteContactDefaults } from '../content/siteContact'
 
 export function useSiteSettings() {
   const [siteSettings, setSiteSettings] = useState(null)
@@ -18,7 +19,15 @@ export function useSiteSettings() {
           ogImage,
           contactEmail,
           contactPhone,
+          bookingUrl,
           address,
+          businessName,
+          copyrightText,
+          credentials,
+          licenseNumber,
+          supervisorInfo,
+          geo,
+          fees,
           "socialLinks": socialLinks->{
             _id,
             title,
@@ -40,7 +49,7 @@ export function useSiteSettings() {
         }`
 
         const data = await sanityClient.fetch(query)
-        setSiteSettings(data)
+        setSiteSettings(mergeSiteContactDefaults(data))
       } catch (err) {
         console.error('Error fetching site settings:', err)
         setError(err)

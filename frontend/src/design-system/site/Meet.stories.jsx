@@ -26,5 +26,7 @@ export const Default = {
       "SEED Scholar Partner",
     ],
     badgeText: "LMFT\nDavis, CA",
+    imageSrc: "/photos/IMG_2481.jpeg",
+    imageAlt: "Arielle Hastings, LMFT",
   },
 };

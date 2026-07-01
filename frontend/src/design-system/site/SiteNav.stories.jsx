@@ -22,7 +22,7 @@ export default {
 
 export const Default = {
   args: {
-    logoName: "[Practice Name]",
+    logoName: "Arielle Rae Hastings, LMFT",
     logoSubtext: "LMFT · Expressive Arts · Davis, CA",
     links: [
       { label: "About", href: "#" },

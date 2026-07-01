@@ -26,7 +26,7 @@ export default function Hero({ therapist, practice }) {
 
   const backgroundImageUrl = practice?.heroBackgroundImage
     ? urlFor(practice.heroBackgroundImage).width(1920).height(1080).url()
-    : "/photos/IMG_0346.JPG";
+    : "/photos/IMG_2506.jpeg";
 
   return (
     <section

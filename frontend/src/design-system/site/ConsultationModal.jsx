@@ -1,6 +1,7 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { apiUrl } from "../../utils/api";
+import { trackEvent } from "../../utils/analytics";
 
 const INITIAL_FORM_DATA = {
   fullName: "",
@@ -10,33 +11,82 @@ const INITIAL_FORM_DATA = {
   preferredTime: "",
   preferredFormat: "",
   message: "",
+  // Honeypot — must stay empty. Bots that fill every field will populate it.
+  company: "",
 };
 
-const TIME_OPTIONS = [
-  "Morning",
-  "Midday",
-  "Afternoon",
-  "Early evening",
-  "I'm flexible",
-];
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export default function ConsultationModal({ isOpen, onClose }) {
+// Minimum time (ms) a genuine human takes to fill the form. Faster = likely bot.
+const MIN_FILL_MS = 2500;
+
+/**
+ * Google Calendar Appointment Schedule pages only allow iframe embedding via the
+ * `?gv=true` variant; the plain share link refuses to frame (X-Frame-Options).
+ * Normalize so either form works.
+ */
+function toEmbedUrl(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    if (
+      u.hostname.endsWith("calendar.google.com") &&
+      u.pathname.includes("/appointments/schedules/") &&
+      !u.searchParams.has("gv")
+    ) {
+      u.searchParams.set("gv", "true");
+    }
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
+const TIME_OPTIONS = ["Morning", "Midday", "Afternoon", "Early evening", "I'm flexible"];
+
+export default function ConsultationModal({ isOpen, onClose, bookingUrl }) {
   const titleId = useId();
   const descriptionId = useId();
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const dialogRef = useRef(null);
+  const openedAtRef = useRef(0);
+  const previouslyFocusedRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    openedAtRef.current = Date.now();
+
+    // Remember what was focused so we can restore it on close, then move focus
+    // into the dialog for keyboard/screen-reader users.
+    previouslyFocusedRef.current = document.activeElement;
+    const focusables = dialogRef.current?.querySelectorAll(FOCUSABLE);
+    focusables?.[0]?.focus();
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+      // Trap Tab focus within the dialog.
+      if (event.key === "Tab" && dialogRef.current) {
+        const items = dialogRef.current.querySelectorAll(FOCUSABLE);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
 
@@ -45,6 +95,11 @@ export default function ConsultationModal({ isOpen, onClose }) {
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      // Restore focus to the element that opened the modal.
+      const toRestore = previouslyFocusedRef.current;
+      if (toRestore && typeof toRestore.focus === "function") {
+        toRestore.focus();
+      }
     };
   }, [isOpen, onClose]);
 
@@ -53,6 +108,14 @@ export default function ConsultationModal({ isOpen, onClose }) {
       setError("");
     }
   }, [isOpen]);
+
+  // When the booking embed is shown, count the open as the conversion signal
+  // (we can't observe completion inside the cross-origin Google iframe).
+  useEffect(() => {
+    if (isOpen && bookingUrl) {
+      trackEvent("Booking Opened");
+    }
+  }, [isOpen, bookingUrl]);
 
   if (!isOpen) {
     return null;
@@ -65,6 +128,16 @@ export default function ConsultationModal({ isOpen, onClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Spam guards: honeypot filled, or form submitted implausibly fast.
+    // Show the success state without sending so bots don't learn they failed.
+    const tooFast = Date.now() - openedAtRef.current < MIN_FILL_MS;
+    if (formData.company || tooFast) {
+      setSubmitted(true);
+      setFormData(INITIAL_FORM_DATA);
+      return;
+    }
+
     setSubmitting(true);
     setError("");
 
@@ -80,6 +153,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
           preferredTime: formData.preferredTime || undefined,
           preferredFormat: formData.preferredFormat || undefined,
           message: formData.message,
+          company: formData.company, // honeypot — server also rejects if filled
         }),
       });
 
@@ -88,6 +162,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
         throw new Error(data.message || "We couldn't send your request. Please try again.");
       }
 
+      trackEvent("Consultation Requested");
       setSubmitted(true);
       setFormData(INITIAL_FORM_DATA);
     } catch (err) {
@@ -100,6 +175,94 @@ export default function ConsultationModal({ isOpen, onClose }) {
   const inputClass =
     "w-full rounded-2xl border bg-white/80 px-4 py-3 text-[0.98rem] outline-none transition focus:border-[var(--teal)] focus:ring-4 focus:ring-[rgba(91,158,160,0.16)]";
   const labelClass = "site-ui-label mb-2 block text-[0.72rem]";
+
+  // Booking embed gets its own full-screen slide-in pane — the Google booking
+  // page needs far more room than the centered form modal allows.
+  if (bookingUrl) {
+    return (
+      <div className="fixed inset-0 z-[500] flex justify-end" role="presentation">
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(28,39,48,0.45)", backdropFilter: "blur(4px)" }}
+          onMouseDown={onClose}
+          aria-hidden
+        />
+        <section
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          aria-describedby={descriptionId}
+          className="relative flex h-[100dvh] w-full flex-col"
+          style={{
+            background:
+              "linear-gradient(160deg, rgba(253,251,247,0.99) 0%, rgba(244,240,232,0.99) 100%)",
+            color: "var(--ink)",
+            animation: "slideInPanel 0.32s cubic-bezier(0.22, 1, 0.36, 1)",
+            willChange: "transform",
+            boxShadow: "0 0 90px rgba(28,39,48,0.28)",
+          }}
+        >
+          <header
+            className="flex-shrink-0 border-b px-5 py-4 md:px-10 md:py-6"
+            style={{ borderColor: "rgba(28,39,48,0.1)" }}
+          >
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border transition hover:-translate-y-0.5 md:right-6 md:top-6"
+              style={{
+                borderColor: "rgba(28,39,48,0.14)",
+                color: "var(--ink)",
+                background: "rgba(255,255,255,0.68)",
+                fontSize: "1.75rem",
+              }}
+              aria-label="Close booking panel"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <p className="site-eyebrow mb-1" style={{ color: "var(--teal-deep)" }}>
+              Free consultation
+            </p>
+            <h2 id={titleId} className="site-heading text-2xl md:text-4xl pr-12">
+              Pick a time that works.
+            </h2>
+            <p id={descriptionId} className="site-body-copy mt-2 text-[1.25rem]">
+              Choose a free 15-minute slot below — you&rsquo;ll get an email confirmation. Please
+              don&rsquo;t share urgent or sensitive details here; if you&rsquo;re in crisis, call
+              911 or your local crisis line.
+            </p>
+          </header>
+
+          <div className="min-h-0 flex-1 p-3 md:p-6">
+            <iframe
+              src={toEmbedUrl(bookingUrl)}
+              title="Book a free consultation"
+              className="mx-auto block h-full w-full rounded-[1.25rem] border"
+              style={{ borderColor: "rgba(28,39,48,0.12)", background: "white" }}
+            />
+          </div>
+
+          <div
+            className="flex flex-shrink-0 flex-col items-start gap-3 border-t px-5 py-4 sm:flex-row sm:items-center sm:justify-between md:px-10"
+            style={{ borderColor: "rgba(28,39,48,0.1)" }}
+          >
+            <p className="site-body-copy text-[0.85rem]" style={{ opacity: 0.7 }}>
+              All booked? Google will email your confirmation — you can close this window.
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="site-button-text flex-shrink-0 rounded-full px-7 py-2.5 text-[0.78rem] uppercase transition hover:-translate-y-0.5"
+              style={{ background: "var(--terracotta)", color: "white" }}
+            >
+              Done
+            </button>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -114,6 +277,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
       />
 
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -177,6 +341,29 @@ export default function ConsultationModal({ isOpen, onClose }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="grid gap-4">
+            {/* Honeypot: hidden from humans, off-screen and skipped by tab order. */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: 1,
+                height: 1,
+                overflow: "hidden",
+              }}
+            >
+              <label htmlFor="consultation-modal-company">Company (leave blank)</label>
+              <input
+                id="consultation-modal-company"
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.company}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label htmlFor="consultation-modal-name" className={labelClass}>
@@ -277,9 +464,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
                     className="site-body-copy flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm"
                     style={{
                       borderColor:
-                        formData.preferredFormat === option
-                          ? "var(--teal)"
-                          : "rgba(28,39,48,0.14)",
+                        formData.preferredFormat === option ? "var(--teal)" : "rgba(28,39,48,0.14)",
                       background:
                         formData.preferredFormat === option
                           ? "rgba(214,236,236,0.55)"
@@ -357,4 +542,5 @@ export default function ConsultationModal({ isOpen, onClose }) {
 ConsultationModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  bookingUrl: PropTypes.string,
 };

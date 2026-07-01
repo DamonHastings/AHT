@@ -88,7 +88,7 @@ export default function WhoIHelp({
 }) {
   const resolvedCards = cards?.length ? cards : WHO_DEFAULTS.cards;
   return (
-    <section className="py-16 md:py-28 px-6 md:px-20 max-w-[1240px] mx-auto relative">
+    <section id="who-i-help" className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 max-w-[1240px] mx-auto relative">
       {/* Ambient orbs */}
       <div
         className="absolute top-12 right-8 pointer-events-none opacity-50 hidden md:block"
@@ -135,6 +135,17 @@ export default function WhoIHelp({
 }
 
 function WhoCard({ card, variant, anchorId }) {
+  // The old "Read more →" links pointed at each card's own anchor (a dead-end).
+  // Route the CTA to the consultation modal instead. Honor a real external/Sanity
+  // link only if it isn't one of those self-referential audience anchors.
+  const isDeadAnchor =
+    !card.linkHref || card.linkHref === "#" || /#audience-/.test(card.linkHref);
+  const ctaHref = isDeadAnchor ? "#contact" : card.linkHref;
+  const ctaText =
+    !card.linkText || /^read more/i.test(card.linkText)
+      ? "Book a free consultation →"
+      : card.linkText;
+
   return (
     <div
       id={anchorId}
@@ -179,11 +190,11 @@ function WhoCard({ card, variant, anchorId }) {
       </p>
 
       <a
-        href={card.linkHref}
+        href={ctaHref}
         className="site-ui-label inline-flex items-center gap-2 transition-[gap] hover:gap-4"
         style={{ color: variant.arrowColor, textDecoration: "none" }}
       >
-        {card.linkText}
+        {ctaText}
       </a>
     </div>
   );

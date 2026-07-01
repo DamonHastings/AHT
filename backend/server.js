@@ -14,9 +14,23 @@ const PORT = process.env.PORT || 5000
 // Connect to MongoDB
 connectDB()
 
+// Allowed browser origins. CORS_ORIGIN may be a single origin or a
+// comma-separated list (e.g. production apex + www + a preview domain).
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin(origin, callback) {
+    // Allow non-browser clients (curl, health checks, same-origin/server-to-server)
+    // which send no Origin header.
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+    return callback(new Error(`Origin ${origin} not allowed by CORS`))
+  },
   credentials: true,
 }))
 app.use(express.json())

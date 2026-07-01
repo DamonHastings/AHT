@@ -1,6 +1,19 @@
 import { useCallback, useState } from "react";
 import { ConsultationModal, SiteNav, PageFooter } from "../design-system/site";
+import {
+  SITE_BRAND_CREDENTIAL,
+  SITE_BRAND_LOCKUP,
+  SITE_BRAND_NAME,
+} from "../content/siteBrand";
 import { useSiteSettings } from "../hooks/useSiteSettings";
+import { trackEvent } from "../utils/analytics";
+
+const NAV_LINKS = [
+  { label: "Who I Help", href: "/#who-i-help" },
+  { label: "Meet Arielle", href: "/#meet" },
+  { label: "Fees", href: "/#fees" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function SiteLayout({ children }) {
   const { siteSettings } = useSiteSettings();
@@ -29,6 +42,10 @@ export default function SiteLayout({ children }) {
     const href = link.getAttribute("href");
     if (href === "#contact" || href === "/#contact") {
       event.preventDefault();
+      // Attribute the open to where the visitor clicked (nav CTA, footer link,
+      // in-page button…) so we can see which entry points drive consultations.
+      const source = link.dataset.analyticsSource || link.textContent?.trim() || "unknown";
+      trackEvent("Consultation Started", { source });
       setIsConsultationModalOpen(true);
     }
   }, []);
@@ -39,14 +56,26 @@ export default function SiteLayout({ children }) {
       style={{ background: "var(--warm-white)" }}
       onClickCapture={handleConsultationLinkClick}
     >
-      <SiteNav
-        logoName={siteSettings?.title}
-        links={[]}
-        ctaHref="/#contact"
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <SiteNav logoName={SITE_BRAND_LOCKUP} links={NAV_LINKS} ctaHref="/#contact" />
+      <main id="main-content" className="flex-grow w-full">{children}</main>
+      <PageFooter
+        logoName={SITE_BRAND_NAME}
+        logoSubtext={SITE_BRAND_CREDENTIAL}
+        licenseNumber={siteSettings?.licenseNumber}
+        supervisorInfo={siteSettings?.supervisorInfo}
+        copyrightText={siteSettings?.copyrightText}
+        address={siteSettings?.address}
+        contactEmail={siteSettings?.contactEmail}
+        contactPhone={siteSettings?.contactPhone}
       />
-      <main className="flex-grow w-full">{children}</main>
-      <PageFooter />
-      <ConsultationModal isOpen={isConsultationModalOpen} onClose={handleCloseConsultationModal} />
+      <ConsultationModal
+        isOpen={isConsultationModalOpen}
+        onClose={handleCloseConsultationModal}
+        bookingUrl={siteSettings?.bookingUrl || import.meta.env.VITE_GOOGLE_BOOKING_URL}
+      />
     </div>
   );
 }

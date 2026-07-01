@@ -19,20 +19,29 @@ export default function ExpressiveArts({
     { name: "Music & sound", detail: "rhythm as regulation" },
     { name: "Nature & space", detail: "when the room isn't enough" },
   ],
-  quotes = [
-    {
-      text: "I kept thinking therapy wasn't for me — I'm not good at talking about myself. Turns out I'm really good at drawing what I feel. That was the door I needed.",
-      attrib: "— Teen, age 15",
-    },
-    {
-      text: "My daughter went from dreading Mondays to asking to go. I don't know exactly what happens in that room, but she comes home lighter.",
-      attrib: "— Parent of a 10-year-old",
-    },
-    {
-      text: "She gets what it means to be first-gen. I've never had to explain the whole context before. We just started from where I actually was.",
-      attrib: "— SEED Scholar, UC Davis",
-    },
-  ],
+  whatToExpect = {
+    heading: "What a first session is like",
+    intro:
+      "If you've never done this before — or it's been a while — here's roughly how it goes. No need to prepare anything.",
+    steps: [
+      {
+        title: "We start where you are",
+        body: "We talk. I get a feel for what brought you in and what you're hoping for. You don't have to have it all figured out.",
+      },
+      {
+        title: "You set the pace",
+        body: "Art, movement, and the rest are invitations — never requirements. If you'd rather just talk the first time, that's completely fine.",
+      },
+      {
+        title: "We notice what helps",
+        body: "Together we pay attention to what feels useful, and shape the work around that — collaboratively, at your speed.",
+      },
+      {
+        title: "No pressure to commit",
+        body: "After the free consultation you decide whether we're a good fit. There's no obligation to continue.",
+      },
+    ],
+  },
 }) {
   return (
     <section className="py-16 md:py-28 px-6 md:px-20 max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start relative">
@@ -99,37 +108,52 @@ export default function ExpressiveArts({
         </div>
       </div>
 
-      <div className="lg:sticky lg:top-24 space-y-6">
-        {quotes.map((q, idx) => (
+      <div className="lg:sticky lg:top-24">
+        <div
+          className="rounded-[20px] p-8 md:p-10 relative overflow-hidden"
+          style={{ background: "var(--navy)", color: "var(--linen)" }}
+        >
           <div
-            key={idx}
-            className="rounded-[20px] p-8 md:p-10 relative overflow-hidden"
-            style={{ background: "var(--navy)", color: "var(--linen)" }}
+            className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-[1.5px] border-[rgba(91,158,160,0.25)]"
+            style={{ animation: "spinSlow 15s linear infinite" }}
+            aria-hidden
+          />
+          <span
+            className="site-eyebrow block mb-3 relative z-10"
+            style={{ color: "var(--teal)" }}
           >
-            <span
-              className="absolute -top-5 left-4 text-8xl font-serif opacity-20 leading-none"
-              style={{ fontFamily: "var(--font-display)", color: "var(--teal)" }}
-            >
-              {"\u201C"}
-            </span>
-            <div
-              className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-[1.5px] border-[rgba(91,158,160,0.25)]"
-              style={{ animation: "spinSlow 15s linear infinite" }}
-              aria-hidden
-            />
-            <p
-              className="site-heading italic text-lg mb-4 relative z-10"
-            >
-              {q.text}
+            before we begin
+          </span>
+          <h3 className="site-heading text-xl md:text-2xl mb-3 relative z-10">
+            {whatToExpect.heading}
+          </h3>
+          {whatToExpect.intro && (
+            <p className="site-body-copy text-[0.95rem] mb-6 relative z-10" style={{ color: "var(--linen)", opacity: 0.8 }}>
+              {whatToExpect.intro}
             </p>
-            <span
-              className="site-ui-label opacity-55"
-              style={{ fontStyle: "normal" }}
-            >
-              {q.attrib}
-            </span>
-          </div>
-        ))}
+          )}
+          <ol className="relative z-10 space-y-5">
+            {whatToExpect.steps.map((s, idx) => (
+              <li key={idx} className="flex gap-4">
+                <span
+                  className="site-ui-label flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[0.8rem]"
+                  style={{ background: "rgba(91,158,160,0.22)", color: "var(--linen)", fontStyle: "normal" }}
+                  aria-hidden
+                >
+                  {idx + 1}
+                </span>
+                <div>
+                  <p className="site-heading text-base mb-1" style={{ fontStyle: "normal" }}>
+                    {s.title}
+                  </p>
+                  <p className="site-body-copy text-[0.9rem]" style={{ color: "var(--linen)", opacity: 0.78 }}>
+                    {s.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
@@ -145,10 +169,14 @@ ExpressiveArts.propTypes = {
       detail: PropTypes.string.isRequired,
     })
   ),
-  quotes: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      attrib: PropTypes.string.isRequired,
-    })
-  ),
+  whatToExpect: PropTypes.shape({
+    heading: PropTypes.string,
+    intro: PropTypes.string,
+    steps: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 };

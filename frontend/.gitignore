@@ -1,1 +1,11 @@
 .vercel
+
+# Generated responsive image variants (rebuilt by scripts/optimize-images.mjs on build)
+public/photos/
+
+# Generated at build time (scripts/gen-icons.mjs, scripts/gen-sitemap.mjs)
+public/apple-touch-icon.png
+public/icon-192.png
+public/icon-512.png
+public/sitemap.xml
+public/robots.txt

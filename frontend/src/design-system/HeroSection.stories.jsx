@@ -7,7 +7,7 @@ export default {
     docs: {
       description: {
         component:
-          "Hero section with background image, large heading, and CTA. Use `variant=\"overlay\"` (default), `variant=\"split\"` for a side-by-side grid, or `variant=\"organic\"` for a split layout with expressive-style typography (Playfair Display + Roboto Condensed, terracotta emphasis, pill CTAs) and a photo clipped by an animated organic mask (`blobMorph` only — the photo stays fixed; oversized slightly so edges do not show). Image column: `blobSide` `\"left\"` / `\"right\"`, or default right when only `variant=\"organic\"` is set.",
+          "Hero section with background image, large heading, and CTA. Use `variant=\"overlay\"` (default), `variant=\"split\"` for a side-by-side grid, or `variant=\"organic\"` for a split layout with expressive-style typography (Playfair Display + Roboto Condensed, terracotta emphasis, pill CTAs) and a photo whose outer edges are framed by a subtle animated organic mask (`blobMorph` only — the photo stays fixed and near-full; only the edges gently wave). Image column: `blobSide` `\"left\"` / `\"right\"`, or default right when only `variant=\"organic\"` is set.",
       },
     },
     layout: "fullscreen",
@@ -65,7 +65,7 @@ export default {
 
 export const Default = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.4,
     heading: "Find Your Path to Wellness",
@@ -79,7 +79,7 @@ export const Default = {
 
 export const LeftAligned = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.5,
     heading: "Welcome to Healing Minds Therapy",
@@ -94,7 +94,7 @@ export const LeftAligned = {
 
 export const RightAligned = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "burgundy",
     overlayOpacity: 0.6,
     heading: "Your Journey Starts Here",
@@ -106,10 +106,10 @@ export const RightAligned = {
   },
 };
 
-/** Hero image clipped by a morphing superellipse mask (`blobMorph`); photo is static and oversized inside the mask. */
+/** Hero image framed by a subtle morphing organic mask (`blobMorph`); photo is static and near-full, only the outer edges wave. */
 export const OrganicImageMask = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     variant: "organic",
     overlay: null,
     kickerText: "Expressive Arts Therapy · Davis, CA",
@@ -137,7 +137,7 @@ export const OrganicImageMask = {
 
 export const BlobLeft = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     variant: "organic",
     blobSide: "left",
     overlay: null,
@@ -158,7 +158,7 @@ export const BlobLeft = {
     docs: {
       description: {
         story:
-          "Photo masked by morphing organic corners (`blobMorph`); image stays fixed inside the mask. On large screens the image sits on the left; stacks on small viewports.",
+          "Photo framed by subtly morphing organic corners (`blobMorph`); image stays fixed and near-full, only the outer edges wave. On large screens the image sits on the left; stacks on small viewports.",
       },
     },
   },
@@ -166,7 +166,7 @@ export const BlobLeft = {
 
 export const BlobRight = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     variant: "organic",
     blobSide: "right",
     overlay: null,
@@ -186,7 +186,7 @@ export const BlobRight = {
 
 export const CtaAlignment = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.45,
     heading: "Left-aligned copy, CTA on the right",
@@ -202,7 +202,7 @@ export const CtaAlignment = {
 
 export const Split = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.4,
     heading: "Find Your Path to Wellness",
@@ -224,7 +224,7 @@ export const Split = {
 
 export const MediumHeight = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.4,
     heading: "Compassionate Care",
@@ -238,7 +238,7 @@ export const MediumHeight = {
 
 export const SmallHeight = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "teal",
     overlayOpacity: 0.5,
     heading: "Begin Your Healing Journey",
@@ -251,7 +251,7 @@ export const SmallHeight = {
 
 export const LightOverlay = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "light",
     overlayOpacity: 0.3,
     heading: "Transform Your Life",
@@ -265,7 +265,7 @@ export const LightOverlay = {
 
 export const NoOverlay = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: null,
     heading: "Mental Health Matters",
     subheading: "Taking care of your mental health is not a luxury, it's a necessity",
@@ -293,7 +293,7 @@ export const NoBackground = {
 
 export const MinimalContent = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.6,
     heading: "Welcome",
@@ -306,7 +306,7 @@ export const MinimalContent = {
 
 export const LongContent = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "burgundy",
     overlayOpacity: 0.5,
     heading: "Comprehensive Mental Health Services",
@@ -325,7 +325,7 @@ export const AllHeights = {
       <div>
         <h3 className="text-xl font-bold mb-2">Small Height</h3>
         <HeroSection
-          backgroundImage="/photos/IMG_0346.JPG"
+          backgroundImage="/photos/IMG_2506.jpeg"
           overlay="dark"
           overlayOpacity={0.4}
           heading="Small Hero"
@@ -337,7 +337,7 @@ export const AllHeights = {
       <div>
         <h3 className="text-xl font-bold mb-2">Medium Height</h3>
         <HeroSection
-          backgroundImage="/photos/IMG_0346.JPG"
+          backgroundImage="/photos/IMG_2506.jpeg"
           overlay="teal"
           overlayOpacity={0.5}
           heading="Medium Hero"
@@ -350,7 +350,7 @@ export const AllHeights = {
       <div>
         <h3 className="text-xl font-bold mb-2">Large Height</h3>
         <HeroSection
-          backgroundImage="/photos/IMG_0346.JPG"
+          backgroundImage="/photos/IMG_2506.jpeg"
           overlay="burgundy"
           overlayOpacity={0.4}
           heading="Large Hero"
@@ -367,7 +367,7 @@ export const DifferentButtons = {
   render: () => (
     <div className="space-y-8">
       <HeroSection
-        backgroundImage="/photos/IMG_0346.JPG"
+        backgroundImage="/photos/IMG_2506.jpeg"
         overlay="dark"
         overlayOpacity={0.5}
         heading="Accent Button (Default)"
@@ -378,7 +378,7 @@ export const DifferentButtons = {
       />
 
       <HeroSection
-        backgroundImage="/photos/IMG_0346.JPG"
+        backgroundImage="/photos/IMG_2506.jpeg"
         overlay="dark"
         overlayOpacity={0.5}
         heading="Primary Button"
@@ -389,7 +389,7 @@ export const DifferentButtons = {
       />
 
       <HeroSection
-        backgroundImage="/photos/IMG_0346.JPG"
+        backgroundImage="/photos/IMG_2506.jpeg"
         overlay="dark"
         overlayOpacity={0.5}
         heading="Outline Button"
@@ -404,7 +404,7 @@ export const DifferentButtons = {
 
 export const WithClickHandler = {
   args: {
-    backgroundImage: "/photos/IMG_0346.JPG",
+    backgroundImage: "/photos/IMG_2506.jpeg",
     overlay: "dark",
     overlayOpacity: 0.4,
     heading: "Ready to Begin Your Journey?",

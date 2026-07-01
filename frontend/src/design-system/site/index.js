@@ -7,6 +7,8 @@ export { default as TheSpace } from "./TheSpace";
 export { default as ExpressiveArts } from "./ExpressiveArts";
 export { default as Meet } from "./Meet";
 export { default as FeelingsCheckIn } from "./FeelingsCheckIn";
+export { default as Fees } from "./Fees";
+export { default as Faq } from "./Faq";
 export { default as CTA } from "./CTA";
 export { default as ConsultationModal } from "./ConsultationModal";
 export { default as PageFooter } from "./PageFooter";

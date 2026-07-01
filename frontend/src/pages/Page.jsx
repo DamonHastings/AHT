@@ -1,9 +1,15 @@
 import { usePage } from "../hooks/usePage";
 import PageRenderer from "../components/PageRenderer";
 import SiteLayout from "../layouts/SiteLayout";
+import Seo from "../components/Seo";
+import { canonicalFor } from "../utils/seo";
+import { usePrerenderReady } from "../utils/usePrerenderReady";
 
 export default function Page({ slug }) {
   const { page, loading, error } = usePage(slug);
+  usePrerenderReady(!loading);
+
+  const canonical = canonicalFor(`/${slug}`);
 
   if (loading) {
     return (
@@ -64,12 +70,20 @@ export default function Page({ slug }) {
 
   const first = page.components?.[0];
   const needsTopPad = first && first._type !== "heroBlock";
+  const fallbackTitle = `${slug.charAt(0).toUpperCase()}${slug.slice(1)} | Arielle Hastings, LMFT`;
 
   return (
-    <SiteLayout>
-      <div className={needsTopPad ? "pt-[4.5rem]" : undefined}>
-        <PageRenderer pageData={page} variant="bare" />
-      </div>
-    </SiteLayout>
+    <>
+      <Seo
+        title={page.metaTitle || fallbackTitle}
+        description={page.metaDescription}
+        canonical={canonical}
+      />
+      <SiteLayout>
+        <div className={needsTopPad ? "pt-[4.5rem]" : undefined}>
+          <PageRenderer pageData={page} variant="bare" />
+        </div>
+      </SiteLayout>
+    </>
   );
 }
