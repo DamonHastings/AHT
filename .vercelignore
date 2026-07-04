@@ -1,4 +1,4 @@
-node_modules
+**/node_modules
 .git
 .env
 .env.local
@@ -6,3 +6,19 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Sanity studio — not part of the Vercel site build
+sanity/
+
+# Local-only assets and caches
+frontend/assets/
+frontend/.puppeteer-cache
+frontend/storybook-static
+frontend/pnpm-lock.yaml
+frontend/pnpm-workspace.yaml
+.claude/
+
+# Docs / dev notes
+docs/
+*.md
+!README.md

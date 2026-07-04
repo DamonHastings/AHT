@@ -39,6 +39,9 @@ html {
   --teal: #5b9ea0;
   --teal-deep: #3e7d80;
   --teal-pale: #d6ecec;
+  /* Accessible-on-navy teal for small text (eyebrows). --teal is only 3.78:1 on
+     --navy; this passes WCAG AA (5.3:1). */
+  --teal-light: #7fb9bb;
   --terracotta: #b05a4a;
   --terra-light: #e8b4aa;
   --terra-pale: #f5e8e5;
@@ -48,6 +51,9 @@ html {
   --navy: #2c3a4a;
   --ink: #1c2730;
   --gold: #c4973a;
+  /* Accessible-on-linen gold for small text (eyebrows). --gold is only 2.36:1
+     on --linen; this passes WCAG AA (4.9:1). */
+  --gold-deep: #856220;
   --warm-white: #fdfbf7;
   --mist: #eff4f4;
   --mauve: #7a6e94;
@@ -130,7 +136,7 @@ html {
   color: var(--linen);
 }
 .site-footer-muted {
-  color: rgba(244, 240, 232, 0.58);
+  color: rgba(244, 240, 232, 0.66);
 }
 .site-footer-label {
   color: var(--teal);

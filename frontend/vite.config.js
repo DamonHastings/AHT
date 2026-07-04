@@ -12,6 +12,9 @@ import { playwright } from '@vitest/browser-playwright';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+const skipPrerender =
+  process.env.SKIP_PRERENDER === "1" || process.env.VERCEL === "1";
+
 export default defineConfig(({ command }) => ({
   plugins: [
     react(),
@@ -19,7 +22,8 @@ export default defineConfig(({ command }) => ({
     // search engines/social scrapers get real content + meta in the initial HTML.
     // Only runs on `vite build` (not dev/storybook/test). Waits for the bottom
     // CTA (#contact) which renders once the page is fully built.
-    ...(command === 'build'
+    // Skipped on Vercel — the build image lacks Chrome system libraries.
+    ...(command === "build" && !skipPrerender
       ? [
           prerender({
             routes: ['/', '/about', '/services', '/privacy', '/good-faith-estimate'],

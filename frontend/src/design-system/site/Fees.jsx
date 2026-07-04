@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { trackEvent } from "../../utils/analytics";
 
 /**
  * Fees / "Investment & fit" section. Private-pay / out-of-network framing with
@@ -98,6 +99,7 @@ export default function Fees({
         <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-4 flex-wrap">
           <a
             href={ctaHref}
+            data-analytics-source="fees"
             className="site-button-text inline-flex items-center justify-center rounded-full px-7 py-3 text-[0.8rem] uppercase transition-all hover:-translate-y-px"
             style={{ background: "var(--terracotta)", color: "white", textDecoration: "none" }}
           >
@@ -109,6 +111,7 @@ export default function Fees({
               {contactPhone && (
                 <a
                   href={`tel:${contactPhone.replace(/[^0-9+]/g, "")}`}
+                  onClick={() => trackEvent("Phone Click", { source: "fees" })}
                   style={{ color: "var(--teal-deep)", textDecoration: "underline" }}
                 >
                   {contactPhone}
@@ -118,6 +121,7 @@ export default function Fees({
               {contactEmail && (
                 <a
                   href={`mailto:${contactEmail}`}
+                  onClick={() => trackEvent("Email Click", { source: "fees" })}
                   style={{ color: "var(--teal-deep)", textDecoration: "underline" }}
                 >
                   {contactEmail}

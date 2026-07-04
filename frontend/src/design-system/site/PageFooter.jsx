@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { studioUrl } from "../../utils/sanityClient";
+import { trackEvent } from "../../utils/analytics";
 import logoMarkKnockout from "../../assets/LogoMarkKnockout.svg";
 import { SITE_BRAND_CREDENTIAL, SITE_BRAND_NAME } from "../../content/siteBrand";
 import { formatCityState } from "../../content/siteContact";
@@ -71,13 +72,18 @@ export default function PageFooter({
             {contactPhone && (
               <a
                 href={`tel:${contactPhone.replace(/[^0-9+]/g, "")}`}
+                onClick={() => trackEvent("Phone Click", { source: "footer" })}
                 className="site-footer-link"
               >
                 {contactPhone}
               </a>
             )}
             {contactEmail && (
-              <a href={`mailto:${contactEmail}`} className="site-footer-link">
+              <a
+                href={`mailto:${contactEmail}`}
+                onClick={() => trackEvent("Email Click", { source: "footer" })}
+                className="site-footer-link"
+              >
                 {contactEmail}
               </a>
             )}
@@ -97,6 +103,9 @@ export default function PageFooter({
             <a
               key={link.label}
               href={link.href}
+              data-analytics-source={
+                link.href === "#contact" ? "footer" : undefined
+              }
               className="site-ui-label site-footer-link"
             >
               {link.label}

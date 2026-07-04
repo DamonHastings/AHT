@@ -28,7 +28,7 @@ const DEFAULT_SWATCHES = [
     reply: "Tender means something is close to the surface. That's worth attending to.",
   },
   {
-    color: "var(--navy)",
+    color: "var(--linen-deep)",
     feel: "lost",
     reply: "Lost is a real feeling. And sometimes what looks like lost is actually a beginning.",
   },
@@ -40,7 +40,8 @@ const DEFAULT_SWATCHES = [
 ];
 
 /**
- * V3 Feelings Check-In - interactive color swatches
+ * V3 Feelings Check-In - interactive color swatches.
+ * Swatches reveal their feeling label on hover and on selection.
  */
 export default function FeelingsCheckIn({
   eyebrow = "a moment for you",
@@ -80,7 +81,7 @@ export default function FeelingsCheckIn({
       <div className="relative z-10 max-w-[640px] mx-auto">
         <span
           className="site-eyebrow block mb-2"
-          style={{ color: "var(--teal)" }}
+          style={{ color: "var(--teal-light)" }}
         >
           {eyebrow}
         </span>
@@ -96,7 +97,7 @@ export default function FeelingsCheckIn({
             <button
               key={s.feel}
               type="button"
-              className="w-14 h-14 rounded-full border-[3px] border-transparent cursor-pointer transition-all duration-200 relative hover:scale-125 hover:shadow-[0_0_0_4px_rgba(253,251,247,0.3)] hover:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="group w-14 h-14 rounded-full border-[3px] border-transparent cursor-pointer transition-all duration-200 relative hover:scale-125 hover:shadow-[0_0_0_4px_rgba(253,251,247,0.3)] hover:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
               style={{
                 background: s.color,
                 transform: picked === s.feel ? "scale(1.25)" : undefined,
@@ -107,10 +108,10 @@ export default function FeelingsCheckIn({
               onClick={() => handleClick(s)}
             >
               <span
-                className="site-ui-label absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap transition-opacity"
+                className="site-ui-label absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap transition-opacity opacity-0 group-hover:opacity-75 group-focus:opacity-75"
                 style={{
                   color: "var(--linen)",
-                  opacity: picked === s.feel ? 0.75 : 0,
+                  opacity: picked === s.feel ? 0.75 : undefined,
                 }}
               >
                 {s.feel}
@@ -124,6 +125,8 @@ export default function FeelingsCheckIn({
           style={{
             opacity: 0.9,
           }}
+          role="status"
+          aria-live="polite"
         >
           {reply}
         </p>

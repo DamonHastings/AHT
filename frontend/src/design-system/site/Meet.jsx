@@ -57,7 +57,7 @@ export default function Meet({
         />
       </div>
 
-      <div className="relative">
+      <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto lg:max-w-none">
         <div
           className={`rounded-t-[60px] rounded-b-xl aspect-[3/4] overflow-hidden flex items-center justify-center ${
             imageSrc ? "" : "border-2 border-dashed border-[rgba(91,158,160,0.3)]"
@@ -120,7 +120,7 @@ export default function Meet({
       <div>
         <span
           className="site-eyebrow block mb-2"
-          style={{ color: "var(--gold)" }}
+          style={{ color: "var(--gold-deep)" }}
         >
           {eyebrow}
         </span>

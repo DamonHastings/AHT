@@ -11,7 +11,7 @@
  * The companion srcset helper lives in src/utils/responsiveImage.js and must use
  * the same WIDTHS / naming convention as this script.
  */
-import { mkdir } from "node:fs/promises";
+import { access, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -28,7 +28,34 @@ const SOURCES = [
   { src: path.join(FRONTEND, "photos", "IMG_2481.jpeg"), name: "meet" },
 ];
 
+async function fileExists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function outputsExist(name) {
+  const checks = WIDTHS.flatMap((width) => [
+    fileExists(path.join(OUT_DIR, `${name}-${width}.webp`)),
+    fileExists(path.join(OUT_DIR, `${name}-${width}.jpg`)),
+  ]);
+  const results = await Promise.all(checks);
+  return results.every(Boolean);
+}
+
 async function processOne({ src, name }) {
+  const hasSource = await fileExists(src);
+  if (!hasSource) {
+    if (await outputsExist(name)) {
+      console.log(`✓ ${name}: using existing optimized files (source not uploaded)`);
+      return;
+    }
+    throw new Error(`Missing source image and optimized outputs for ${name}`);
+  }
+
   const generated = [];
   for (const width of WIDTHS) {
     const base = sharp(src).rotate().resize({ width, withoutEnlargement: true });

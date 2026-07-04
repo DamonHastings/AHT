@@ -1,0 +1,9 @@
+node_modules
+.puppeteer-cache
+/assets/
+storybook-static
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.env
+.env.local
+.env.*.local

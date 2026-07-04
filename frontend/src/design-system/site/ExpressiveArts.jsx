@@ -120,7 +120,7 @@ export default function ExpressiveArts({
           />
           <span
             className="site-eyebrow block mb-3 relative z-10"
-            style={{ color: "var(--teal)" }}
+            style={{ color: "var(--teal-light)" }}
           >
             before we begin
           </span>

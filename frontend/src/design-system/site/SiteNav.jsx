@@ -61,7 +61,7 @@ export default function SiteNav({
 
   const linkStyle = {
     color: "var(--ink)",
-    opacity: 0.62,
+    opacity: 0.75,
     textDecoration: "none",
   };
   const handleLinkEnter = (e) => {
@@ -69,7 +69,7 @@ export default function SiteNav({
     e.currentTarget.style.color = "var(--teal-deep)";
   };
   const handleLinkLeave = (e) => {
-    e.currentTarget.style.opacity = "0.62";
+    e.currentTarget.style.opacity = "0.75";
     e.currentTarget.style.color = "var(--ink)";
   };
 
@@ -136,6 +136,7 @@ export default function SiteNav({
 
       <a
         href={ctaHref}
+        data-analytics-source="nav"
         className="site-button-text hidden md:inline-block rounded-full px-6 py-2.5 text-[0.8rem] uppercase transition-all hover:-translate-y-px"
         style={{
           background: "var(--terracotta)",
@@ -222,6 +223,7 @@ export default function SiteNav({
 
           <a
             href={ctaHref}
+            data-analytics-source="nav-mobile"
             className="site-button-text mt-8 block rounded-full px-6 py-4 text-center text-[0.85rem] uppercase transition-all hover:-translate-y-px"
             style={{
               background: "var(--terracotta)",

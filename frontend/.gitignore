@@ -1,4 +1,5 @@
 .vercel
+.puppeteer-cache
 
 # Generated responsive image variants (rebuilt by scripts/optimize-images.mjs on build)
 public/photos/
@@ -9,3 +10,4 @@ public/icon-192.png
 public/icon-512.png
 public/sitemap.xml
 public/robots.txt
+.env*

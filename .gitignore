@@ -54,5 +54,8 @@ sanity/dist/
 # pipeline sources live in frontend/photos/; these are unreferenced originals.
 frontend/assets/
 
+# Puppeteer browser cache (downloaded locally for prerender builds)
+frontend/.puppeteer-cache/
+
 # Claude Code session worktrees
 .claude/worktrees/

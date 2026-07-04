@@ -136,7 +136,7 @@ const homePage = {
         { color: 'var(--mauve)', feel: 'numb', reply: "Numb is its own kind of hard. You're still here — that matters." },
         { color: 'var(--gold)', feel: 'hopeful', reply: "Hopeful is a good place to begin. Let's build something from that." },
         { color: 'var(--terra-light)', feel: 'tender', reply: "Tender means something is close to the surface. That's worth attending to." },
-        { color: 'var(--navy)', feel: 'lost', reply: "Lost is a real feeling. And sometimes what looks like lost is actually a beginning." },
+        { color: 'var(--linen-deep)', feel: 'lost', reply: "Lost is a real feeling. And sometimes what looks like lost is actually a beginning." },
         {
           color: 'var(--teal-deep)',
           feel: 'wired / anxious',

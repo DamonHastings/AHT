@@ -32,7 +32,7 @@ export default function PullQuote({
       <div className="max-w-[760px] mx-auto relative z-10">
         <span
           className="site-eyebrow block mb-5"
-          style={{ color: "var(--teal)" }}
+          style={{ color: "var(--teal-light)" }}
         >
           {eyebrow}
         </span>

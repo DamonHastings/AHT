@@ -51,6 +51,7 @@ export default function CTA({
 
       <a
         href={buttonHref}
+        data-analytics-source="cta-section"
         className="site-button-text inline-block py-4 px-10 rounded-full text-[0.92rem] whitespace-nowrap transition-all hover:-translate-y-0.5 relative z-10"
         style={{
           background: "white",

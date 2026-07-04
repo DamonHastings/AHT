@@ -82,6 +82,7 @@ export default function Hero({
         >
           <a
             href={primaryCtaHref}
+            data-analytics-source="hero"
             className="site-button-text inline-block py-3.5 px-8 rounded-full text-[0.88rem] transition-all hover:-translate-y-0.5"
             style={{
               background: "var(--terracotta)",

@@ -27,8 +27,9 @@ const BASE = SITE_URL || "https://example.com";
 // Public, indexable routes. Keep in sync with App.jsx (exclude legal noise if desired).
 const ROUTES = [
   { path: "/", priority: "1.0", changefreq: "monthly" },
-  { path: "/about", priority: "0.7", changefreq: "monthly" },
-  { path: "/services", priority: "0.7", changefreq: "monthly" },
+  // /about and /services are temporarily disabled (redirected to home in App.jsx)
+  // until their CMS content is rewritten — omitted from the sitemap so search
+  // engines don't index the wrong-practice pages. Restore alongside the routes.
   { path: "/privacy", priority: "0.3", changefreq: "yearly" },
   { path: "/good-faith-estimate", priority: "0.3", changefreq: "yearly" },
 ];
