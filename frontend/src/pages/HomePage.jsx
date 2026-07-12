@@ -118,7 +118,7 @@ export default function HomePage() {
         </>
       )}
         <Faq />
-        <CTA />
+        {/* <CTA /> */}
       </SiteLayout>
     </>
   );
