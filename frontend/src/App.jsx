@@ -20,7 +20,6 @@ import { trackPageview } from "./utils/analytics";
 // entries back in scripts/gen-sitemap.mjs, and republish the Sanity
 // `about`/`services` page documents once the copy is rewritten.
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
-const GoodFaithEstimatePage = lazy(() => import("./pages/GoodFaithEstimatePage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 // Send a GA4 pageview on each client-side route change. trackPageview() dedupes
@@ -44,7 +43,6 @@ function AppContent() {
             <Route path="/about" element={<Navigate to="/" replace />} />
             <Route path="/services" element={<Navigate to="/" replace />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
-            <Route path="/good-faith-estimate" element={<GoodFaithEstimatePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

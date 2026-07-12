@@ -49,15 +49,15 @@ export default function ExpressiveArts({
       <div className="absolute top-20 right-4 hidden lg:block pointer-events-none" aria-hidden>
         <div className="relative w-[100px] h-[100px]">
           <div
-            className="absolute w-[90px] h-[90px] rounded-full border-[1.5px] border-[rgba(91,158,160,0.25)]"
+            className="absolute w-[90px] h-[90px] rounded-full border-[1.5px] border-[rgba(91,158,160,0.42)]"
             style={{ animation: "spinSlow 18s linear infinite" }}
           />
           <div
-            className="absolute w-[55px] h-[55px] rounded-full border-[1.5px] border-[rgba(176,90,74,0.2)] top-[17.5px] left-[17.5px]"
+            className="absolute w-[55px] h-[55px] rounded-full border-[1.5px] border-[rgba(176,90,74,0.38)] top-[17.5px] left-[17.5px]"
             style={{ animation: "spinSlowRev 12s linear infinite" }}
           />
           <div
-            className="absolute w-6 h-6 rounded-full bg-[rgba(196,151,58,0.2)] top-8 left-8"
+            className="absolute w-6 h-6 rounded-full bg-[rgba(196,151,58,0.4)] top-8 left-8"
             style={{ animation: "orbitFloat 6s ease-in-out infinite" }}
           />
         </div>
@@ -114,7 +114,7 @@ export default function ExpressiveArts({
           style={{ background: "var(--navy)", color: "var(--linen)" }}
         >
           <div
-            className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-[1.5px] border-[rgba(91,158,160,0.25)]"
+            className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-[1.5px] border-[rgba(91,158,160,0.42)]"
             style={{ animation: "spinSlow 15s linear infinite" }}
             aria-hidden
           />

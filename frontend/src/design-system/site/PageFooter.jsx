@@ -20,7 +20,7 @@ export default function PageFooter({
   info,
   links = [
     { label: "Privacy Policy", href: "/privacy" },
-    { label: "Good Faith Estimate", href: "/good-faith-estimate" },
+    { label: "Good Faith Estimate", href: "/#good-faith-estimate" },
     { label: "Contact", href: "#contact" },
   ],
 }) {

@@ -22,7 +22,7 @@ export default function CTA({
     >
       {/* Ambient circles */}
       <div
-        className="absolute w-48 h-48 md:w-60 md:h-60 rounded-full -top-20 -right-14 opacity-[0.07]"
+        className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full -top-20 -right-14 opacity-[0.16]"
         style={{
           background: "rgba(255,255,255,0.9)",
           animation: "orbitFloat 10s ease-in-out infinite",
@@ -31,7 +31,7 @@ export default function CTA({
         aria-hidden
       />
       <div
-        className="absolute w-32 h-32 md:w-36 md:h-36 rounded-full border-2 border-white/20 -bottom-8 left-[40%]"
+        className="absolute w-36 h-36 md:w-44 md:h-44 rounded-full border-2 border-white/35 -bottom-8 left-[40%]"
         style={{ background: "transparent", animation: "spinSlow 20s linear infinite" }}
         aria-hidden
       />

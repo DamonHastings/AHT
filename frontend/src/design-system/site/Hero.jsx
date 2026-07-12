@@ -127,32 +127,32 @@ function HeroComposition() {
         className="absolute w-64 h-64 lg:w-80 lg:h-80 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[60%_40%_70%_30%/50%_60%_40%_50%]"
         style={{
           background:
-            "radial-gradient(ellipse at 40% 40%, rgba(91,158,160,0.18) 0%, rgba(176,90,74,0.1) 55%, transparent 80%)",
+            "radial-gradient(ellipse at 40% 40%, rgba(91,158,160,0.28) 0%, rgba(176,90,74,0.2) 55%, transparent 80%)",
           animation: "blobFloat 16s ease-in-out infinite",
         }}
       />
 
       {/* Orbiting circles */}
       <div
-        className="absolute w-32 h-32 lg:w-[180px] lg:h-[180px] rounded-full border-2 border-[rgba(91,158,160,0.35)] top-12 left-16 lg:top-[60px] lg:left-20"
+        className="absolute w-32 h-32 lg:w-[180px] lg:h-[180px] rounded-full border-2 border-[rgba(91,158,160,0.5)] top-12 left-16 lg:top-[60px] lg:left-20"
         style={{ animation: "spinSlow 22s linear infinite" }}
       />
       <div
-        className="absolute w-24 h-24 lg:w-[110px] lg:h-[110px] rounded-full border-2 border-[rgba(176,90,74,0.3)] top-20 right-8 lg:top-24 lg:right-10"
+        className="absolute w-24 h-24 lg:w-[110px] lg:h-[110px] rounded-full border-2 border-[rgba(176,90,74,0.45)] top-20 right-8 lg:top-24 lg:right-10"
         style={{ animation: "spinSlowRev 17s linear infinite" }}
       />
       <div
-        className="absolute w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full border-2 border-[rgba(196,151,58,0.4)] bottom-24 left-12 lg:bottom-[120px] lg:left-14"
+        className="absolute w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full border-2 border-[rgba(196,151,58,0.55)] bottom-24 left-12 lg:bottom-[120px] lg:left-14"
         style={{ animation: "spinSlow 13s linear infinite" }}
       />
 
       {/* Filled blobs */}
       <div
-        className="absolute w-16 h-12 lg:w-[90px] lg:h-[70px] rounded-full opacity-55 top-12 right-12 lg:top-14 lg:right-14 blur-[2px]"
+        className="absolute w-16 h-12 lg:w-[90px] lg:h-[70px] rounded-full opacity-65 top-12 right-12 lg:top-14 lg:right-14 blur-[2px]"
         style={{ background: "var(--teal)", animation: "orbitFloat 9s ease-in-out infinite" }}
       />
       <div
-        className="absolute w-12 h-10 lg:w-[65px] lg:h-[55px] rounded-full opacity-45 bottom-28 right-10 lg:bottom-[130px] lg:right-12 blur-[1.5px]"
+        className="absolute w-12 h-10 lg:w-[65px] lg:h-[55px] rounded-full opacity-60 bottom-28 right-10 lg:bottom-[130px] lg:right-12 blur-[1.5px]"
         style={{
           background: "var(--terracotta)",
           animation: "orbitFloat 12s ease-in-out infinite",
@@ -177,7 +177,7 @@ function HeroComposition() {
           { size: 12, color: "var(--terra-light)", delay: -3 },
         ].map((item, i) =>
           item.line ? (
-            <div key={i} className="w-px h-3 lg:h-4 bg-[rgba(196,151,58,0.3)] rounded-sm" />
+            <div key={i} className="w-px h-3 lg:h-4 bg-[rgba(196,151,58,0.5)] rounded-sm" />
           ) : (
             <div
               key={i}
