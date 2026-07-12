@@ -33,7 +33,7 @@ export default function Meet({
     >
       {/* Ambient mobile top-left */}
       <div
-        className="absolute top-10 left-10 md:left-14 hidden md:flex flex-col items-center opacity-40 pointer-events-none"
+        className="absolute top-10 left-10 md:left-14 hidden md:flex flex-col items-center opacity-65 pointer-events-none"
         aria-hidden
       >
         <div

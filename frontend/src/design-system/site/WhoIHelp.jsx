@@ -1,5 +1,7 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { audienceAnchorId, WHO_I_HELP_BLOCK_DEFAULTS } from "../../content/whoIHelpDefaults";
+import GroupInterestModal from "./GroupInterestModal";
 
 const WHO_DEFAULTS = WHO_I_HELP_BLOCK_DEFAULTS;
 
@@ -87,20 +89,25 @@ export default function WhoIHelp({
   cards,
 }) {
   const resolvedCards = cards?.length ? cards : WHO_DEFAULTS.cards;
+  // The "Groups" entry isn't an audience you can book today — it's a "forming,
+  // gauging interest" note. Pull it out of the card grid and render it as a
+  // distinct call-out below.
+  const groupsCard = resolvedCards.find((card) => card.variant === "groups");
+  const gridCards = resolvedCards.filter((card) => card.variant !== "groups");
   return (
     <section id="who-i-help" className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 max-w-[1240px] mx-auto relative">
       {/* Ambient orbs */}
       <div
-        className="absolute top-12 right-8 pointer-events-none opacity-50 hidden md:block"
+        className="absolute top-12 right-8 pointer-events-none opacity-75 hidden md:block"
         aria-hidden
       >
-        <div className="relative w-20 h-20">
+        <div className="relative w-24 h-24">
           <div
-            className="absolute w-[70px] h-[70px] rounded-full border-[1.5px] border-[rgba(176,90,74,0.3)]"
+            className="absolute w-[88px] h-[88px] rounded-full border-2 border-[rgba(176,90,74,0.5)]"
             style={{ animation: "spinSlow 20s linear infinite" }}
           />
           <div
-            className="absolute w-10 h-10 rounded-full top-4 left-4 bg-[rgba(91,158,160,0.12)]"
+            className="absolute w-12 h-12 rounded-full top-5 left-5 bg-[rgba(91,158,160,0.28)]"
             style={{ animation: "orbitFloat 8s ease-in-out infinite" }}
           />
         </div>
@@ -123,13 +130,15 @@ export default function WhoIHelp({
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {resolvedCards.map((card, idx) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {gridCards.map((card, idx) => {
           const v = CARD_VARIANTS[card.variant] || CARD_VARIANTS.children;
           const anchorId = card.anchorId ?? audienceAnchorId(card.variant);
           return <WhoCard key={card._key ?? idx} card={card} variant={v} anchorId={anchorId} />;
         })}
       </div>
+
+      {groupsCard && <GroupsCallout card={groupsCard} />}
     </section>
   );
 }
@@ -162,11 +171,11 @@ function WhoCard({ card, variant, anchorId }) {
       }}
     >
       <div
-        className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-20"
+        className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full opacity-[0.35]"
         style={{ background: variant.blobColor, animation: "orbitFloat 12s ease-in-out infinite" }}
       />
       <div
-        className="absolute top-5 right-5 w-9 h-9 rounded-full border-[1.5px] opacity-20"
+        className="absolute top-5 right-5 w-11 h-11 rounded-full border-2 opacity-[0.35]"
         style={{ borderColor: variant.ringColor, animation: "spinSlow 18s linear infinite" }}
       />
 
@@ -199,6 +208,80 @@ function WhoCard({ card, variant, anchorId }) {
     </div>
   );
 }
+
+/**
+ * "Groups" isn't a bookable audience — it's a forming offering Arielle is
+ * gauging interest in. Rendered as a wide, visually distinct call-out beneath
+ * the card grid (dashed "in progress" framing, not a solid pastel card).
+ */
+function GroupsCallout({ card }) {
+  const [interestOpen, setInterestOpen] = useState(false);
+  const ctaText =
+    !card.linkText || /^read more/i.test(card.linkText)
+      ? "Share interest →"
+      : card.linkText;
+
+  return (
+    <div
+      className="mt-8 md:mt-10 relative overflow-hidden rounded-3xl p-8 md:p-10 flex flex-col gap-6 md:flex-row md:items-center md:gap-10"
+      style={{
+        background: "var(--mist)",
+        border: "1.5px dashed rgba(91,158,160,0.5)",
+      }}
+    >
+      {/* Ambient orb — echoes the section's motif but subtle */}
+      <div
+        className="absolute -bottom-12 -right-12 w-40 h-40 rounded-full opacity-[0.25] pointer-events-none"
+        style={{ background: "var(--teal)", animation: "orbitFloat 12s ease-in-out infinite" }}
+        aria-hidden
+      />
+
+      <div className="relative flex-1 min-w-0">
+        <span
+          className="site-ui-label inline-flex items-center gap-2 mb-3"
+          style={{ color: "var(--teal-deep)" }}
+        >
+          <span
+            className="inline-block w-2 h-2 rounded-full"
+            style={{ background: "var(--teal-deep)", animation: "gemSway 3.5s ease-in-out infinite" }}
+            aria-hidden
+          />
+          {card.tag || "Groups · forming"}
+        </span>
+        <h3 className="site-heading text-2xl md:text-[1.6rem] mb-3">
+          {card.title || "Groups are on the horizon"}
+        </h3>
+        <p className="site-body-copy text-[0.98rem] max-w-[62ch]">{card.body}</p>
+      </div>
+
+      <div className="relative shrink-0">
+        <button
+          type="button"
+          onClick={() => setInterestOpen(true)}
+          data-analytics-source="who-i-help-groups"
+          className="site-button-text inline-flex items-center justify-center rounded-full px-7 py-3 text-[0.8rem] uppercase transition-all hover:-translate-y-px whitespace-nowrap cursor-pointer"
+          style={{ background: "var(--teal-deep)", color: "white" }}
+        >
+          {ctaText}
+        </button>
+      </div>
+
+      <GroupInterestModal isOpen={interestOpen} onClose={() => setInterestOpen(false)} />
+    </div>
+  );
+}
+
+const groupsCardShape = PropTypes.shape({
+  tag: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  linkText: PropTypes.string,
+  linkHref: PropTypes.string,
+});
+
+GroupsCallout.propTypes = {
+  card: groupsCardShape.isRequired,
+};
 
 WhoIHelp.propTypes = {
   eyebrow: PropTypes.string,

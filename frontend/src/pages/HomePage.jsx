@@ -15,7 +15,6 @@ import {
   ExpressiveArts,
   Meet,
   FeelingsCheckIn,
-  Fees,
   Faq,
   CTA,
 } from "../design-system/site";
@@ -119,14 +118,7 @@ export default function HomePage() {
         </>
       )}
         <Faq />
-        <Fees
-          sessionFee={siteSettings?.fees?.sessionFee}
-          consultNote={siteSettings?.fees?.consultNote}
-          paymentNote={siteSettings?.fees?.paymentNote}
-          slidingScaleNote={siteSettings?.fees?.slidingScaleNote}
-          contactEmail={siteSettings?.contactEmail}
-          contactPhone={siteSettings?.contactPhone}
-        />
+        <CTA />
       </SiteLayout>
     </>
   );
@@ -171,7 +163,6 @@ function StaticHomeLayout() {
         imageAlt="Arielle Hastings, LMFT"
       />
       <FeelingsCheckIn />
-      <CTA />
     </>
   );
 }

@@ -21,6 +21,11 @@ export const DEFAULT_FAQ_ITEMS = [
     a: "A limited number of reduced-fee / sliding-scale spots are available. If cost is a concern, please mention it when you reach out and we can talk it through.",
   },
   {
+    id: "good-faith-estimate",
+    q: "Can I get a Good Faith Estimate of costs?",
+    a: "Yes — a Good Faith Estimate is available on request. Under the federal No Surprises Act, you have the right to receive a Good Faith Estimate of the expected cost of your care before you schedule. Just ask when you reach out and I'll put one in writing for you.",
+  },
+  {
     q: "Do you meet in person or by telehealth?",
     a: "Both, when available — in person in Davis, CA, and secure telehealth for clients in California. You can note your preference when you request a consultation.",
   },

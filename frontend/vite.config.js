@@ -26,7 +26,7 @@ export default defineConfig(({ command }) => ({
     ...(command === "build" && !skipPrerender
       ? [
           prerender({
-            routes: ['/', '/about', '/services', '/privacy', '/good-faith-estimate'],
+            routes: ['/', '/about', '/services', '/privacy'],
             renderer: '@prerenderer/renderer-puppeteer',
             rendererOptions: {
               // Each route dispatches this once its data/loading resolves
@@ -45,6 +45,10 @@ export default defineConfig(({ command }) => ({
   ],
   server: {
     port: 5173,
+    // Listen on all interfaces (IPv4 + IPv6). Without this, Vite binds only
+    // IPv6 localhost (::1) on some machines, so browsers that resolve
+    // `localhost` to 127.0.0.1 (e.g. Chrome) can't connect.
+    host: true,
     // Fail loudly if 5173 is taken instead of silently bumping to another port.
     // The Sanity CORS allowlist only includes localhost:5173, so a bumped port
     // gets its browser fetches blocked and the app falls back to static content.

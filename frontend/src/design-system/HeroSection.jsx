@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Button from "./Button";
+import HeroCollage from "./HeroCollage";
 import { CONTAINER, GRID_12 } from "./layout";
 
 export default function HeroSection({
@@ -25,6 +26,7 @@ export default function HeroSection({
   blobImageSrcSet,
   blobImageWebpSrcSet,
   blobImageSizes,
+  collageImages,
   priority = false,
   className = "",
 }) {
@@ -62,8 +64,12 @@ export default function HeroSection({
     teal: "bg-therapy-teal-900",
   };
 
-  /** Masked hero image column: `variant="organic"` or legacy `blobSide` left/right */
-  const organicImageSide = blobSide ?? (variant === "organic" ? "right" : null);
+  /** Collage hero: overlapping, drifting photos with a cycling focus. */
+  const isCollage = variant === "collage" && Array.isArray(collageImages) && collageImages.length > 0;
+
+  /** Masked hero image column: `variant="organic"`/`"collage"` or legacy `blobSide` left/right */
+  const organicImageSide =
+    blobSide ?? (variant === "organic" || isCollage ? "right" : null);
 
   const contentBlock = (
     <div className={`flex flex-col gap-8 ${alignmentClasses[alignment]}`}>
@@ -250,6 +256,12 @@ export default function HeroSection({
     </div>
   );
 
+  const visual = isCollage ? (
+    <HeroCollage images={collageImages} priority={priority} />
+  ) : (
+    blobVisual
+  );
+
   // Organic / blob: hero image in animated organic mask + text column (expressive typography)
   if (organicImageSide === "left" || organicImageSide === "right") {
     return (
@@ -261,7 +273,7 @@ export default function HeroSection({
           <div className={`grid w-full min-h-0 grid-cols-1 items-stretch ${organicLgGridClass}`}>
             {organicImageSide === "left" && (
               <>
-                <div className="max-md:order-1 order-1 min-w-0">{blobVisual}</div>
+                <div className="max-md:order-1 order-1 min-w-0">{visual}</div>
                 <div className="max-md:order-2 order-2 flex min-w-0 flex-col justify-center px-6 py-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20">
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
@@ -269,10 +281,14 @@ export default function HeroSection({
             )}
             {organicImageSide === "right" && (
               <>
-                <div className="max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-6 py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20">
+                <div
+                  className={`max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-6 py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20 ${
+                    isCollage ? "max-lg:!pt-3" : ""
+                  }`}
+                >
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
-                <div className="max-md:order-1 order-2 min-w-0">{blobVisual}</div>
+                <div className="max-md:order-1 order-2 min-w-0">{visual}</div>
               </>
             )}
           </div>
@@ -370,12 +386,20 @@ HeroSection.propTypes = {
   alignment: PropTypes.oneOf(["left", "center", "right"]),
   ctaAlignment: PropTypes.oneOf(["left", "center", "right"]),
   height: PropTypes.oneOf(["small", "medium", "large", "screen"]),
-  variant: PropTypes.oneOf(["overlay", "split", "organic"]),
+  variant: PropTypes.oneOf(["overlay", "split", "organic", "collage"]),
   blobSide: PropTypes.oneOf(["left", "right", null]),
   blobImage: PropTypes.string,
   blobImageSrcSet: PropTypes.string,
   blobImageWebpSrcSet: PropTypes.string,
   blobImageSizes: PropTypes.string,
+  collageImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string,
+      jpegSrcSet: PropTypes.string,
+      webpSrcSet: PropTypes.string,
+      alt: PropTypes.string,
+    })
+  ),
   priority: PropTypes.bool,
   className: PropTypes.string,
 };

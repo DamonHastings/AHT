@@ -64,6 +64,16 @@ export const heroBlock = {
       hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
     },
     {
+      name: 'gallery',
+      title: 'Photo hero — collage gallery',
+      description:
+        'Photos for the animated hero collage. Add 2–4 images (the first is the initial focus, and they drift/cycle in order). If left empty, the built-in default photos are used.',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      validation: Rule => Rule.max(4),
+      hidden: ({ parent }) => (parent?.presentation ?? 'expressive') !== 'photo',
+    },
+    {
       name: 'photoVariant',
       title: 'Photo hero — layout variant',
       type: 'string',
@@ -308,6 +318,18 @@ export const meetBlock = {
   preview: { prepare: () => ({ title: 'Meet / Profile' }) },
 };
 
+// Shared palette. Values are theme color slugs (resolve to var(--<slug>) on the
+// site). Used both for the displayed swatches and for tagging words with colors.
+const FEELING_COLOR_OPTIONS = [
+  { title: 'Terracotta (warm)', value: 'terracotta' },
+  { title: 'Terracotta light (soft)', value: 'terra-light' },
+  { title: 'Teal (cool)', value: 'teal' },
+  { title: 'Teal deep', value: 'teal-deep' },
+  { title: 'Mauve (muted)', value: 'mauve' },
+  { title: 'Gold (bright)', value: 'gold' },
+  { title: 'Linen deep', value: 'linen-deep' },
+];
+
 export const feelingsCheckInBlock = {
   name: 'feelingsCheckInBlock',
   title: 'Feelings Check-In',
@@ -317,9 +339,100 @@ export const feelingsCheckInBlock = {
     { name: 'heading', title: 'Heading', type: 'string', initialValue: 'How are you feeling right now?' },
     { name: 'subheading', title: 'Subheading', type: 'string', initialValue: 'Choose a color. No explanation needed.' },
     {
-      name: 'swatches',
-      title: 'Swatches',
+      name: 'colors',
+      title: 'Colors (swatches shown)',
+      description: 'The clickable color palette. Each color reveals the words tagged with it below.',
       type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'value',
+              title: 'Color',
+              type: 'string',
+              options: { list: FEELING_COLOR_OPTIONS },
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'label',
+              title: 'Accessible label',
+              type: 'string',
+              description: 'Short screen-reader name for the swatch (e.g. "warm", "cool"). Not shown visually.',
+            },
+          ],
+          preview: {
+            select: { value: 'value', label: 'label' },
+            prepare: ({ value, label }) => ({ title: value, subtitle: label }),
+          },
+        },
+      ],
+    },
+    {
+      name: 'words',
+      title: 'Word library',
+      description:
+        'The feelings a visitor can explore. Each word has a name, a description, and one or more colors it belongs to (a word can be tied to multiple colors).',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'name', title: 'Word', type: 'string', validation: Rule => Rule.required() },
+            { name: 'description', title: 'Description', type: 'text', rows: 3 },
+            {
+              name: 'colors',
+              title: 'Colors',
+              description: 'Which color swatch(es) this word appears under.',
+              type: 'array',
+              of: [{ type: 'string' }],
+              options: { list: FEELING_COLOR_OPTIONS },
+              validation: Rule => Rule.required().min(1),
+            },
+          ],
+          preview: {
+            select: { name: 'name', colors: 'colors' },
+            prepare: ({ name, colors }) => ({
+              title: name,
+              subtitle: Array.isArray(colors) ? colors.join(', ') : '',
+            }),
+          },
+        },
+      ],
+    },
+    {
+      name: 'resonatePrompt',
+      title: 'Prompt (after a color is picked)',
+      type: 'string',
+      initialValue: 'Do any of these feelings resonate with you?',
+    },
+    {
+      name: 'allPrompt',
+      title: 'Prompt (full word list)',
+      type: 'string',
+      initialValue: "No pressure to fit a color. Here's the fuller range — see if anything lands.",
+    },
+    {
+      name: 'noneLabel',
+      title: '"None of these connect" label',
+      type: 'string',
+      initialValue: 'None of these connect',
+    },
+    {
+      name: 'closingBlurb',
+      title: 'Closing note',
+      description: 'A short note on the value of naming what you feel. Shown at the bottom of the section.',
+      type: 'text',
+      rows: 3,
+      initialValue:
+        "Naming what you feel is a small act of caring for it. You don't have to fix the feeling or explain it — just noticing it, and giving it a word, is enough to begin.",
+    },
+    {
+      name: 'swatches',
+      title: 'Swatches (legacy)',
+      description: 'Deprecated. Use Colors + Word library above instead. Kept for older content.',
+      type: 'array',
+      hidden: ({ parent }) => !(parent?.swatches?.length),
       of: [
         {
           type: 'object',

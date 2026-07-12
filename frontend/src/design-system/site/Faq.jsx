@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { DEFAULT_FAQ_ITEMS } from "../../content/faqDefaults";
 
@@ -6,12 +7,34 @@ import { DEFAULT_FAQ_ITEMS } from "../../content/faqDefaults";
  * screen-reader-accessible by default, and open-able by crawlers). Answers the
  * predictable pre-booking questions. Pair with FAQPage JSON-LD (see
  * buildFaqJsonLd in utils/seo.js) using the same item list.
+ *
+ * Items may carry an `id`, which becomes the <details> element id so links
+ * elsewhere (e.g. the footer's "Good Faith Estimate") can deep-link to a
+ * question via `/#<id>` — the matching item opens and scrolls into view.
  */
 export default function Faq({
   eyebrow = "questions",
   heading = "Things people often ask.",
   items = DEFAULT_FAQ_ITEMS,
 }) {
+  // Open + scroll to the <details> whose id matches the URL hash. Runs on mount
+  // (deep-link from another page) and on hashchange (same-page footer click).
+  const openFromHash = useCallback(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el && el.tagName === "DETAILS") {
+      el.open = true;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  useEffect(() => {
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [openFromHash]);
+
   return (
     <section
       id="faq"
@@ -28,7 +51,8 @@ export default function Faq({
           {items.map((item, idx) => (
             <details
               key={idx}
-              className="group border-b py-2"
+              id={item.id}
+              className="group border-b py-2 scroll-mt-28"
               style={{ borderColor: "rgba(28,39,48,0.1)" }}
             >
               <summary
@@ -58,6 +82,7 @@ Faq.propTypes = {
   heading: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
       q: PropTypes.string.isRequired,
       a: PropTypes.string.isRequired,
     })

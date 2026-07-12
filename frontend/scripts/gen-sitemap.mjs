@@ -31,7 +31,6 @@ const ROUTES = [
   // until their CMS content is rewritten — omitted from the sitemap so search
   // engines don't index the wrong-practice pages. Restore alongside the routes.
   { path: "/privacy", priority: "0.3", changefreq: "yearly" },
-  { path: "/good-faith-estimate", priority: "0.3", changefreq: "yearly" },
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

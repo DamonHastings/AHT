@@ -26,6 +26,8 @@ const OUT_DIR = path.join(FRONTEND, "public", "photos");
 const SOURCES = [
   { src: path.join(FRONTEND, "photos", "IMG_2506.jpeg"), name: "hero" },
   { src: path.join(FRONTEND, "photos", "IMG_2481.jpeg"), name: "meet" },
+  // Second angle of the therapy room — used as a collage tile in the hero.
+  { src: path.join(FRONTEND, "photos", "IMG_0346.JPG"), name: "room" },
 ];
 
 async function fileExists(filePath) {

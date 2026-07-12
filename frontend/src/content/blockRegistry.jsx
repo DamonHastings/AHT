@@ -1,4 +1,5 @@
 import { sanityImage } from "../utils/sanityImage";
+import { responsiveImage } from "../utils/responsiveImage";
 import { HeroSection } from "../design-system";
 import {
   Hero,
@@ -65,6 +66,22 @@ export function renderBlockComponent(component, index) {
         const blobSide =
           photoVariant === "organic" ? component.photoBlobSide ?? null : null;
 
+        // Collage tiles for the hero gallery. Prefer CMS-managed photos from the
+        // block's `gallery` field; fall back to the built-in optimized local
+        // photos (office, room, headshot) when the editor hasn't set any.
+        const galleryImages = (Array.isArray(component.gallery) ? component.gallery : [])
+          .filter((image) => image?.asset)
+          .map((image) => sanityImage(image, { widths: [480, 768, 1200, 1800] }))
+          .filter(Boolean)
+          .slice(0, 4);
+        const collageImages = galleryImages.length
+          ? galleryImages
+          : [
+              responsiveImage("hero"),
+              responsiveImage("room"),
+              responsiveImage("meet"),
+            ];
+
         return (
           <EditableSection key={key} component={component} className="site-section-hero">
             <HeroSection
@@ -72,8 +89,9 @@ export function renderBlockComponent(component, index) {
               blobImageSrcSet={heroImg?.jpegSrcSet}
               blobImageWebpSrcSet={heroImg?.webpSrcSet}
               blobImageSizes="(min-width: 1024px) 52vw, 100vw"
+              collageImages={collageImages}
               priority
-              variant={photoVariant}
+              variant="collage"
               blobSide={blobSide}
               overlay={overlay}
               overlayOpacity={component.photoOverlayOpacity ?? 0.4}
@@ -196,7 +214,13 @@ export function renderBlockComponent(component, index) {
             eyebrow={component.eyebrow}
             heading={component.heading}
             subheading={component.subheading}
+            colors={component.colors}
+            words={component.words}
             swatches={component.swatches}
+            resonatePrompt={component.resonatePrompt}
+            allPrompt={component.allPrompt}
+            noneLabel={component.noneLabel}
+            closingBlurb={component.closingBlurb}
           />
         </EditableSection>
       );

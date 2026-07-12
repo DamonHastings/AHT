@@ -33,29 +33,29 @@ export default function TheSpace({
     >
       {/* Ambient mobile */}
       <div
-        className="absolute top-8 right-8 md:right-12 hidden md:flex flex-col items-center opacity-45 pointer-events-none"
+        className="absolute top-8 right-8 md:right-12 hidden md:flex flex-col items-center opacity-70 pointer-events-none"
         aria-hidden
       >
         <div
           className="w-3 h-3 rounded-full bg-[var(--terra-light)]"
           style={{ animation: "gemSway 5s ease-in-out infinite" }}
         />
-        <div className="w-px h-5 bg-[rgba(196,151,58,0.4)]" />
+        <div className="w-px h-5 bg-[rgba(196,151,58,0.6)]" />
         <div
           className="w-2 h-2 rounded-full bg-[var(--teal)]"
           style={{ animation: "gemSway 5s ease-in-out infinite", animationDelay: "-1.5s" }}
         />
-        <div className="w-px h-4 bg-[rgba(196,151,58,0.4)]" />
+        <div className="w-px h-4 bg-[rgba(196,151,58,0.6)]" />
         <div
           className="w-3.5 h-3.5 rounded-full bg-[var(--gold)]"
           style={{ animation: "gemSway 5s ease-in-out infinite", animationDelay: "-3s" }}
         />
-        <div className="w-px h-4 bg-[rgba(196,151,58,0.4)]" />
+        <div className="w-px h-4 bg-[rgba(196,151,58,0.6)]" />
         <div
           className="w-2 h-2 rounded-full bg-[var(--mauve)]"
           style={{ animation: "gemSway 5s ease-in-out infinite", animationDelay: "-4s" }}
         />
-        <div className="w-px h-4 bg-[rgba(196,151,58,0.4)]" />
+        <div className="w-px h-4 bg-[rgba(196,151,58,0.6)]" />
         <div
           className="w-2.5 h-2.5 rounded-full bg-[var(--terracotta)]"
           style={{ animation: "gemSway 5s ease-in-out infinite", animationDelay: "-2s" }}
