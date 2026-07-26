@@ -6,6 +6,7 @@
 import { createClient } from '@sanity/client';
 import dotenv from 'dotenv';
 import { WHO_I_HELP_BLOCK_DEFAULTS } from '../frontend/src/content/whoIHelpDefaults.js';
+import { DEFAULT_FAQ_ITEMS } from '../frontend/src/content/faqDefaults.js';
 
 dotenv.config();
 
@@ -143,6 +144,18 @@ const homePage = {
           reply: "Wired usually means something matters. We can slow it down together — and sometimes use that energy instead of only fighting it.",
         },
       ],
+    },
+    {
+      _type: 'faqBlock',
+      _key: 'faq',
+      eyebrow: 'questions',
+      heading: 'Things people often ask.',
+      items: DEFAULT_FAQ_ITEMS.map((it, i) => ({
+        _key: `faq-${i}`,
+        question: it.q,
+        answer: it.a,
+        ...(it.id ? { anchorId: it.id } : {}),
+      })),
     },
     {
       _type: 'ctaBlock',

@@ -9,6 +9,7 @@ import {
   ExpressiveArts,
   Meet,
   FeelingsCheckIn,
+  Faq,
   CTA,
   ProseSection,
 } from "../design-system/site";
@@ -224,6 +225,17 @@ export function renderBlockComponent(component, index) {
           />
         </EditableSection>
       );
+
+    case "faqBlock": {
+      const faqItems = component.items?.length
+        ? component.items.map((it) => ({ id: it.anchorId, q: it.question, a: it.answer }))
+        : undefined;
+      return (
+        <EditableSection key={key} component={component} className="site-section-faq">
+          <Faq eyebrow={component.eyebrow} heading={component.heading} items={faqItems} />
+        </EditableSection>
+      );
+    }
 
     case "ctaBlock":
       return (

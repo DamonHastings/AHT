@@ -448,6 +448,41 @@ export const feelingsCheckInBlock = {
   preview: { prepare: () => ({ title: 'Feelings Check-In' }) },
 };
 
+export const faqBlock = {
+  name: 'faqBlock',
+  title: 'FAQ',
+  type: 'object',
+  fields: [
+    { name: 'eyebrow', title: 'Eyebrow', type: 'string', initialValue: 'questions' },
+    { name: 'heading', title: 'Heading', type: 'string', initialValue: 'Things people often ask.' },
+    {
+      name: 'items',
+      title: 'Questions',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'question', title: 'Question', type: 'string', validation: Rule => Rule.required() },
+            { name: 'answer', title: 'Answer', type: 'text', rows: 4, validation: Rule => Rule.required() },
+            {
+              name: 'anchorId',
+              title: 'Anchor ID (optional)',
+              type: 'string',
+              description:
+                'Enables deep-links to this question. The footer “Good Faith Estimate” link requires an item with anchor ID "good-faith-estimate".',
+            },
+          ],
+          preview: {
+            select: { title: 'question', subtitle: 'anchorId' },
+          },
+        },
+      ],
+    },
+  ],
+  preview: { prepare: () => ({ title: 'FAQ' }) },
+};
+
 export const ctaBlock = {
   name: 'ctaBlock',
   title: 'CTA',

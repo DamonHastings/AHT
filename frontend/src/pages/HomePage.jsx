@@ -16,7 +16,6 @@ import {
   Meet,
   FeelingsCheckIn,
   Faq,
-  CTA,
 } from "../design-system/site";
 import { DEFAULT_FAQ_ITEMS } from "../content/faqDefaults";
 
@@ -28,6 +27,7 @@ const SITE_BLOCK_TYPES = new Set([
   "expressiveArtsBlock",
   "meetBlock",
   "feelingsCheckInBlock",
+  "faqBlock",
   "ctaBlock",
   "proseSectionBlock",
   "spacerBlock",
@@ -75,13 +75,21 @@ export default function HomePage() {
 
   const showSanityContent = page && hasSiteBlocks;
 
+  // FAQ is a Sanity block when authored; otherwise the hardcoded <Faq/> fallback
+  // (below) renders the defaults. Keep both the render and the JSON-LD in sync.
+  const faqComponent = page?.components?.find((c) => c._type === "faqBlock");
+  const hasFaqBlock = Boolean(faqComponent);
+  const faqItems = faqComponent?.items?.length
+    ? faqComponent.items.map((it) => ({ q: it.question, a: it.answer }))
+    : DEFAULT_FAQ_ITEMS;
+
   const canonical = canonicalFor("/");
   const ogImage = siteSettings?.ogImage
     ? urlFor(siteSettings.ogImage).width(1200).height(630).fit("crop").url()
     : undefined;
   const jsonLd = [
     buildPracticeJsonLd(siteSettings, { url: canonical, image: ogImage }),
-    buildFaqJsonLd(DEFAULT_FAQ_ITEMS),
+    buildFaqJsonLd(faqItems),
   ];
 
   return (
@@ -117,8 +125,7 @@ export default function HomePage() {
           <StaticHomeLayout />
         </>
       )}
-        <Faq />
-        {/* <CTA /> */}
+        {!hasFaqBlock && <Faq />}
       </SiteLayout>
     </>
   );

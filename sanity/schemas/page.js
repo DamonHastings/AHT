@@ -66,6 +66,7 @@ export default {
         { type: 'expressiveArtsBlock' },
         { type: 'meetBlock' },
         { type: 'feelingsCheckInBlock' },
+        { type: 'faqBlock' },
         { type: 'ctaBlock' },
         { type: 'proseSectionBlock' },
         { type: 'spacerBlock' },
