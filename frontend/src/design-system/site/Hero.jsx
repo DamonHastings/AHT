@@ -11,7 +11,7 @@ export default function Hero({
   headingLines,
   body = "I'm an expressive arts therapist — warm and playful, and also willing to bring loving challenge when it helps. We can use movement, color, metaphor, making, and nature when they fit you; we can also talk it through. The next step is a free consultation so we can see if we're a good match.",
   primaryCtaText = "Schedule a free consultation",
-  primaryCtaHref = "#contact",
+  primaryCtaHref = "#book",
   secondaryCtaText = "Who I help →",
   secondaryCtaHref = "/#audience-children",
 }) {

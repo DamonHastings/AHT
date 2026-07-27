@@ -11,5 +11,6 @@ export { default as Fees } from "./Fees";
 export { default as Faq } from "./Faq";
 export { default as CTA } from "./CTA";
 export { default as ConsultationModal } from "./ConsultationModal";
+export { default as ContactModal } from "./ContactModal";
 export { default as PageFooter } from "./PageFooter";
 export { default as ProseSection } from "./ProseSection";

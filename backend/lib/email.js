@@ -116,3 +116,47 @@ export async function sendGroupInterestEmail(data) {
     return { sent: false, error: err.message }
   }
 }
+
+/**
+ * Compile a contact-form submission into a plain-text email body.
+ */
+export function compileContactEmail(data) {
+  const lines = [
+    'New contact form message',
+    '---',
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    data.phone ? `Phone: ${data.phone}` : null,
+    data.message ? `Message:\n${data.message}` : null,
+  ].filter(Boolean)
+  return lines.join('\n')
+}
+
+/**
+ * Send a contact-form submission as email to the practitioner.
+ * No-op if PRACTITIONER_EMAIL or SMTP/MAILER_URL is not configured.
+ */
+export async function sendContactEmail(data) {
+  const to = process.env.PRACTITIONER_EMAIL
+  if (!to) return { sent: false, reason: 'PRACTITIONER_EMAIL not set' }
+
+  const transporter = getTransporter()
+  if (!transporter) return { sent: false, reason: 'No mail transport configured (SMTP or MAILER_URL)' }
+
+  const subject = `Contact form message from ${data.name}`
+  const text = compileContactEmail(data)
+
+  try {
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM || process.env.SMTP_USER || 'noreply@localhost',
+      to,
+      replyTo: data.email || undefined,
+      subject,
+      text,
+    })
+    return { sent: true }
+  } catch (err) {
+    console.error('Send contact email error:', err)
+    return { sent: false, error: err.message }
+  }
+}

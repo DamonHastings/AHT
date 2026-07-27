@@ -9,7 +9,7 @@ export default function CTA({
   subheading =
     "Most people reach out the same way you might have — email or voicemail after reading a profile. We'll schedule a short consultation (about 15 minutes), no commitment. Telehealth and in-person in Davis when available.",
   buttonText = "Schedule a free consultation",
-  buttonHref = "#contact",
+  buttonHref = "#book",
 }) {
   return (
     <section

@@ -149,7 +149,7 @@ function WhoCard({ card, variant, anchorId }) {
   // link only if it isn't one of those self-referential audience anchors.
   const isDeadAnchor =
     !card.linkHref || card.linkHref === "#" || /#audience-/.test(card.linkHref);
-  const ctaHref = isDeadAnchor ? "#contact" : card.linkHref;
+  const ctaHref = isDeadAnchor ? "#book" : card.linkHref;
   const ctaText =
     !card.linkText || /^read more/i.test(card.linkText)
       ? "Book a free consultation →"

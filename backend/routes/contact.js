@@ -1,12 +1,19 @@
 import express from 'express'
 import Contact from '../models/Contact.js'
+import { sendContactEmail } from '../lib/email.js'
 
 const router = express.Router()
 
-// POST /api/contact - Submit contact form
+// POST /api/contact - Submit contact form (persists + emails the practitioner)
 router.post('/', async (req, res) => {
   try {
-    const { name, email, phone, message } = req.body
+    const { name, email, phone, message, company } = req.body
+
+    // Honeypot: legitimate visitors never fill this hidden field. Respond 200 so
+    // bots don't learn they were filtered, but skip persisting/emailing.
+    if (company) {
+      return res.status(200).json({ message: 'Contact form submitted successfully' })
+    }
 
     if (!name || !email || !message) {
       return res.status(400).json({ message: 'Name, email, and message are required' })
@@ -21,9 +28,20 @@ router.post('/', async (req, res) => {
 
     await contact.save()
 
-    res.status(201).json({ 
+    // Email the practitioner (no-op if mail transport isn't configured).
+    sendContactEmail({ name, email, phone, message })
+      .then((result) => {
+        if (result.sent) {
+          console.log('Contact email sent to practitioner')
+        } else {
+          console.error('Contact email NOT sent:', result.reason || result.error)
+        }
+      })
+      .catch((err) => console.error('Contact email error:', err))
+
+    res.status(201).json({
       message: 'Contact form submitted successfully',
-      id: contact._id 
+      id: contact._id,
     })
   } catch (error) {
     console.error('Contact form error:', error)

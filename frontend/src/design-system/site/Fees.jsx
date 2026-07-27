@@ -24,7 +24,7 @@ export default function Fees({
   contactEmail,
   contactPhone,
   ctaText = "Schedule a free consultation",
-  ctaHref = "#contact",
+  ctaHref = "#book",
 }) {
   const renderHeading = () => {
     if (!headingEmphasis || !heading.includes(headingEmphasis)) return heading;

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { ConsultationModal, SiteNav, PageFooter } from "../design-system/site";
+import { ConsultationModal, ContactModal, SiteNav, PageFooter } from "../design-system/site";
 import {
   SITE_BRAND_CREDENTIAL,
   SITE_BRAND_LOCKUP,
@@ -19,12 +19,19 @@ const NAV_LINKS = [
 export default function SiteLayout({ children }) {
   const { siteSettings } = useSiteSettings();
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const handleCloseConsultationModal = useCallback(() => {
     setIsConsultationModalOpen(false);
   }, []);
 
-  const handleConsultationLinkClick = useCallback((event) => {
+  const handleCloseContactModal = useCallback(() => {
+    setIsContactModalOpen(false);
+  }, []);
+
+  // Intercept in-page anchor clicks and open the matching modal:
+  //   #book  → consultation scheduler   |   #contact → standard contact form
+  const handleModalLinkClick = useCallback((event) => {
     if (
       event.defaultPrevented ||
       event.metaKey ||
@@ -41,13 +48,16 @@ export default function SiteLayout({ children }) {
     }
 
     const href = link.getAttribute("href");
-    if (href === "#contact" || href === "/#contact") {
+    const source = link.dataset.analyticsSource || link.textContent?.trim() || "unknown";
+
+    if (href === "#book" || href === "/#book") {
       event.preventDefault();
-      // Attribute the open to where the visitor clicked (nav CTA, footer link,
-      // in-page button…) so we can see which entry points drive consultations.
-      const source = link.dataset.analyticsSource || link.textContent?.trim() || "unknown";
       trackEvent("Consultation Started", { source });
       setIsConsultationModalOpen(true);
+    } else if (href === "#contact" || href === "/#contact") {
+      event.preventDefault();
+      trackEvent("Contact Started", { source });
+      setIsContactModalOpen(true);
     }
   }, []);
 
@@ -55,12 +65,12 @@ export default function SiteLayout({ children }) {
     <div
       className="site-theme min-h-screen overflow-x-hidden flex flex-col"
       style={{ background: "var(--warm-white)" }}
-      onClickCapture={handleConsultationLinkClick}
+      onClickCapture={handleModalLinkClick}
     >
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      <SiteNav logoName={SITE_BRAND_LOCKUP} links={NAV_LINKS} ctaHref="/#contact" />
+      <SiteNav logoName={SITE_BRAND_LOCKUP} links={NAV_LINKS} ctaHref="/#book" />
       <main id="main-content" className="flex-grow w-full">{children}</main>
       <PageFooter
         logoName={SITE_BRAND_NAME}
@@ -77,6 +87,7 @@ export default function SiteLayout({ children }) {
         onClose={handleCloseConsultationModal}
         bookingUrl={siteSettings?.bookingUrl || import.meta.env.VITE_GOOGLE_BOOKING_URL}
       />
+      <ContactModal isOpen={isContactModalOpen} onClose={handleCloseContactModal} />
     </div>
   );
 }
