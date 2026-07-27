@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ConsultationModal, ContactModal, SiteNav, PageFooter } from "../design-system/site";
 import {
   SITE_BRAND_CREDENTIAL,
@@ -27,6 +27,53 @@ export default function SiteLayout({ children }) {
 
   const handleCloseContactModal = useCallback(() => {
     setIsContactModalOpen(false);
+  }, []);
+
+  // Scroll to a hash anchor on first load. When arriving from outside the site
+  // (e.g. a bookmark or a link to /#meet), the target section doesn't exist yet
+  // while the page is fetching/rendering, so the browser's native jump finds
+  // nothing. Poll for the element and keep re-aligning across a short settle
+  // window — images loading above the target reflow the layout after the first
+  // scroll — bailing out as soon as the visitor scrolls themselves. (scroll-mt
+  // on the sections handles the fixed-nav offset.)
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (!id) return undefined;
+
+    let cancelled = false;
+    let timer;
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("wheel", onUserScroll);
+      window.removeEventListener("touchmove", onUserScroll);
+      window.removeEventListener("keydown", onUserScroll);
+    };
+    function onUserScroll() {
+      cancelled = true;
+      cleanup();
+    }
+    window.addEventListener("wheel", onUserScroll, { passive: true });
+    window.addEventListener("touchmove", onUserScroll, { passive: true });
+    window.addEventListener("keydown", onUserScroll);
+
+    let attempts = 0;
+    const tick = () => {
+      if (cancelled) return;
+      // Re-align on every tick (a no-op once the position has settled) so the
+      // target stays anchored while the page finishes loading and reflowing.
+      document.getElementById(id)?.scrollIntoView({ block: "start" });
+      if (attempts++ < 30) {
+        timer = window.setTimeout(tick, 100);
+      } else {
+        cleanup();
+      }
+    };
+    timer = window.setTimeout(tick, 0);
+
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
   }, []);
 
   // Intercept in-page anchor clicks and open the matching modal:
