@@ -223,17 +223,17 @@ export default function HeroSection({
    *  Compact mode gives the image column less width so a single headshot reads smaller. */
   const organicLgGridClass = compact
     ? organicImageSide === "left"
-      ? "lg:grid-cols-[minmax(0,40%)_minmax(0,60%)]"
-      : "lg:grid-cols-[minmax(0,60%)_minmax(0,40%)]"
+      ? "md:grid-cols-[minmax(0,40%)_minmax(0,60%)]"
+      : "md:grid-cols-[minmax(0,60%)_minmax(0,40%)]"
     : organicImageSide === "left"
-      ? "lg:grid-cols-[minmax(0,52%)_minmax(0,48%)]"
-      : "lg:grid-cols-[minmax(0,48%)_minmax(0,52%)]";
+      ? "md:grid-cols-[minmax(0,52%)_minmax(0,48%)]"
+      : "md:grid-cols-[minmax(0,48%)_minmax(0,52%)]";
 
   /** Frame size caps for the single organic image. Compact = a smaller headshot
    *  with a consistent portrait aspect at every breakpoint (no max-height caps
    *  fighting the aspect ratio, which was cropping the photo on small screens). */
   const organicFrameClass = compact
-    ? "relative mx-auto w-full min-w-0 aspect-[4/5] max-w-[15rem] sm:max-w-[17rem] lg:max-w-[20rem]"
+    ? "relative w-full min-w-0 aspect-[6/7] md:aspect-[4/5.3] max-w-[75vw] md:max-w-[31vw]"
     : "relative mx-auto w-full min-w-0 max-w-full max-lg:aspect-[4/3] max-lg:max-h-[min(48vh,19rem)] sm:max-lg:max-h-[min(50vh,22rem)] lg:aspect-[3/4] lg:w-full lg:max-h-[min(72vh,44rem)]";
 
   /** Compact hero uses a clean static rounded frame; the legacy organic variant
@@ -248,7 +248,7 @@ export default function HeroSection({
 
   const blobVisual = (
     <div
-      className={`relative flex w-full min-w-0 min-h-0 items-center justify-center py-8 sm:py-10 lg:py-12 ${blobFramePadding}`}
+      className={`relative flex w-full min-w-0 min-h-0 items-center justify-center items-center py-8 sm:py-10 lg:py-12 ${blobFramePadding}`}
     >
       <div className={organicFrameClass}>
         <div className="absolute inset-0 overflow-hidden shadow-2xl" style={maskStyle}>
@@ -266,7 +266,7 @@ export default function HeroSection({
                 srcSet={blobImageSrcSet}
                 sizes={blobImageSizes}
                 alt=""
-                className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
                 loading={priority ? "eager" : "lazy"}
                 // Lowercase DOM attr: React 18.2 doesn't recognize camelCase
                 // `fetchPriority`; spreading the lowercase key passes it through cleanly.
@@ -303,8 +303,8 @@ export default function HeroSection({
           <div className={`grid w-full min-h-0 max-w-[1400px] mx-auto grid-cols-1 items-stretch ${organicLgGridClass}`}>
             {organicImageSide === "left" && (
               <>
-                <div className="max-md:order-1 order-1 min-w-0">{visual}</div>
-                <div className="max-md:order-2 order-2 flex min-w-0 flex-col justify-center px-6 py-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20">
+                <div className="max-md:order-1 order-1 min-w-0 items-center justify-center">{visual}</div>
+                <div className="max-md:order-2 order-2 flex min-w-0 flex-col justify-center px-6 pt-2 pb-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20">
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
               </>
@@ -312,13 +312,13 @@ export default function HeroSection({
             {organicImageSide === "right" && (
               <>
                 <div
-                  className={`max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-6 py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20 ${
+                  className={`max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-6 pt-2 pb-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20 ${
                     isCollage ? "max-lg:!pt-3" : ""
                   }`}
                 >
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
-                <div className="max-md:order-1 order-2 min-w-0">{visual}</div>
+                <div className="max-md:order-1 order-2 min-w-0 items-center justify-center flex">{visual}</div>
               </>
             )}
           </div>

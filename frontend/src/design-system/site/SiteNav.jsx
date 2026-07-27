@@ -95,7 +95,7 @@ export default function SiteNav({
           alt=""
           // Sized to roughly match the height of the stacked wordmark so the
           // emblem reads as a peer to the name, not an oversized badge.
-          className="h-11 w-11 md:h-14 md:w-14 object-contain shrink-0"
+          className="h-12 w-12 md:h-16 md:w-16 object-contain shrink-0"
         />
         {/* Split "Name, CREDENTIAL" into a two-line lockup: the name leads and
             the credential sits beneath it as a small letter-spaced eyebrow.
@@ -105,20 +105,20 @@ export default function SiteNav({
             className="font-serif text-xl md:text-[1.55rem] tracking-[-0.01em]"
             style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
           >
-            {logoDisplayName}
-          </span>
-          {logoCredential && (
+            {logoDisplayName}{logoCredential && (
             <span
-              className="site-eyebrow mt-1 text-[0.62rem] md:text-[0.68rem]"
+              className="site-eyebrow mt-1 ml-2 text-[0.62rem] md:text-[0.68rem]"
               style={{ color: "var(--teal-deep)" }}
             >
               {logoCredential}
             </span>
           )}
+          </span>
+          
           {tagline && (
             <span
-              className="hidden lg:block mt-1 text-[0.7rem] tracking-[0.01em]"
-              style={{ color: "var(--ink)", opacity: 0.6 }}
+              className="lg:block mt-1 text-[.8rem]"
+              style={{ color: "var(--ink)", opacity: 1 }}
             >
               {tagline}
             </span>
