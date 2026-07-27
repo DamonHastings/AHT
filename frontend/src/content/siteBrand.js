@@ -4,3 +4,6 @@ export const SITE_BRAND_CREDENTIAL = "LMFT";
 
 /** "Name, CREDENTIAL" for components that split on the last comma (e.g. SiteNav). */
 export const SITE_BRAND_LOCKUP = `${SITE_BRAND_NAME}, ${SITE_BRAND_CREDENTIAL}`;
+
+/** Practice descriptor shown as a tagline under the nav wordmark. */
+export const SITE_BRAND_TAGLINE = "Creative + Relational + Expressive Arts Psychotherapy";

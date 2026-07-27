@@ -67,6 +67,7 @@ export default {
         { type: 'meetBlock' },
         { type: 'feelingsCheckInBlock' },
         { type: 'faqBlock' },
+        { type: 'feesBlock' },
         { type: 'ctaBlock' },
         { type: 'proseSectionBlock' },
         { type: 'spacerBlock' },

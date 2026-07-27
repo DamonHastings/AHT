@@ -28,6 +28,12 @@ const SOURCES = [
   { src: path.join(FRONTEND, "photos", "IMG_2481.jpeg"), name: "meet" },
   // Second angle of the therapy room — used as a collage tile in the hero.
   { src: path.join(FRONTEND, "photos", "IMG_0346.JPG"), name: "room" },
+  // Expressive-arts work — the photo strip in the "The Approach" section.
+  { src: path.join(FRONTEND, "photos", "exa1.jpg"), name: "exa1" },
+  { src: path.join(FRONTEND, "photos", "exa2.jpg"), name: "exa2" },
+  { src: path.join(FRONTEND, "photos", "exa3.jpg"), name: "exa3" },
+  // Environment / place — the "My Background" section image.
+  { src: path.join(FRONTEND, "photos", "background.jpg"), name: "background" },
 ];
 
 async function fileExists(filePath) {

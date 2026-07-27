@@ -10,25 +10,11 @@ import {
   Meet,
   FeelingsCheckIn,
   Faq,
+  Fees,
   CTA,
   ProseSection,
 } from "../design-system/site";
 import EditableSection from "./EditableSection";
-
-function heroPrimaryCtaHandler(href) {
-  return () => {
-    const target = typeof href === "string" ? href.trim() : "";
-    if (!target || target === "#") {
-      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-    if (target.startsWith("#")) {
-      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-    window.location.assign(target);
-  };
-}
 
 const SPACER_HEIGHT = {
   sm: "h-8",
@@ -54,60 +40,41 @@ export function renderBlockComponent(component, index) {
     case "heroBlock": {
       const presentation = component.presentation ?? "expressive";
       if (presentation === "photo") {
-        const photoVariant = component.photoVariant ?? "overlay";
-        const overlayRaw = component.photoOverlay ?? "dark";
-        const overlay =
-          overlayRaw === "none" || overlayRaw === null ? null : overlayRaw;
-        const heroImg = component.photoBackgroundImage
-          ? sanityImage(component.photoBackgroundImage, {
-              widths: [768, 1200, 1800, 2400],
-            })
-          : null;
-        const backgroundImage = heroImg?.src ?? "/photos/IMG_2506.jpeg";
-        const blobSide =
-          photoVariant === "organic" ? component.photoBlobSide ?? null : null;
+        // Single, smaller headshot (organic mask) — prefers a CMS image, else the
+        // built-in optimized headshot. The old collage/gallery is retired here.
+        const headshot = component.photoBackgroundImage
+          ? sanityImage(component.photoBackgroundImage, { widths: [480, 768, 1200] })
+          : responsiveImage("meet");
 
-        // Collage tiles for the hero gallery. Prefer CMS-managed photos from the
-        // block's `gallery` field; fall back to the built-in optimized local
-        // photos (office, room, headshot) when the editor hasn't set any.
-        const galleryImages = (Array.isArray(component.gallery) ? component.gallery : [])
-          .filter((image) => image?.asset)
-          .map((image) => sanityImage(image, { widths: [480, 768, 1200, 1800] }))
-          .filter(Boolean)
-          .slice(0, 4);
-        const collageImages = galleryImages.length
-          ? galleryImages
-          : [
-              responsiveImage("hero"),
-              responsiveImage("room"),
-              responsiveImage("meet"),
-            ];
+        // In-page navigation links replace the hero CTA buttons.
+        const heroLinks = [
+          {
+            label: component.primaryCtaText || "More about me",
+            href: component.primaryCtaHref || "#meet",
+          },
+          {
+            label: component.secondaryCtaText || "More about my approach",
+            href: component.secondaryCtaHref || "#the-approach",
+          },
+        ];
 
         return (
           <EditableSection key={key} component={component} className="site-section-hero">
             <HeroSection
-              backgroundImage={backgroundImage}
-              blobImageSrcSet={heroImg?.jpegSrcSet}
-              blobImageWebpSrcSet={heroImg?.webpSrcSet}
-              blobImageSizes="(min-width: 1024px) 52vw, 100vw"
-              collageImages={collageImages}
+              variant="organic"
+              compact
+              blobImage={headshot?.src}
+              blobImageSrcSet={headshot?.jpegSrcSet}
+              blobImageWebpSrcSet={headshot?.webpSrcSet}
+              blobImageSizes="(min-width: 1024px) 22rem, 60vw"
+              overlay={null}
               priority
-              variant="collage"
-              blobSide={blobSide}
-              overlay={overlay}
-              overlayOpacity={component.photoOverlayOpacity ?? 0.4}
               kickerText={component.kickerText}
               heading={component.heading}
               headingEmphasis={component.headingEmphasis}
               subheading={component.body}
-              ctaText={component.primaryCtaText}
-              primaryCtaHref={component.primaryCtaHref}
-              onCtaClick={heroPrimaryCtaHandler(component.primaryCtaHref)}
-              secondaryCtaText={component.secondaryCtaText}
-              secondaryCtaHref={component.secondaryCtaHref}
-              ctaVariant="accent"
-              alignment={component.photoTextAlignment ?? "left"}
-              height={component.photoHeight ?? "screen"}
+              heroLinks={heroLinks}
+              alignment="left"
             />
           </EditableSection>
         );
@@ -173,11 +140,21 @@ export function renderBlockComponent(component, index) {
             heading={component.heading}
             paragraphs={component.paragraphs}
             modalities={component.modalities}
+            images={[
+              responsiveImage("exa1"),
+              responsiveImage("exa2"),
+              responsiveImage("exa3"),
+            ]}
           />
         </EditableSection>
       );
 
-    case "meetBlock":
+    case "meetBlock": {
+      // Background section image: a CMS image if set, else the local
+      // "environment" photo (the headshot now lives in the hero).
+      const meetImg = component.image
+        ? sanityImage(component.image, { widths: [480, 768, 1200] })
+        : responsiveImage("background");
       return (
         <EditableSection key={key} component={component} className="site-section-meet">
           <Meet
@@ -187,26 +164,15 @@ export function renderBlockComponent(component, index) {
             paragraphs={component.paragraphs}
             credentials={component.credentials}
             badgeText={component.badgeText}
-            imageSrc={
-              component.image
-                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.src
-                : "/photos/IMG_2481.jpeg"
-            }
-            imageSrcSet={
-              component.image
-                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.jpegSrcSet
-                : undefined
-            }
-            imageWebpSrcSet={
-              component.image
-                ? sanityImage(component.image, { widths: [480, 768, 1200] })?.webpSrcSet
-                : undefined
-            }
+            imageSrc={meetImg?.src}
+            imageSrcSet={meetImg?.jpegSrcSet}
+            imageWebpSrcSet={meetImg?.webpSrcSet}
             imageSizes="(min-width: 1024px) 50vw, 100vw"
-            imageAlt="Arielle Hastings, LMFT"
+            imageAlt="Arielle Rae Hastings, LMFT"
           />
         </EditableSection>
       );
+    }
 
     case "feelingsCheckInBlock":
       return (
@@ -236,6 +202,21 @@ export function renderBlockComponent(component, index) {
         </EditableSection>
       );
     }
+
+    case "feesBlock":
+      return (
+        <EditableSection key={key} component={component} className="site-section-fees">
+          <Fees
+            eyebrow={component.eyebrow}
+            heading={component.heading}
+            headingEmphasis={component.headingEmphasis}
+            intro={component.intro}
+            whyInvestment={component.whyInvestment}
+            feesBilling={component.feesBilling}
+            sessionFee={component.sessionFee}
+          />
+        </EditableSection>
+      );
 
     case "ctaBlock":
       return (

@@ -14,7 +14,7 @@ export default function CTA({
   return (
     <section
       id="contact"
-      className="py-16 md:py-28 px-6 md:px-20 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 flex-wrap relative overflow-hidden"
+      className="py-16 md:py-28 px-6 md:px-20 flex flex-col items-start gap-8 relative overflow-hidden"
       style={{
         background: "linear-gradient(120deg, var(--terracotta) 0%, #8A4035 100%)",
         color: "white",
@@ -52,7 +52,7 @@ export default function CTA({
       <a
         href={buttonHref}
         data-analytics-source="cta-section"
-        className="site-button-text inline-block py-4 px-10 rounded-full text-[0.92rem] whitespace-nowrap transition-all hover:-translate-y-0.5 relative z-10"
+        className="site-button-text inline-block py-4 px-10 rounded-full text-[0.92rem] whitespace-nowrap transition-all hover:-translate-y-0.5 relative z-10 self-start"
         style={{
           background: "white",
           color: "var(--terracotta)",

@@ -28,6 +28,7 @@ const SITE_BLOCK_TYPES = new Set([
   "meetBlock",
   "feelingsCheckInBlock",
   "faqBlock",
+  "feesBlock",
   "ctaBlock",
   "proseSectionBlock",
   "spacerBlock",
@@ -131,43 +132,47 @@ export default function HomePage() {
   );
 }
 
-const heroImage = responsiveImage("hero");
-const meetImage = responsiveImage("meet");
+const headshotImage = responsiveImage("meet");
+const backgroundImage = responsiveImage("background");
+const exaImages = [
+  responsiveImage("exa1"),
+  responsiveImage("exa2"),
+  responsiveImage("exa3"),
+];
 
 function StaticHomeLayout() {
   return (
     <>
       <HeroSection
-        backgroundImage={heroImage.src}
-        blobImageSrcSet={heroImage.jpegSrcSet}
-        blobImageWebpSrcSet={heroImage.webpSrcSet}
-        blobImageSizes="(min-width: 1024px) 52vw, 100vw"
+        blobImage={headshotImage.src}
+        blobImageSrcSet={headshotImage.jpegSrcSet}
+        blobImageWebpSrcSet={headshotImage.webpSrcSet}
+        blobImageSizes="(min-width: 1024px) 22rem, 60vw"
         priority
         variant="organic"
-        blobSide="left"
+        compact
         overlay={null}
         kickerText="Expressive Arts Therapy · Davis, CA"
-        heading="If reaching out was hard, I'm glad you landed here."
-        headingEmphasis="glad you landed here."
-        subheading="I'm an expressive arts therapist in Davis — warm and playful, and also willing to bring loving challenge when it helps. We can use movement, color, metaphor, making, and nature when they fit you; we can also talk it through. When you're ready, the next step is a free consultation so we can see if we're a good match."
-        ctaText="Schedule a free consultation"
-        primaryCtaHref="#contact"
-        secondaryCtaText="Who I help →"
-        secondaryCtaHref="/#who-i-help"
-        ctaVariant="accent"
+        heading="THERAPEUTIC SUPPORT TO HELP SEE A WAY THROUGH"
+        headingEmphasis="THERAPEUTIC SUPPORT"
+        subheading="Warm, relational, and creative psychotherapy in Davis — for role transitions, loss and grief, anxiety, and life alongside parenthood."
+        heroLinks={[
+          { label: "More about me", href: "#meet" },
+          { label: "More about my approach", href: "#the-approach" },
+        ]}
         alignment="left"
         className="pt-[4.5rem]"
       />
       <PullQuote />
       <WhoIHelp />
       <TheSpace />
-      <ExpressiveArts />
+      <ExpressiveArts images={exaImages} />
       <Meet
-        imageSrc={meetImage.src}
-        imageSrcSet={meetImage.jpegSrcSet}
-        imageWebpSrcSet={meetImage.webpSrcSet}
+        imageSrc={backgroundImage.src}
+        imageSrcSet={backgroundImage.jpegSrcSet}
+        imageWebpSrcSet={backgroundImage.webpSrcSet}
         imageSizes="(min-width: 1024px) 50vw, 100vw"
-        imageAlt="Arielle Hastings, LMFT"
+        imageAlt="A garden in golden light — the environment that shapes the work"
       />
       <FeelingsCheckIn />
     </>

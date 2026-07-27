@@ -69,3 +69,50 @@ export async function sendConsultationEmail(appointment) {
     return { sent: false, error: err.message }
   }
 }
+
+/**
+ * Compile a forming-groups interest submission into a plain-text email body.
+ */
+export function compileGroupInterestEmail(data) {
+  const interests = Array.isArray(data.interests)
+    ? data.interests.join('; ')
+    : data.interests
+  const lines = [
+    'New group interest submission',
+    '---',
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    interests ? `Interested in: ${interests}` : null,
+    data.format ? `Preferred format: ${data.format}` : null,
+    data.notes ? `Notes:\n${data.notes}` : null,
+  ].filter(Boolean)
+  return lines.join('\n')
+}
+
+/**
+ * Send a group-interest submission as email to the practitioner.
+ * No-op if PRACTITIONER_EMAIL or SMTP/MAILER_URL is not configured.
+ */
+export async function sendGroupInterestEmail(data) {
+  const to = process.env.PRACTITIONER_EMAIL
+  if (!to) return { sent: false, reason: 'PRACTITIONER_EMAIL not set' }
+
+  const transporter = getTransporter()
+  if (!transporter) return { sent: false, reason: 'No mail transport configured (SMTP or MAILER_URL)' }
+
+  const subject = `Group interest from ${data.name}`
+  const text = compileGroupInterestEmail(data)
+
+  try {
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM || process.env.SMTP_USER || 'noreply@localhost',
+      to,
+      subject,
+      text,
+    })
+    return { sent: true }
+  } catch (err) {
+    console.error('Send group interest email error:', err)
+    return { sent: false, error: err.message }
+  }
+}

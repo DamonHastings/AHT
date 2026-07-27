@@ -10,7 +10,9 @@ import { trackEvent } from "../utils/analytics";
 
 const NAV_LINKS = [
   { label: "Who I Help", href: "/#who-i-help" },
+  { label: "The Approach", href: "/#the-approach" },
   { label: "Meet Arielle", href: "/#meet" },
+  { label: "Fees", href: "/#fees" },
   { label: "Contact", href: "#contact" },
 ];
 

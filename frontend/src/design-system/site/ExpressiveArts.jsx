@@ -1,15 +1,18 @@
 import PropTypes from "prop-types";
 
 /**
- * V3 Expressive Arts - modalities list + quote blocks
+ * V3 "The Approach" — intro copy, an optional photo strip (expressive-arts work),
+ * and the modalities list rendered as an aligned two-column table.
  */
 export default function ExpressiveArts({
   eyebrow = "the approach",
   heading = "Collaborative, directive, and tuned to the moment.",
   paragraphs = [
-    "Expressive arts therapy weaves drawing, movement, writing, music, metaphor, symbolism, and play — not because you need to be an artist, but because imagination and the body sometimes know things the mind hasn't caught up to yet. We can go outside or stay in the room; we can stay verbal when that's what you need.",
-    "I'm responsive to what you bring and direct when that's useful — so you're not carrying the whole hour alone, and you're also not being talked at. Loving challenge and tolerable discomfort are part of growth; so is humor and curiosity. The form follows what you need.",
+    "I can specify your treatment based on needs and strengths — whether it's brief or targeted (behavior-based, acute challenges, a short-term goal, life transitions) or spanning several years (relational, attachment-based, processing complex grief), and perhaps there are mixtures of it all.",
+    "I connect with a client-centered and relational framework, incorporating biopsychology, existential influence, movement-based and narrative therapy, and other creative modalities to find or deepen your sense of self-awareness, introspection, and authentic expression — always looking through a larger societal lens to support understanding life's many layers.",
+    "My style is warm, accepting, flexible, curious, and playful — and I'll utilize gentle, shifting challenges to support your growth, celebrate with you, and share your frustrations and pain. The therapeutic process should feel alive, active, and fluid.",
   ],
+  images = [],
   modalities = [
     { name: "Drawing & painting", detail: "for what has no shape yet" },
     { name: "Sandtray & play", detail: "especially for children & teens" },
@@ -20,8 +23,13 @@ export default function ExpressiveArts({
     { name: "Nature & space", detail: "when the room isn't enough" },
   ],
 }) {
+  const galleryImages = (images || []).filter(Boolean).slice(0, 3);
+
   return (
-    <section className="py-16 md:py-28 px-6 md:px-20 max-w-[1200px] mx-auto relative">
+    <section
+      id="the-approach"
+      className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 max-w-[1200px] mx-auto relative"
+    >
       {/* Orbiting circles */}
       <div className="absolute top-20 right-4 hidden lg:block pointer-events-none" aria-hidden>
         <div className="relative w-[100px] h-[100px]">
@@ -41,42 +49,57 @@ export default function ExpressiveArts({
       </div>
 
       <div className="max-w-[760px] mx-auto">
-        <span
-          className="site-eyebrow block mb-2"
-          style={{
-            color: "var(--terracotta)",
-          }}
-        >
+        <span className="site-eyebrow block mb-2" style={{ color: "var(--terracotta)" }}>
           {eyebrow}
         </span>
-        <h2
-          className="site-heading text-2xl md:text-3xl mb-6"
-        >
-          {heading}
-        </h2>
+        <h2 className="site-heading text-2xl md:text-3xl mb-6">{heading}</h2>
 
         {paragraphs.map((p, idx) => (
-          <p
-            key={idx}
-            className="site-body-copy text-base mb-4"
-          >
+          <p key={idx} className="site-body-copy text-base mb-4">
             {p}
           </p>
         ))}
 
-        <div className="mt-8 flex flex-col">
+        {galleryImages.length > 0 && (
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {galleryImages.map((img, i) => (
+              <div
+                key={img.src || i}
+                className="overflow-hidden rounded-2xl aspect-[4/5] shadow-md"
+              >
+                <picture>
+                  {img.webpSrcSet && (
+                    <source
+                      type="image/webp"
+                      srcSet={img.webpSrcSet}
+                      sizes="(min-width: 1024px) 240px, 40vw"
+                    />
+                  )}
+                  <img
+                    src={img.src}
+                    srcSet={img.jpegSrcSet}
+                    sizes="(min-width: 1024px) 240px, 40vw"
+                    alt={img.alt || ""}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                </picture>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-10 flex flex-col">
           {modalities.map((m, idx) => (
             <div
               key={idx}
-              className="py-4 border-b border-[rgba(28,39,48,0.08)] flex justify-between items-center text-[0.95rem] cursor-default transition-colors hover:text-[var(--teal-deep)]"
+              className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 py-4 border-b border-[rgba(57,67,79,0.1)] text-[0.95rem] cursor-default transition-colors hover:text-[var(--teal-deep)]"
             >
               <span className="font-normal">{m.name}</span>
               <span
-                className="site-ui-label text-[0.75rem]"
-                style={{
-                  color: "var(--terracotta)",
-                  opacity: 0.78,
-                }}
+                className="site-ui-label text-[0.75rem] text-right"
+                style={{ color: "var(--terracotta)", opacity: 0.78 }}
               >
                 {m.detail}
               </span>
@@ -88,10 +111,18 @@ export default function ExpressiveArts({
   );
 }
 
+const imageShape = PropTypes.shape({
+  src: PropTypes.string,
+  jpegSrcSet: PropTypes.string,
+  webpSrcSet: PropTypes.string,
+  alt: PropTypes.string,
+});
+
 ExpressiveArts.propTypes = {
   eyebrow: PropTypes.string,
   heading: PropTypes.string,
   paragraphs: PropTypes.arrayOf(PropTypes.string),
+  images: PropTypes.arrayOf(imageShape),
   modalities: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,

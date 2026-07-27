@@ -49,7 +49,9 @@ html {
   --linen: #f4f0e8;
   --linen-deep: #eae4d8;
   --navy: #2c3a4a;
-  --ink: #1c2730;
+  /* Primary text color. Softened from near-black (#1c2730) to a warmer charcoal
+     so headings/body read less harsh while still passing WCAG AA on --warm-white. */
+  --ink: #39434f;
   --gold: #c4973a;
   /* Accessible-on-linen gold for small text (eyebrows). --gold is only 2.36:1
      on --linen; this passes WCAG AA (4.9:1). */
@@ -91,7 +93,7 @@ html {
   font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.72;
-  color: rgba(28, 39, 48, 0.82);
+  color: rgba(57, 67, 79, 0.88);
 }
 
 .site-eyebrow,

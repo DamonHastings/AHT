@@ -27,6 +27,8 @@ export default function HeroSection({
   blobImageWebpSrcSet,
   blobImageSizes,
   collageImages,
+  compact = false,
+  heroLinks = null,
   priority = false,
   className = "",
 }) {
@@ -144,7 +146,21 @@ export default function HeroSection({
         </p>
       )}
 
-      {(ctaText || secondaryCtaText) && (
+      {heroLinks?.length ? (
+        <div className="flex w-full flex-wrap gap-x-8 gap-y-3">
+          {heroLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="site-ui-label inline-flex items-center gap-2 underline underline-offset-4 transition-[gap] hover:gap-3"
+              style={{ color: "var(--teal-deep)", textDecoration: "none" }}
+            >
+              {link.label}
+              <span aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      ) : (ctaText || secondaryCtaText) ? (
         <div className="flex w-full flex-wrap gap-4">
           {ctaText &&
             (usePrimaryAnchor ? (
@@ -190,7 +206,7 @@ export default function HeroSection({
             </a>
           )}
         </div>
-      )}
+      ) : null}
     </div>
   );
 
@@ -203,17 +219,26 @@ export default function HeroSection({
         ? "px-4 sm:px-6 lg:pl-8 lg:pr-2"
         : "";
 
-  /** Slightly wider photo column than 45% / 55%; mask size is capped so it does not spill past the hero. */
-  const organicLgGridClass =
-    organicImageSide === "left"
+  /** Slightly wider photo column than 45% / 55%; mask size is capped so it does not spill past the hero.
+   *  Compact mode gives the image column less width so a single headshot reads smaller. */
+  const organicLgGridClass = compact
+    ? organicImageSide === "left"
+      ? "lg:grid-cols-[minmax(0,40%)_minmax(0,60%)]"
+      : "lg:grid-cols-[minmax(0,60%)_minmax(0,40%)]"
+    : organicImageSide === "left"
       ? "lg:grid-cols-[minmax(0,52%)_minmax(0,48%)]"
       : "lg:grid-cols-[minmax(0,48%)_minmax(0,52%)]";
+
+  /** Frame size caps for the single organic image. Compact = a smaller headshot. */
+  const organicFrameClass = compact
+    ? "relative mx-auto w-full min-w-0 max-w-[20rem] max-lg:aspect-[4/5] max-lg:max-h-[min(44vh,17rem)] lg:aspect-[4/5] lg:max-w-[22rem] lg:max-h-[min(56vh,30rem)]"
+    : "relative mx-auto w-full min-w-0 max-w-full max-lg:aspect-[4/3] max-lg:max-h-[min(48vh,19rem)] sm:max-lg:max-h-[min(50vh,22rem)] lg:aspect-[3/4] lg:w-full lg:max-h-[min(72vh,44rem)]";
 
   const blobVisual = (
     <div
       className={`relative flex w-full min-w-0 min-h-0 items-center justify-center py-8 sm:py-10 lg:py-12 ${blobFramePadding}`}
     >
-      <div className="relative mx-auto w-full min-w-0 max-w-full max-lg:aspect-[4/3] max-lg:max-h-[min(48vh,19rem)] sm:max-lg:max-h-[min(50vh,22rem)] lg:aspect-[3/4] lg:w-full lg:max-h-[min(72vh,44rem)]">
+      <div className={organicFrameClass}>
         <div
           className="absolute inset-0 overflow-hidden shadow-2xl"
           style={{
@@ -398,6 +423,13 @@ HeroSection.propTypes = {
       jpegSrcSet: PropTypes.string,
       webpSrcSet: PropTypes.string,
       alt: PropTypes.string,
+    })
+  ),
+  compact: PropTypes.bool,
+  heroLinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired,
     })
   ),
   priority: PropTypes.bool,

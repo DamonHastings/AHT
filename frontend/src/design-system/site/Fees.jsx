@@ -2,19 +2,25 @@ import PropTypes from "prop-types";
 import { trackEvent } from "../../utils/analytics";
 
 /**
- * Fees / "Investment & fit" section. Private-pay / out-of-network framing with
- * superbill + sliding-scale notes. All copy is sourced from Sanity siteSettings.fees
- * so it stays editable; any blank field simply hides that line. Includes visible
- * contact details (phone/email) and a consult CTA.
+ * Investment / Insurance / Fees + Billing section. Private-pay / out-of-network
+ * framing with two callouts — "why therapy is a good investment" and "how fees &
+ * billing are handled" — plus an optional intro and a consult CTA. Copy is
+ * editable via the Sanity feesBlock; rates are shared at the consultation.
  */
 export default function Fees({
-  eyebrow = "investment & fit",
-  heading = "Straightforward about cost.",
-  headingEmphasis = "cost.",
+  eyebrow = "investment, insurance & billing",
+  heading = "An investment in yourself — and the people in your life.",
+  headingEmphasis = "in yourself",
+  intro = "Therapy is an investment of time, energy, and money — and it can be one of the most worthwhile: a steadier relationship with yourself that ripples out to everyone around you.",
+  whyInvestment = {
+    title: "Why therapy is a good investment",
+    body: "Working privately — rather than through insurance — keeps our work confidential and clinically driven by you and me, not by an insurer's requirements, diagnoses, or session caps. That means care that's flexible, personal, and paced to what you actually need, for as long (or short) as it serves you.",
+  },
+  feesBilling = {
+    title: "How fees & billing are handled",
+    body: "Session rates are shared during your free consultation. I'm an out-of-network provider and can provide a monthly superbill (a detailed receipt) you can submit to your insurance for possible partial reimbursement — check your plan for out-of-network mental health benefits. Payment methods are set at our first session, and a limited number of reduced-fee / sliding-scale spots are available; if cost is a barrier, please mention it when you reach out.",
+  },
   sessionFee,
-  consultNote = "Free 15-minute phone consultation",
-  paymentNote = "I'm an out-of-network provider. I can provide a monthly superbill (a detailed receipt) you can submit to your insurance for possible partial reimbursement — check your plan for out-of-network mental health benefits.",
-  slidingScaleNote = "A limited number of reduced-fee / sliding-scale spots are available. If cost is a barrier, please mention it when you reach out — we can talk it through.",
   contactEmail,
   contactPhone,
   ctaText = "Schedule a free consultation",
@@ -32,6 +38,8 @@ export default function Fees({
     );
   };
 
+  const callouts = [whyInvestment, feesBilling].filter((c) => c && (c.title || c.body));
+
   return (
     <section
       id="fees"
@@ -42,57 +50,32 @@ export default function Fees({
         <span className="site-eyebrow block mb-2" style={{ color: "var(--terracotta)" }}>
           {eyebrow}
         </span>
-        <h2 className="site-heading text-2xl md:text-3xl mb-10 max-w-[24ch]">{renderHeading()}</h2>
+        <h2 className="site-heading text-2xl md:text-3xl mb-4 max-w-[24ch]">{renderHeading()}</h2>
+        {intro && (
+          <p className="site-body-copy text-base mb-10 max-w-[62ch]">{intro}</p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {/* Consultation + session fee */}
-          <div
-            className="rounded-[20px] p-8 md:p-10"
-            style={{ background: "var(--warm-white)", border: "1px solid rgba(28,39,48,0.08)" }}
-          >
-            <p className="site-ui-label mb-2" style={{ color: "var(--teal-deep)", fontStyle: "normal" }}>
-              first step
-            </p>
-            <p className="site-heading text-xl mb-1" style={{ fontStyle: "normal" }}>
-              {consultNote}
-            </p>
-            <p className="site-body-copy text-[0.95rem] mb-6">
-              A no-pressure chance to see if we&rsquo;re a good match before booking anything.
-            </p>
-
-            <p className="site-ui-label mb-2" style={{ color: "var(--teal-deep)", fontStyle: "normal" }}>
-              ongoing sessions
-            </p>
-            <p className="site-heading text-xl" style={{ fontStyle: "normal" }}>
-              {sessionFee || "Rates shared during your free consultation"}
-            </p>
-          </div>
-
-          {/* Payment / insurance / sliding scale */}
-          <div className="flex flex-col gap-6">
-            {paymentNote && (
-              <div
-                className="rounded-[20px] p-7 md:p-8"
-                style={{ background: "var(--warm-white)", border: "1px solid rgba(28,39,48,0.08)" }}
+          {callouts.map((c, idx) => (
+            <div
+              key={idx}
+              className="rounded-[20px] p-8 md:p-10"
+              style={{ background: "var(--warm-white)", border: "1px solid rgba(57,67,79,0.08)" }}
+            >
+              <p
+                className="site-ui-label mb-3"
+                style={{ color: "var(--teal-deep)", fontStyle: "normal" }}
               >
-                <p className="site-ui-label mb-2" style={{ color: "var(--teal-deep)", fontStyle: "normal" }}>
-                  insurance
+                {c.title}
+              </p>
+              <p className="site-body-copy text-[0.98rem]">{c.body}</p>
+              {idx === 1 && sessionFee && (
+                <p className="site-heading text-lg mt-4" style={{ fontStyle: "normal" }}>
+                  {sessionFee}
                 </p>
-                <p className="site-body-copy text-[0.95rem]">{paymentNote}</p>
-              </div>
-            )}
-            {slidingScaleNote && (
-              <div
-                className="rounded-[20px] p-7 md:p-8"
-                style={{ background: "var(--warm-white)", border: "1px solid rgba(28,39,48,0.08)" }}
-              >
-                <p className="site-ui-label mb-2" style={{ color: "var(--teal-deep)", fontStyle: "normal" }}>
-                  if cost is a barrier
-                </p>
-                <p className="site-body-copy text-[0.95rem]">{slidingScaleNote}</p>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* CTA + contact */}
@@ -135,14 +118,19 @@ export default function Fees({
   );
 }
 
+const calloutShape = PropTypes.shape({
+  title: PropTypes.string,
+  body: PropTypes.string,
+});
+
 Fees.propTypes = {
   eyebrow: PropTypes.string,
   heading: PropTypes.string,
   headingEmphasis: PropTypes.string,
+  intro: PropTypes.string,
+  whyInvestment: calloutShape,
+  feesBilling: calloutShape,
   sessionFee: PropTypes.string,
-  consultNote: PropTypes.string,
-  paymentNote: PropTypes.string,
-  slidingScaleNote: PropTypes.string,
   contactEmail: PropTypes.string,
   contactPhone: PropTypes.string,
   ctaText: PropTypes.string,

@@ -483,6 +483,43 @@ export const faqBlock = {
   preview: { prepare: () => ({ title: 'FAQ' }) },
 };
 
+export const feesBlock = {
+  name: 'feesBlock',
+  title: 'Investment / Fees + Billing',
+  type: 'object',
+  fields: [
+    { name: 'eyebrow', title: 'Eyebrow', type: 'string', initialValue: 'investment, insurance & billing' },
+    { name: 'heading', title: 'Heading', type: 'string', initialValue: 'An investment in yourself — and the people in your life.' },
+    { name: 'headingEmphasis', title: 'Heading Emphasis (italic)', type: 'string', initialValue: 'in yourself' },
+    { name: 'intro', title: 'Intro', type: 'text', rows: 3 },
+    {
+      name: 'whyInvestment',
+      title: 'Callout — Why therapy is a good investment',
+      type: 'object',
+      fields: [
+        { name: 'title', title: 'Title', type: 'string', initialValue: 'Why therapy is a good investment' },
+        { name: 'body', title: 'Body', type: 'text', rows: 5 },
+      ],
+    },
+    {
+      name: 'feesBilling',
+      title: 'Callout — How fees & billing are handled',
+      type: 'object',
+      fields: [
+        { name: 'title', title: 'Title', type: 'string', initialValue: 'How fees & billing are handled' },
+        { name: 'body', title: 'Body', type: 'text', rows: 5 },
+      ],
+    },
+    {
+      name: 'sessionFee',
+      title: 'Session fee (optional)',
+      type: 'string',
+      description: 'Leave blank to keep "rates shared during your free consultation".',
+    },
+  ],
+  preview: { prepare: () => ({ title: 'Investment / Fees + Billing' }) },
+};
+
 export const ctaBlock = {
   name: 'ctaBlock',
   title: 'CTA',

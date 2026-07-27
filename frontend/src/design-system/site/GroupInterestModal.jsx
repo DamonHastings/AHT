@@ -1,6 +1,7 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { SITE_CONTACT } from "../../content/siteContact";
+import { apiUrl } from "../../utils/api";
 import { trackEvent } from "../../utils/analytics";
 
 const FOCUSABLE =
@@ -15,22 +16,23 @@ const INTEREST_OPTIONS = [
 
 const FORMAT_OPTIONS = ["In person", "Telehealth", "Either"];
 
-const INITIAL = { name: "", email: "", interests: [], format: "", notes: "" };
+// Honeypot `company` must stay empty — bots that fill every field populate it.
+const INITIAL = { name: "", email: "", interests: [], format: "", notes: "", company: "" };
 
 /**
- * Short "gauge interest" questionnaire for the forming Groups offering. Rather
- * than booking a consult, answers are compiled into a pre-addressed email to the
- * practitioner (mailto) — no backend required, and it works on the static site.
+ * Short "gauge interest" questionnaire for the forming Groups offering. Answers
+ * are submitted to the backend, which emails the practitioner directly (same
+ * infra as the consultation form).
  */
-export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) {
+export default function GroupInterestModal({ isOpen, onClose }) {
   const titleId = useId();
   const descriptionId = useId();
   const [form, setForm] = useState(INITIAL);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const dialogRef = useRef(null);
   const previouslyFocusedRef = useRef(null);
-
-  const to = recipientEmail || SITE_CONTACT.email;
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -79,24 +81,9 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
     if (isOpen) {
       setForm(INITIAL);
       setSubmitted(false);
+      setError("");
     }
   }, [isOpen]);
-
-  const mailtoHref = useMemo(() => {
-    const subject = `Group interest — ${form.name || "someone"}`;
-    const body = [
-      "I'm interested in the groups you're forming.",
-      "----",
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      form.interests.length ? `Interested in: ${form.interests.join("; ")}` : null,
-      form.format ? `Preferred format: ${form.format}` : null,
-      form.notes ? `Notes:\n${form.notes}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }, [form, to]);
 
   if (!isOpen) return null;
 
@@ -114,12 +101,34 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Open the visitor's mail client with the compiled interest email.
-    window.location.href = mailtoHref;
-    trackEvent("Group Interest Submitted");
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await fetch(apiUrl("/api/group-interest"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          interests: form.interests,
+          format: form.format,
+          notes: form.notes,
+          company: form.company, // honeypot
+        }),
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || "We couldn't send that. Please try again.");
+      }
+      trackEvent("Group Interest Submitted");
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || "We couldn't send that. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -189,12 +198,15 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
               borderColor: "rgba(91,158,160,0.28)",
             }}
           >
-            <h3 className="site-heading mb-3 text-2xl">Your email is ready to send.</h3>
+            <h3 className="site-heading mb-3 text-2xl">Thank you — your interest is in.</h3>
             <p className="site-body-copy">
-              Your mail app should have opened with your answers — just hit send and it&rsquo;ll
-              reach me. If nothing opened, you can email me directly at{" "}
-              <a href={mailtoHref} style={{ color: "var(--teal-deep)", textDecoration: "underline" }}>
-                {to}
+              Thanks for sharing. I&rsquo;ll only reach out if a group takes shape that fits what
+              you&rsquo;re looking for. If you&rsquo;d rather reach me directly, you can email{" "}
+              <a
+                href={`mailto:${SITE_CONTACT.email}`}
+                style={{ color: "var(--teal-deep)", textDecoration: "underline" }}
+              >
+                {SITE_CONTACT.email}
               </a>
               .
             </p>
@@ -209,6 +221,23 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="grid gap-5">
+            {/* Honeypot: hidden from humans, off-screen and skipped by tab order. */}
+            <div
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+            >
+              <label htmlFor="group-interest-company">Company (leave blank)</label>
+              <input
+                id="group-interest-company"
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.company}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label htmlFor="group-interest-name" className={labelClass}>
@@ -319,20 +348,34 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
             </div>
 
             <p className="site-body-copy text-sm" style={{ opacity: 0.75 }}>
-              Submitting opens your email app with your answers, addressed to me — just press send.
-              Please don&rsquo;t include urgent or sensitive details here.
+              This just sends me your answers so I can gauge interest — no commitment. Please
+              don&rsquo;t include urgent or sensitive details here.
             </p>
+
+            {error && (
+              <p
+                className="rounded-2xl border px-4 py-3 text-sm"
+                style={{
+                  background: "rgba(176,90,74,0.1)",
+                  borderColor: "rgba(176,90,74,0.3)",
+                  color: "var(--terracotta)",
+                }}
+              >
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
-              className="site-button-text mt-1 rounded-full px-8 py-4 text-[0.9rem] uppercase transition hover:-translate-y-0.5"
+              disabled={submitting}
+              className="site-button-text mt-1 rounded-full px-8 py-4 text-[0.9rem] uppercase transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
               style={{
                 background: "var(--teal-deep)",
                 color: "white",
                 boxShadow: "0 10px 32px rgba(62,125,128,0.26)",
               }}
             >
-              Send my interest
+              {submitting ? "Sending..." : "Send my interest"}
             </button>
           </form>
         )}
@@ -344,5 +387,4 @@ export default function GroupInterestModal({ isOpen, onClose, recipientEmail }) 
 GroupInterestModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  recipientEmail: PropTypes.string,
 };

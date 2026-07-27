@@ -210,12 +210,13 @@ export default function ConsultationModal({ isOpen, onClose, bookingUrl }) {
             <button
               type="button"
               onClick={onClose}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border transition hover:-translate-y-0.5 md:right-6 md:top-6"
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full transition hover:-translate-y-0.5 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/60 md:right-6 md:top-6"
               style={{
-                borderColor: "rgba(28,39,48,0.14)",
-                color: "var(--ink)",
-                background: "rgba(255,255,255,0.68)",
-                fontSize: "1.75rem",
+                background: "var(--terracotta)",
+                color: "white",
+                fontSize: "1.9rem",
+                lineHeight: 1,
+                boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
               }}
               aria-label="Close booking panel"
             >
@@ -224,13 +225,14 @@ export default function ConsultationModal({ isOpen, onClose, bookingUrl }) {
             <p className="site-eyebrow mb-1" style={{ color: "var(--teal-deep)" }}>
               Free consultation
             </p>
-            <h2 id={titleId} className="site-heading text-2xl md:text-4xl pr-12">
-              Pick a time that works.
+            <h2 id={titleId} className="site-heading text-2xl md:text-4xl pr-14">
+              Request your consultation time.
             </h2>
-            <p id={descriptionId} className="site-body-copy mt-2 text-[1.25rem]">
-              Choose a free 15-minute slot below — you&rsquo;ll get an email confirmation. Please
-              don&rsquo;t share urgent or sensitive details here; if you&rsquo;re in crisis, call
-              911 or your local crisis line.
+            <p id={descriptionId} className="site-body-copy mt-2 text-[1.05rem]">
+              Request your consultation time below — I&rsquo;ll follow up via email with a
+              confirmation or suggest a different time. Please don&rsquo;t share urgent or
+              sensitive details here; if you&rsquo;re in crisis, call 911 or your local crisis
+              line.
             </p>
           </header>
 
@@ -294,11 +296,13 @@ export default function ConsultationModal({ isOpen, onClose, bookingUrl }) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border transition hover:-translate-y-0.5 md:right-6 md:top-6"
+          className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full transition hover:-translate-y-0.5 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/60 md:right-6 md:top-6"
           style={{
-            borderColor: "rgba(28,39,48,0.14)",
-            color: "var(--ink)",
-            background: "rgba(255,255,255,0.68)",
+            background: "var(--terracotta)",
+            color: "white",
+            fontSize: "1.9rem",
+            lineHeight: 1,
+            boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
           }}
           aria-label="Close consultation form"
         >

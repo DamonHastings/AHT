@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/database.js'
 import contactRoutes from './routes/contact.js'
 import appointmentRoutes from './routes/appointments.js'
+import groupInterestRoutes from './routes/groupInterest.js'
 import userRoutes from './routes/users.js'
 
 dotenv.config()
@@ -39,6 +40,7 @@ app.use(express.urlencoded({ extended: true }))
 // Routes
 app.use('/api/contact', contactRoutes)
 app.use('/api/appointments', appointmentRoutes)
+app.use('/api/group-interest', groupInterestRoutes)
 app.use('/api/users', userRoutes)
 
 // Health check

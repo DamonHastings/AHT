@@ -1,11 +1,10 @@
 import LegalLayout from "./legal/LegalLayout";
-import ReviewNote from "./legal/ReviewNote";
 import { useSiteSettings } from "../hooks/useSiteSettings";
 
 export default function PrivacyPolicyPage() {
   const { siteSettings } = useSiteSettings();
   const practice =
-    siteSettings?.businessName || siteSettings?.title || "Arielle Hastings, LMFT";
+    siteSettings?.businessName || siteSettings?.title || "Arielle Rae Hastings, LMFT";
   const email = siteSettings?.contactEmail;
 
   return (
@@ -13,10 +12,8 @@ export default function PrivacyPolicyPage() {
       title="Privacy Policy"
       metaDescription="How this website collects, uses, and protects the information you share when you request a consultation."
       path="/privacy"
-      lastUpdated="[Month Year]"
+      lastUpdated="July 2026"
     >
-      <ReviewNote />
-
       <p className="site-body-copy mb-6">
         This Privacy Policy describes how {practice} (&ldquo;we,&rdquo; &ldquo;I,&rdquo; or
         &ldquo;the practice&rdquo;) handles information collected through this website. It applies

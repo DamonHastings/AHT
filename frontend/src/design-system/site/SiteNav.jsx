@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import logoMarkTeal from "../../assets/LogoMarkTeal.svg";
-import { SITE_BRAND_LOCKUP } from "../../content/siteBrand";
+import { SITE_BRAND_LOCKUP, SITE_BRAND_TAGLINE } from "../../content/siteBrand";
 
 /**
  * V3 Navigation - fixed top nav with logo, links, and CTA.
@@ -11,6 +11,7 @@ import { SITE_BRAND_LOCKUP } from "../../content/siteBrand";
  */
 export default function SiteNav({
   logoName = SITE_BRAND_LOCKUP,
+  tagline = SITE_BRAND_TAGLINE,
   links = [
     { label: "About", href: "#" },
     { label: "Who I Help", href: "#" },
@@ -111,6 +112,14 @@ export default function SiteNav({
               style={{ color: "var(--teal-deep)" }}
             >
               {logoCredential}
+            </span>
+          )}
+          {tagline && (
+            <span
+              className="hidden lg:block mt-1 text-[0.7rem] tracking-[0.01em]"
+              style={{ color: "var(--ink)", opacity: 0.6 }}
+            >
+              {tagline}
             </span>
           )}
         </span>
@@ -242,6 +251,7 @@ export default function SiteNav({
 
 SiteNav.propTypes = {
   logoName: PropTypes.string,
+  tagline: PropTypes.string,
   links: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
