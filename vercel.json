@@ -39,6 +39,10 @@
       "dest": "frontend/$1"
     },
     {
+      "src": "/privacy/?",
+      "dest": "frontend/privacy/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "frontend/index.html"
     }
