@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
  * V3 "The Approach" — intro copy, an optional photo strip (expressive-arts work),
  * and the modalities list rendered as an aligned two-column table.
  */
-export default function ExpressiveArts({
+export default function TheApproach({
   eyebrow = "the approach",
   heading = "Collaborative, directive, and tuned to the moment.",
   paragraphs = [
@@ -118,7 +118,7 @@ const imageShape = PropTypes.shape({
   alt: PropTypes.string,
 });
 
-ExpressiveArts.propTypes = {
+TheApproach.propTypes = {
   eyebrow: PropTypes.string,
   heading: PropTypes.string,
   paragraphs: PropTypes.arrayOf(PropTypes.string),

@@ -12,7 +12,7 @@ import {
   PullQuote,
   WhoIHelp,
   TheSpace,
-  ExpressiveArts,
+  TheApproach,
   Meet,
   FeelingsCheckIn,
   Faq,
@@ -166,7 +166,7 @@ function StaticHomeLayout() {
       <PullQuote />
       <WhoIHelp />
       <TheSpace />
-      <ExpressiveArts images={exaImages} />
+      <TheApproach images={exaImages} />
       <Meet
         imageSrc={backgroundImage.src}
         imageSrcSet={backgroundImage.jpegSrcSet}

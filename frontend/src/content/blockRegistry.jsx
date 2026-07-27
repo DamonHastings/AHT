@@ -6,7 +6,7 @@ import {
   PullQuote,
   WhoIHelp,
   TheSpace,
-  ExpressiveArts,
+  TheApproach,
   Meet,
   FeelingsCheckIn,
   Faq,
@@ -135,7 +135,7 @@ export function renderBlockComponent(component, index) {
     case "expressiveArtsBlock":
       return (
         <EditableSection key={key} component={component} className="site-section-expressive">
-          <ExpressiveArts
+          <TheApproach
             eyebrow={component.eyebrow}
             heading={component.heading}
             paragraphs={component.paragraphs}
