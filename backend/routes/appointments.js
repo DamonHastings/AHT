@@ -1,16 +1,16 @@
 import express from 'express'
-import Appointment from '../models/Appointment.js'
 import { sendConsultationEmail } from '../lib/email.js'
 
 const router = express.Router()
 
-// POST /api/appointments - Create consultation request (V1: compiles to email when configured)
+// POST /api/appointments - Consultation request, compiled to email to the
+// practitioner. Email-only (not persisted).
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, preferredDate, preferredTime, message, company } = req.body
 
     // Honeypot: legitimate clients never fill this hidden field. Respond 200 so
-    // bots don't learn they were filtered, but skip persisting/emailing.
+    // bots don't learn they were filtered, but skip emailing.
     if (company) {
       return res.status(200).json({ message: 'Appointment request submitted successfully' })
     }
@@ -19,35 +19,23 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ message: 'Name and email are required' })
     }
 
-    const appointment = new Appointment({
+    const result = await sendConsultationEmail({
       name,
       email,
       phone: phone || '',
       preferredDate: preferredDate || undefined,
       preferredTime: preferredTime || undefined,
       message: message || '',
-      status: 'pending',
     })
+    if (result.sent) {
+      console.log('Consultation email sent to practitioner')
+    } else {
+      console.error('Consultation email NOT sent:', result.reason || result.error)
+    }
 
-    await appointment.save()
-
-    // V1: send compiled email to practitioner when PRACTITIONER_EMAIL + SMTP/MAILER_URL are set
-    sendConsultationEmail(appointment).then((result) => {
-      if (result.sent) {
-        console.log('Consultation email sent to practitioner')
-      } else if (result.reason) {
-        console.log('Consultation email skipped:', result.reason)
-      }
-    }).catch((err) => {
-      console.error('Consultation email error:', err)
-    })
-
-    res.status(201).json({
-      message: 'Appointment request submitted successfully',
-      id: appointment._id,
-    })
+    res.status(201).json({ message: 'Appointment request submitted successfully' })
   } catch (error) {
-    console.error('Appointment creation error:', error)
+    console.error('Appointment request error:', error)
     res.status(500).json({ message: 'Server error', error: error.message })
   }
 })
