@@ -52,6 +52,7 @@ export default {
       type: 'array',
       of: [
         { type: 'heroBlock' },
+        { type: 'focusAreasBlock' },
         { type: 'pullQuoteBlock' },
         { type: 'whoIHelpBlock' },
         { type: 'theSpaceBlock' },

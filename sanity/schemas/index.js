@@ -28,6 +28,7 @@ import {
   ctaBlock,
   proseSectionBlock,
   spacerBlock,
+  focusAreasBlock,
 } from './pageBlocks'
 import {
   homePageTemplate,
@@ -69,6 +70,7 @@ export const schemaTypes = [
   ctaBlock,
   proseSectionBlock,
   spacerBlock,
+  focusAreasBlock,
 
   // Page templates (objects for template-based pages)
   homePageTemplate,

@@ -2,6 +2,7 @@
 export { default as SiteNav } from "./SiteNav";
 export { default as Hero } from "./Hero";
 export { default as PullQuote } from "./PullQuote";
+export { default as FocusAreas } from "./FocusAreas";
 export { default as WhoIHelp } from "./WhoIHelp";
 export { default as TheSpace } from "./TheSpace";
 export { default as TheApproach } from "./TheApproach";

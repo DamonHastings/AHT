@@ -4,6 +4,7 @@ import { HeroSection } from "../design-system";
 import {
   Hero,
   PullQuote,
+  FocusAreas,
   WhoIHelp,
   TheSpace,
   TheApproach,
@@ -102,6 +103,18 @@ export function renderBlockComponent(component, index) {
       return (
         <EditableSection key={key} component={component} className="site-section-pullquote">
           <PullQuote eyebrow={component.eyebrow} quote={component.quote} body={component.body} />
+        </EditableSection>
+      );
+
+    case "focusAreasBlock":
+      return (
+        <EditableSection key={key} component={component} className="site-section-focus-areas">
+          <FocusAreas
+            eyebrow={component.eyebrow}
+            leadIn={component.leadIn}
+            areas={component.areas}
+            audienceLine={component.audienceLine}
+          />
         </EditableSection>
       );
 

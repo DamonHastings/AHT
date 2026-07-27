@@ -584,3 +584,47 @@ export const spacerBlock = {
   ],
   preview: { prepare: () => ({ title: 'Spacer' }) },
 };
+
+export const focusAreasBlock = {
+  name: 'focusAreasBlock',
+  title: 'Focus Areas (rotating line)',
+  type: 'object',
+  description:
+    'A quiet band, usually right under the hero: an eyebrow, a "Support for ___" line that gently cycles through the focus areas, and a smaller line naming who you work with.',
+  fields: [
+    {
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      initialValue: 'areas of focus',
+    },
+    {
+      name: 'leadIn',
+      title: 'Lead-in words',
+      type: 'string',
+      description: 'The fixed words before the rotating phrase, e.g. "Support for".',
+      initialValue: 'Support for',
+    },
+    {
+      name: 'areas',
+      title: 'Focus areas (rotate through these)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Each entry becomes one line in the rotation. Keep them short.',
+    },
+    {
+      name: 'audienceLine',
+      title: 'Who you work with (static line)',
+      type: 'string',
+      description: 'Shown smaller, below the rotating line. Leave blank to hide.',
+      initialValue: 'Teens, students, young adults, parents, and professionals',
+    },
+  ],
+  preview: {
+    select: { areas: 'areas' },
+    prepare: ({ areas }) => ({
+      title: 'Focus Areas',
+      subtitle: areas?.length ? `${areas.length} areas · rotating` : 'no areas yet',
+    }),
+  },
+};

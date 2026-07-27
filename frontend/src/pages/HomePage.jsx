@@ -20,6 +20,7 @@ import { DEFAULT_FAQ_ITEMS } from "../content/faqDefaults";
 
 const SITE_BLOCK_TYPES = new Set([
   "heroBlock",
+  "focusAreasBlock",
   "pullQuoteBlock",
   "whoIHelpBlock",
   "theSpaceBlock",
