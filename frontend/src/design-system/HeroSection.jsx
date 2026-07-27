@@ -139,11 +139,17 @@ export default function HeroSection({
       )}
 
       {subheading && (
-        <p
-          className="site-body-copy text-[1.05rem] mb-11 max-w-[460px] w-full"
-        >
-          {subheading}
-        </p>
+        <div className="mb-11 flex w-full max-w-[460px] flex-col gap-4">
+          {String(subheading)
+            .split(/\n+/)
+            .map((para) => para.trim())
+            .filter(Boolean)
+            .map((para, i) => (
+              <p key={i} className="site-body-copy text-[1.05rem]">
+                {para}
+              </p>
+            ))}
+        </div>
       )}
 
       {heroLinks?.length ? (
