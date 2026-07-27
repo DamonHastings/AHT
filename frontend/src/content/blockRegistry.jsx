@@ -213,9 +213,7 @@ export function renderBlockComponent(component, index) {
             heading={component.heading}
             headingEmphasis={component.headingEmphasis}
             intro={component.intro}
-            whyInvestment={component.whyInvestment}
-            feesBilling={component.feesBilling}
-            sessionFee={component.sessionFee}
+            cards={component.cards}
           />
         </EditableSection>
       );

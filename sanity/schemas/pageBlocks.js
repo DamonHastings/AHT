@@ -493,28 +493,24 @@ export const feesBlock = {
     { name: 'headingEmphasis', title: 'Heading Emphasis (italic)', type: 'string', initialValue: 'in yourself' },
     { name: 'intro', title: 'Intro', type: 'text', rows: 3 },
     {
-      name: 'whyInvestment',
-      title: 'Callout — Why therapy is a good investment',
-      type: 'object',
-      fields: [
-        { name: 'title', title: 'Title', type: 'string', initialValue: 'Why therapy is a good investment' },
-        { name: 'body', title: 'Body', type: 'text', rows: 5 },
+      name: 'cards',
+      title: 'Cards',
+      description: 'Each card has a title and a rich-text body. Add, edit, and reorder freely.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'feesCard',
+          fields: [
+            { name: 'title', title: 'Title', type: 'string', validation: Rule => Rule.required() },
+            { name: 'body', title: 'Body', type: 'array', of: [{ type: 'block' }] },
+          ],
+          preview: {
+            select: { title: 'title' },
+            prepare: ({ title }) => ({ title: title || 'Card' }),
+          },
+        },
       ],
-    },
-    {
-      name: 'feesBilling',
-      title: 'Callout — How fees & billing are handled',
-      type: 'object',
-      fields: [
-        { name: 'title', title: 'Title', type: 'string', initialValue: 'How fees & billing are handled' },
-        { name: 'body', title: 'Body', type: 'text', rows: 5 },
-      ],
-    },
-    {
-      name: 'sessionFee',
-      title: 'Session fee (optional)',
-      type: 'string',
-      description: 'Leave blank to keep "rates shared during your free consultation".',
     },
   ],
   preview: { prepare: () => ({ title: 'Investment / Fees + Billing' }) },
