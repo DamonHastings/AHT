@@ -51,6 +51,13 @@ export default {
       },
     },
     {
+      name: 'defaultSeo',
+      title: 'Default SEO & Social',
+      type: 'defaultSeo',
+      description:
+        'Site-wide search + social defaults and the title template. Individual pages inherit these unless they set their own SEO values.',
+    },
+    {
       name: 'contactEmail',
       title: 'Contact Email',
       type: 'string',
@@ -213,24 +220,6 @@ export default {
           rows: 2,
           initialValue:
             'A limited number of reduced-fee / sliding-scale spots are available. If cost is a barrier, please mention it when you reach out — we can talk it through.',
-        },
-      ],
-    },
-    {
-      name: 'seo',
-      title: 'SEO Settings',
-      type: 'object',
-      fields: [
-        {
-          name: 'keywords',
-          title: 'Keywords',
-          type: 'array',
-          of: [{ type: 'string' }],
-        },
-        {
-          name: 'author',
-          title: 'Author',
-          type: 'string',
         },
       ],
     },

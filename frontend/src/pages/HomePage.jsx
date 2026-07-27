@@ -5,8 +5,7 @@ import PageRenderer from "../components/PageRenderer";
 import SiteLayout from "../layouts/SiteLayout";
 import Seo from "../components/Seo";
 import { responsiveImage } from "../utils/responsiveImage";
-import { canonicalFor, buildPracticeJsonLd, buildFaqJsonLd } from "../utils/seo";
-import { urlFor } from "../utils/sanityClient";
+import { resolveSeo, buildPracticeJsonLd, buildFaqJsonLd } from "../utils/seo";
 import { HeroSection } from "../design-system";
 import {
   PullQuote,
@@ -84,23 +83,23 @@ export default function HomePage() {
     ? faqComponent.items.map((it) => ({ q: it.question, a: it.answer }))
     : DEFAULT_FAQ_ITEMS;
 
-  const canonical = canonicalFor("/");
-  const ogImage = siteSettings?.ogImage
-    ? urlFor(siteSettings.ogImage).width(1200).height(630).fit("crop").url()
-    : undefined;
+  const seo = resolveSeo(page, siteSettings, { path: "/", isHome: true });
+  const ogImage = seo.image;
   const jsonLd = [
-    buildPracticeJsonLd(siteSettings, { url: canonical, image: ogImage }),
+    buildPracticeJsonLd(siteSettings, { url: seo.canonical, image: ogImage }),
     buildFaqJsonLd(faqItems),
   ];
 
   return (
     <>
       <Seo
-        title={page?.metaTitle || DEFAULT_TITLE}
-        description={page?.metaDescription || DEFAULT_DESCRIPTION}
-        image={ogImage}
-        canonical={canonical}
+        title={seo.title || DEFAULT_TITLE}
+        description={seo.description || DEFAULT_DESCRIPTION}
+        image={seo.image}
+        canonical={seo.canonical}
         jsonLd={jsonLd}
+        noindex={seo.noindex}
+        twitterHandle={seo.twitterHandle}
       />
       <SiteLayout>
       {showSanityContent ? (

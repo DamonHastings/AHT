@@ -24,19 +24,11 @@ export default {
       description: 'URL path for this page (e.g., "about" for /about)',
     },
     {
-      name: 'metaTitle',
-      title: 'Meta Title (SEO)',
-      type: 'string',
-      description: 'Title shown in search results and browser tabs',
-      validation: Rule => Rule.max(60),
-    },
-    {
-      name: 'metaDescription',
-      title: 'Meta Description (SEO)',
-      type: 'text',
-      rows: 3,
-      description: 'Description shown in search results',
-      validation: Rule => Rule.max(160),
+      name: 'seo',
+      title: 'SEO & Social',
+      type: 'seo',
+      description:
+        'Search + social settings for this page. Anything left blank falls back to the site-wide defaults in Site Settings.',
     },
     {
       name: 'template',

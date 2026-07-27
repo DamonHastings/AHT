@@ -10,7 +10,7 @@ export default function NotFoundPage() {
 
   return (
     <>
-      <Seo title="Page not found | Arielle Hastings, LMFT" />
+      <Seo title="Page not found | Arielle Rae Hastings, LMFT" noindex />
       <SiteLayout>
         <section
           className="site-theme flex min-h-[60vh] flex-col items-center justify-center px-6 pt-32 pb-24 text-center"

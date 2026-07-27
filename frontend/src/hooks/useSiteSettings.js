@@ -17,6 +17,15 @@ export function useSiteSettings() {
           logo,
           favicon,
           ogImage,
+          defaultSeo{
+            titleTemplate,
+            defaultTitle,
+            defaultDescription,
+            defaultOgImage,
+            twitterHandle,
+            author,
+            keywords
+          },
           contactEmail,
           contactPhone,
           bookingUrl,

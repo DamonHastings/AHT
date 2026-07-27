@@ -2,14 +2,27 @@
 /**
  * Generate public/robots.txt and public/sitemap.xml at build time.
  *
- * Uses VITE_SITE_URL (the production origin, e.g. https://www.ariellehastings.com).
+ * Routes come from Sanity (published, non-noindex pages) via
+ * scripts/lib/indexable-routes.mjs — the same list the prerender uses — so new
+ * pages appear automatically and noindex pages are excluded.
+ *
+ * Uses VITE_SITE_URL (the production origin, e.g. https://arielleraehastings.com).
  * If unset, falls back to a placeholder and warns — set VITE_SITE_URL in the
  * deploy environment so the sitemap/robots reference real absolute URLs.
- * Chained into `npm run build`.
+ * Chained into `npm run build` via the `prebuild` script.
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { getIndexableRoutes } from "./lib/indexable-routes.mjs";
+
+// Load .env for local builds (Vercel injects env vars directly, and has no
+// .env file — so ignore the "file not found" error there).
+try {
+  process.loadEnvFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".env"));
+} catch {
+  /* no .env (e.g. CI/Vercel) — rely on process.env */
+}
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.resolve(dirname, "..", "public");
@@ -24,35 +37,34 @@ if (!SITE_URL) {
 }
 const BASE = SITE_URL || "https://example.com";
 
-// Public, indexable routes. Keep in sync with App.jsx (exclude legal noise if desired).
-const ROUTES = [
-  { path: "/", priority: "1.0", changefreq: "monthly" },
-  // /about and /services are temporarily disabled (redirected to home in App.jsx)
-  // until their CMS content is rewritten — omitted from the sitemap so search
-  // engines don't index the wrong-practice pages. Restore alongside the routes.
-  { path: "/privacy", priority: "0.3", changefreq: "yearly" },
-];
+function urlEntry(route) {
+  const lastmod = route.lastmod ? `\n    <lastmod>${route.lastmod.slice(0, 10)}</lastmod>` : "";
+  return (
+    `  <url>\n    <loc>${BASE}${route.path}</loc>${lastmod}` +
+    `\n    <changefreq>${route.changefreq}</changefreq>` +
+    `\n    <priority>${route.priority}</priority>\n  </url>`
+  );
+}
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+async function main() {
+  const routes = await getIndexableRoutes();
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${ROUTES.map(
-  (r) =>
-    `  <url>\n    <loc>${BASE}${r.path}</loc>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority}</priority>\n  </url>`
-).join("\n")}
+${routes.map(urlEntry).join("\n")}
 </urlset>
 `;
 
-const robots = `User-agent: *
+  const robots = `User-agent: *
 Allow: /
 
 Sitemap: ${BASE}/sitemap.xml
 `;
 
-async function main() {
   await mkdir(PUBLIC_DIR, { recursive: true });
   await writeFile(path.join(PUBLIC_DIR, "sitemap.xml"), sitemap, "utf8");
   await writeFile(path.join(PUBLIC_DIR, "robots.txt"), robots, "utf8");
-  console.log(`✓ sitemap.xml + robots.txt written for ${BASE}`);
+  console.log(`✓ sitemap.xml (${routes.length} routes) + robots.txt written for ${BASE}`);
 }
 
 main().catch((err) => {

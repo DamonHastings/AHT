@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
  * (HelmetProvider is installed in main.jsx) and captured at build time by the
  * prerender step so crawlers/social scrapers see real tags in the initial HTML.
  */
-export default function Seo({ title, description, image, canonical, jsonLd }) {
+export default function Seo({ title, description, image, canonical, jsonLd, noindex, twitterHandle }) {
   // Accept a single JSON-LD object or an array of them (e.g. LocalBusiness + FAQPage).
   const jsonLdBlocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 
@@ -16,6 +16,7 @@ export default function Seo({ title, description, image, canonical, jsonLd }) {
       {title && <title>{title}</title>}
       {description && <meta name="description" content={description} />}
       {canonical && <link rel="canonical" href={canonical} />}
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
@@ -26,6 +27,7 @@ export default function Seo({ title, description, image, canonical, jsonLd }) {
 
       {/* Twitter */}
       <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+      {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
       {title && <meta name="twitter:title" content={title} />}
       {description && <meta name="twitter:description" content={description} />}
       {image && <meta name="twitter:image" content={image} />}
@@ -45,4 +47,6 @@ Seo.propTypes = {
   image: PropTypes.string,
   canonical: PropTypes.string,
   jsonLd: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  noindex: PropTypes.bool,
+  twitterHandle: PropTypes.string,
 };

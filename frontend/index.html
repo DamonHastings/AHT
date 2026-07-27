@@ -8,19 +8,16 @@
     <meta name="theme-color" content="#b05a4a" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Default SEO (overridden per-page by react-helmet-async / prerender) -->
-    <title>Expressive Arts Therapy in Davis, CA | Arielle Hastings, LMFT</title>
-    <meta
-      name="description"
-      content="Expressive arts therapy in Davis, CA with Arielle Hastings, LMFT. Warm, playful, collaborative therapy for kids, teens, young adults, and parents — using movement, art, metaphor, and talk. Book a free consultation."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Expressive Arts Therapy in Davis, CA | Arielle Hastings, LMFT" />
-    <meta
-      property="og:description"
-      content="Warm, playful, collaborative expressive arts therapy in Davis, CA. Book a free consultation."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!--
+      Fallback title only. Per-page title, description, Open Graph, Twitter, and
+      canonical tags are managed by react-helmet-async (component:
+      src/components/Seo.jsx, values from Sanity via resolveSeo) and baked into
+      each route's HTML by the build prerender. We deliberately do NOT repeat the
+      description / OG / Twitter meta here: the prerender captures helmet's
+      versions, and static copies would produce duplicate description meta tags.
+      Helmet manages the single title element below, so it does not duplicate.
+    -->
+    <title>Expressive Arts Therapy in Davis, CA | Arielle Rae Hastings, LMFT</title>
 
     <!-- Preconnect to font + Sanity image CDNs (LCP hero is a Sanity image) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

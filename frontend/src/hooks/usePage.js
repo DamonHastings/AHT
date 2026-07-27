@@ -29,6 +29,16 @@ export function usePage(slug) {
           _id,
           title,
           slug,
+          // New consolidated SEO object; legacy flat fields kept as fallback
+          // (see resolveSeo) until page docs are migrated.
+          seo{
+            metaTitle,
+            metaDescription,
+            ogImage,
+            canonicalUrl,
+            noIndex,
+            keywords
+          },
           metaTitle,
           metaDescription,
           template,
@@ -114,6 +124,7 @@ export function usePages() {
           _id,
           title,
           slug,
+          "noIndex": seo.noIndex,
           metaTitle,
           metaDescription,
           publishedAt

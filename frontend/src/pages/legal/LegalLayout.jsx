@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import SiteLayout from "../../layouts/SiteLayout";
 import Seo from "../../components/Seo";
-import { canonicalFor } from "../../utils/seo";
+import { useSiteSettings } from "../../hooks/useSiteSettings";
+import { resolveSeo } from "../../utils/seo";
 import { usePrerenderReady } from "../../utils/usePrerenderReady";
 
 /**
@@ -10,14 +11,25 @@ import { usePrerenderReady } from "../../utils/usePrerenderReady";
  * prose column, and sets per-page <head> meta.
  */
 export default function LegalLayout({ title, metaDescription, path, lastUpdated, children }) {
+  const { siteSettings } = useSiteSettings();
   usePrerenderReady(true);
+
+  // Title is set explicitly (synchronous) so it's correct even before settings
+  // load; description/image/canonical/twitter layer over the site defaults.
+  const seo = resolveSeo(
+    { seo: { metaTitle: `${title} | Arielle Rae Hastings, LMFT`, metaDescription } },
+    siteSettings,
+    { path }
+  );
 
   return (
     <>
       <Seo
-        title={`${title} | Arielle Hastings, LMFT`}
-        description={metaDescription}
-        canonical={canonicalFor(path)}
+        title={seo.title}
+        description={seo.description}
+        image={seo.image}
+        canonical={seo.canonical}
+        twitterHandle={seo.twitterHandle}
       />
       <SiteLayout>
         <article

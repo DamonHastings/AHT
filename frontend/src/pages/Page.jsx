@@ -1,15 +1,15 @@
 import { usePage } from "../hooks/usePage";
+import { useSiteSettings } from "../hooks/useSiteSettings";
 import PageRenderer from "../components/PageRenderer";
 import SiteLayout from "../layouts/SiteLayout";
 import Seo from "../components/Seo";
-import { canonicalFor } from "../utils/seo";
+import { resolveSeo } from "../utils/seo";
 import { usePrerenderReady } from "../utils/usePrerenderReady";
 
 export default function Page({ slug }) {
   const { page, loading, error } = usePage(slug);
+  const { siteSettings } = useSiteSettings();
   usePrerenderReady(!loading);
-
-  const canonical = canonicalFor(`/${slug}`);
 
   if (loading) {
     return (
@@ -70,14 +70,17 @@ export default function Page({ slug }) {
 
   const first = page.components?.[0];
   const needsTopPad = first && first._type !== "heroBlock";
-  const fallbackTitle = `${slug.charAt(0).toUpperCase()}${slug.slice(1)} | Arielle Hastings, LMFT`;
+  const seo = resolveSeo(page, siteSettings, { path: `/${slug}` });
 
   return (
     <>
       <Seo
-        title={page.metaTitle || fallbackTitle}
-        description={page.metaDescription}
-        canonical={canonical}
+        title={seo.title}
+        description={seo.description}
+        image={seo.image}
+        canonical={seo.canonical}
+        noindex={seo.noindex}
+        twitterHandle={seo.twitterHandle}
       />
       <SiteLayout>
         <div className={needsTopPad ? "pt-[4.5rem]" : undefined}>

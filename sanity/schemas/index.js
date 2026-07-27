@@ -9,6 +9,10 @@ import footerContent from './footerContent'
 import socialLinks from './socialLinks'
 import contentBlock from './contentBlock'
 
+// Shared objects
+import seo from './objects/seo'
+import defaultSeo from './objects/defaultSeo'
+
 // Page builder schemas
 import page from './page'
 import {
@@ -44,6 +48,10 @@ export const schemaTypes = [
   footerContent,
   socialLinks,
   contentBlock,
+
+  // Shared objects
+  seo,
+  defaultSeo,
 
   // Page builder
   page,
