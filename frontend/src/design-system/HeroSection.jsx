@@ -153,18 +153,35 @@ export default function HeroSection({
       )}
 
       {heroLinks?.length ? (
-        <div className="flex w-full flex-wrap gap-x-8 gap-y-3">
-          {heroLinks.map((link) => (
+        <div className="flex w-full flex-col items-start gap-6">
+          {ctaText && usePrimaryAnchor && (
             <a
-              key={link.href}
-              href={link.href}
-              className="site-ui-label inline-flex items-center gap-2 underline underline-offset-4 transition-[gap] hover:gap-3"
-              style={{ color: "var(--teal-deep)", textDecoration: "none" }}
+              href={primaryHref}
+              data-analytics-source="hero"
+              className="site-button-text inline-block py-3.5 px-8 rounded-full text-[0.88rem] transition-all hover:-translate-y-0.5"
+              style={{
+                background: "var(--terracotta)",
+                color: "white",
+                textDecoration: "none",
+                boxShadow: "0 6px 24px rgba(176,90,74,0.28)",
+              }}
             >
-              {link.label}
-              <span aria-hidden="true">→</span>
+              {ctaText}
             </a>
-          ))}
+          )}
+          <div className="flex w-full flex-wrap gap-x-8 gap-y-3">
+            {heroLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="site-ui-label inline-flex items-center gap-2 underline underline-offset-4 transition-[gap] hover:gap-3"
+                style={{ color: "var(--teal-deep)", textDecoration: "none" }}
+              >
+                {link.label}
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
         </div>
       ) : (ctaText || secondaryCtaText) ? (
         <div className="flex w-full flex-wrap gap-4">

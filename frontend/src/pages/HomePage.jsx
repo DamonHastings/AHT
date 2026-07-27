@@ -156,6 +156,8 @@ function StaticHomeLayout() {
         heading="THERAPEUTIC SUPPORT TO HELP SEE A WAY THROUGH"
         headingEmphasis="THERAPEUTIC SUPPORT"
         subheading="Warm, relational, and creative psychotherapy in Davis — for role transitions, loss and grief, anxiety, and life alongside parenthood."
+        ctaText="Schedule a free consultation"
+        primaryCtaHref="#book"
         heroLinks={[
           { label: "More about me", href: "#meet" },
           { label: "More about my approach", href: "#the-approach" },

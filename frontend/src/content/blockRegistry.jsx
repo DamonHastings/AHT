@@ -73,6 +73,8 @@ export function renderBlockComponent(component, index) {
               heading={component.heading}
               headingEmphasis={component.headingEmphasis}
               subheading={component.body}
+              ctaText="Schedule a free consultation"
+              primaryCtaHref="#book"
               heroLinks={heroLinks}
               alignment="left"
             />
