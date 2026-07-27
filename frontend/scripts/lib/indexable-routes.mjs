@@ -23,8 +23,20 @@ const client = createClient({ projectId, dataset, apiVersion: '2024-01-01', useC
 // Slugs the router redirects/does not serve as standalone pages (see src/App.jsx).
 const EXCLUDED_SLUGS = new Set(['about', 'services']);
 
-// Routes served by the app but not backed by a Sanity `page` document.
-const STATIC_ROUTES = [{ path: '/privacy', changefreq: 'yearly', priority: '0.3' }];
+// Routes served by the app but not backed by a Sanity `page` document. Their
+// SEO lives in React (e.g. LegalLayout), so we carry title/description here for
+// the build-time meta injection (scripts/inject-meta.mjs). Keep in sync with the
+// page's own <Seo>/LegalLayout values.
+const STATIC_ROUTES = [
+  {
+    path: '/privacy',
+    changefreq: 'yearly',
+    priority: '0.3',
+    title: 'Privacy Policy | Arielle Rae Hastings, LMFT',
+    description:
+      'How this website collects, uses, and protects the information you share when you request a consultation.',
+  },
+];
 
 /** Map a Sanity page slug to a site path. The home page ("home") lives at "/". */
 function slugToPath(slug) {
