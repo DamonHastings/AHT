@@ -14,7 +14,7 @@ export default function CTA({
   return (
     <section
       id="contact"
-      className="py-16 md:py-28 px-6 md:px-20 flex flex-col items-start gap-8 relative overflow-hidden"
+      className="py-16 md:py-28 px-6 md:px-20 relative overflow-hidden"
       style={{
         background: "linear-gradient(120deg, var(--terracotta) 0%, #8A4035 100%)",
         color: "white",
@@ -36,32 +36,32 @@ export default function CTA({
         aria-hidden
       />
 
-      <div>
-        <h2
-          className="site-heading text-3xl md:text-5xl max-w-[620px]"
-        >
-          {heading}
-          <br />
-          <em style={{ fontStyle: "italic", opacity: 0.7 }}>{headingEmphasis}</em>
-        </h2>
-        <p className="max-w-[680px] text-base leading-[1.7] opacity-80 font-normal mt-4">
-          {subheading}
-        </p>
-      </div>
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col items-start gap-8">
+        <div>
+          <h2 className="site-heading text-3xl md:text-5xl max-w-[620px]">
+            {heading}
+            <br />
+            <em style={{ fontStyle: "italic", opacity: 0.7 }}>{headingEmphasis}</em>
+          </h2>
+          <p className="max-w-[680px] text-base leading-[1.7] opacity-80 font-normal mt-4">
+            {subheading}
+          </p>
+        </div>
 
-      <a
-        href={buttonHref}
-        data-analytics-source="cta-section"
-        className="site-button-text inline-block py-4 px-10 rounded-full text-[0.92rem] whitespace-nowrap transition-all hover:-translate-y-0.5 relative z-10 self-start"
-        style={{
-          background: "white",
-          color: "var(--terracotta)",
-          textDecoration: "none",
-          boxShadow: "0 8px 30px rgba(0,0,0,0.18)",
-        }}
-      >
-        {buttonText}
-      </a>
+        <a
+          href={buttonHref}
+          data-analytics-source="cta-section"
+          className="site-button-text inline-block py-4 px-10 rounded-full text-[0.92rem] whitespace-nowrap transition-all hover:-translate-y-0.5 self-start"
+          style={{
+            background: "white",
+            color: "var(--terracotta)",
+            textDecoration: "none",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.18)",
+          }}
+        >
+          {buttonText}
+        </a>
+      </div>
     </section>
   );
 }

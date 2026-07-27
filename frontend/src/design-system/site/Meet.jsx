@@ -28,7 +28,7 @@ export default function Meet({
   return (
     <section
       id="meet"
-      className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative overflow-hidden"
+      className="scroll-mt-24 py-16 md:py-28 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-[minmax(0,600px)_minmax(0,600px)] justify-center gap-12 lg:gap-20 items-center relative overflow-hidden"
       style={{ background: "var(--linen)" }}
     >
       {/* Ambient mobile top-left */}

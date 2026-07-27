@@ -77,13 +77,14 @@ export default function SiteNav({
   return (
     <>
     <nav
-      className="fixed inset-x-0 top-0 z-[200] flex justify-between items-center px-6 md:px-14 py-4"
+      className="fixed inset-x-0 top-0 z-[200] py-4"
       style={{
         background: "rgba(253,251,247,0.92)",
         backdropFilter: "blur(16px)",
         borderBottom: "1px solid rgba(91,158,160,0.15)",
       }}
     >
+      <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 md:px-14">
       <a
         href="/"
         className="flex items-center gap-3 md:gap-3.5 no-underline shrink-0"
@@ -195,6 +196,7 @@ export default function SiteNav({
           )}
         </svg>
       </button>
+      </div>
     </nav>
 
       {/* Mobile drawer — rendered as a sibling of <nav> (not a child) so the

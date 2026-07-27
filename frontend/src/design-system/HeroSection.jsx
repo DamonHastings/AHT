@@ -229,24 +229,29 @@ export default function HeroSection({
       ? "lg:grid-cols-[minmax(0,52%)_minmax(0,48%)]"
       : "lg:grid-cols-[minmax(0,48%)_minmax(0,52%)]";
 
-  /** Frame size caps for the single organic image. Compact = a smaller headshot. */
+  /** Frame size caps for the single organic image. Compact = a smaller headshot
+   *  with a consistent portrait aspect at every breakpoint (no max-height caps
+   *  fighting the aspect ratio, which was cropping the photo on small screens). */
   const organicFrameClass = compact
-    ? "relative mx-auto w-full min-w-0 max-w-[20rem] max-lg:aspect-[4/5] max-lg:max-h-[min(44vh,17rem)] lg:aspect-[4/5] lg:max-w-[22rem] lg:max-h-[min(56vh,30rem)]"
+    ? "relative mx-auto w-full min-w-0 aspect-[4/5] max-w-[15rem] sm:max-w-[17rem] lg:max-w-[20rem]"
     : "relative mx-auto w-full min-w-0 max-w-full max-lg:aspect-[4/3] max-lg:max-h-[min(48vh,19rem)] sm:max-lg:max-h-[min(50vh,22rem)] lg:aspect-[3/4] lg:w-full lg:max-h-[min(72vh,44rem)]";
+
+  /** Compact hero uses a clean static rounded frame; the legacy organic variant
+   *  keeps the animated soft-edge mask. */
+  const maskStyle = compact
+    ? { borderRadius: "1.5rem" }
+    : {
+        animation: "blobMorph 12s ease-in-out infinite",
+        borderRadius: "16% 14% 18% 13% / 14% 17% 13% 16%",
+        willChange: "border-radius",
+      };
 
   const blobVisual = (
     <div
       className={`relative flex w-full min-w-0 min-h-0 items-center justify-center py-8 sm:py-10 lg:py-12 ${blobFramePadding}`}
     >
       <div className={organicFrameClass}>
-        <div
-          className="absolute inset-0 overflow-hidden shadow-2xl"
-          style={{
-            animation: "blobMorph 12s ease-in-out infinite",
-            borderRadius: "16% 14% 18% 13% / 14% 17% 13% 16%",
-            willChange: "border-radius",
-          }}
-        >
+        <div className="absolute inset-0 overflow-hidden shadow-2xl" style={maskStyle}>
           {blobSrc ? (
             <picture>
               {blobImageWebpSrcSet && (
@@ -295,7 +300,7 @@ export default function HeroSection({
         style={{ background: "var(--linen)" }}
       >
         <div className="relative z-[2] grid w-full min-h-0 pt-20">
-          <div className={`grid w-full min-h-0 grid-cols-1 items-stretch ${organicLgGridClass}`}>
+          <div className={`grid w-full min-h-0 max-w-[1400px] mx-auto grid-cols-1 items-stretch ${organicLgGridClass}`}>
             {organicImageSide === "left" && (
               <>
                 <div className="max-md:order-1 order-1 min-w-0">{visual}</div>
