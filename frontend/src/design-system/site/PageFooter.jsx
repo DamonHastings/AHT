@@ -96,7 +96,20 @@ export default function PageFooter({
         className="mt-12 pt-6 flex flex-col gap-5 md:flex-row md:items-center md:justify-between"
         style={{ borderTop: "1px solid rgba(244,240,232,0.12)" }}
       >
-        <p className="site-footer-muted text-[0.78rem] leading-relaxed">{legalLine}</p>
+        <div className="flex flex-col gap-1.5">
+          <p className="site-footer-muted text-[0.78rem] leading-relaxed">{legalLine}</p>
+          <p className="text-[0.78rem] leading-relaxed">
+            <span className="site-footer-muted">Designed by </span>
+            <a
+              href="https://panta.llc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="site-footer-link"
+            >
+              Panta
+            </a>
+          </p>
+        </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           {links.map((link) => (
@@ -121,7 +134,7 @@ export default function PageFooter({
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
-            Sign into Sanity
+            Sign into Admin
           </a>
         </div>
       </div>
