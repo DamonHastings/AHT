@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ReadMore from "./ReadMore";
 
 /**
  * V3 "The Approach" — intro copy, an optional photo strip (expressive-arts work),
@@ -23,7 +24,7 @@ export default function TheApproach({
     { name: "Nature & space", detail: "when the room isn't enough" },
   ],
 }) {
-  const galleryImages = (images || []).filter(Boolean).slice(0, 3);
+  const galleryImages = (images || []).filter(Boolean).slice(0, 6);
 
   return (
     <section
@@ -54,11 +55,7 @@ export default function TheApproach({
         </span>
         <h2 className="site-heading text-2xl md:text-3xl mb-6">{heading}</h2>
 
-        {paragraphs.map((p, idx) => (
-          <p key={idx} className="site-body-copy text-base mb-4">
-            {p}
-          </p>
-        ))}
+        <ReadMore paragraphs={paragraphs} />
 
         {galleryImages.length > 0 && (
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -92,13 +89,16 @@ export default function TheApproach({
 
         <div className="mt-10 flex flex-col">
           {modalities.map((m, idx) => (
+            // Stack name over detail on phones (the detail is a full phrase and
+            // gets crushed in a side-by-side column); align into two columns at
+            // sm and up.
             <div
               key={idx}
-              className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 py-4 border-b border-[rgba(57,67,79,0.1)] text-[0.95rem] cursor-default transition-colors hover:text-[var(--teal-deep)]"
+              className="flex flex-col gap-0.5 sm:grid sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-x-6 py-3.5 border-b border-[rgba(57,67,79,0.1)] text-[0.95rem] cursor-default transition-colors hover:text-[var(--teal-deep)]"
             >
               <span className="font-normal">{m.name}</span>
               <span
-                className="site-ui-label text-[0.75rem] text-right"
+                className="site-ui-label text-[0.72rem] sm:text-right"
                 style={{ color: "var(--terracotta)", opacity: 0.78 }}
               >
                 {m.detail}

@@ -266,7 +266,10 @@ export default function FeelingsCheckIn({
           role="region"
           aria-live="polite"
           aria-label="Feelings"
-          className="min-h-[8rem] outline-none"
+          // Reserve the panel height only once a color is picked, so the idle
+          // state ("Choose a color above to begin.") doesn't leave a big empty
+          // block before the closing note.
+          className={`outline-none ${view === "idle" ? "" : "min-h-[8rem]"}`}
         >
           <div
             key={`${view}-${activeColor?.value ?? ""}-${activeWord?.name ?? ""}`}

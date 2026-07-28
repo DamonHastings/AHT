@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ConsultationModal, ContactModal, SiteNav, PageFooter } from "../design-system/site";
+import { ConsultationModal, ContactModal, SiteNav, PageFooter, MobileCtaBar } from "../design-system/site";
 import {
   SITE_BRAND_CREDENTIAL,
   SITE_BRAND_LOCKUP,
@@ -119,6 +119,7 @@ export default function SiteLayout({ children }) {
       </a>
       <SiteNav logoName={SITE_BRAND_LOCKUP} links={NAV_LINKS} ctaHref="/#book" />
       <main id="main-content" className="flex-grow w-full">{children}</main>
+      <MobileCtaBar ctaHref="/#book" />
       <PageFooter
         logoName={SITE_BRAND_NAME}
         logoSubtext={SITE_BRAND_CREDENTIAL}

@@ -32,8 +32,14 @@ const SOURCES = [
   { src: path.join(FRONTEND, "photos", "exa1.jpg"), name: "exa1" },
   { src: path.join(FRONTEND, "photos", "exa2.jpg"), name: "exa2" },
   { src: path.join(FRONTEND, "photos", "exa3.jpg"), name: "exa3" },
-  // Environment / place — the "My Background" section image.
+  // More expressive-arts work — expands the "The Approach" gallery.
+  { src: path.join(FRONTEND, "photos", "art-feelings.jpg"), name: "art-feelings" },
+  { src: path.join(FRONTEND, "photos", "art-hands.jpg"), name: "art-hands" },
+  // Environment / place — the "My Background" section image plus nature photos
+  // used to break up text elsewhere.
   { src: path.join(FRONTEND, "photos", "background.jpg"), name: "background" },
+  { src: path.join(FRONTEND, "photos", "nature-butterfly.jpg"), name: "nature-butterfly" },
+  { src: path.join(FRONTEND, "photos", "nature-sunset.jpg"), name: "nature-sunset" },
 ];
 
 async function fileExists(filePath) {

@@ -130,7 +130,7 @@ export default function WhoIHelp({
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {gridCards.map((card, idx) => {
           const v = CARD_VARIANTS[card.variant] || CARD_VARIANTS.children;
           const anchorId = card.anchorId ?? audienceAnchorId(card.variant);
@@ -155,10 +155,21 @@ function WhoCard({ card, variant, anchorId }) {
       ? "Book a free consultation →"
       : card.linkText;
 
+  // On phones this is a tap-to-expand accordion row (tag + title, body + CTA
+  // revealed on tap) so the nine audiences read as a short, scannable menu
+  // instead of a 5,000px stack. From sm up (anything wider than a phone) the body
+  // is always shown and the toggle is inert, so non-mobile screens keep the
+  // familiar full pastel card grid. Plain state + `hidden sm:block` (rather than
+  // a native <details>, whose closed content some browsers hide via
+  // content-visibility that CSS `display` can't override) so it behaves
+  // identically everywhere. Body copy stays in the DOM at every size.
+  const [open, setOpen] = useState(false);
+  const bodyId = `${anchorId}-body`;
+
   return (
     <div
       id={anchorId}
-      className="rounded-3xl p-7 md:p-10 relative overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl scroll-mt-28"
+      className="rounded-3xl relative overflow-hidden transition-all duration-300 sm:hover:-translate-y-1 scroll-mt-28"
       style={{
         background: variant.bg,
         boxShadow: "transparent",
@@ -170,41 +181,57 @@ function WhoCard({ card, variant, anchorId }) {
         e.currentTarget.style.boxShadow = "transparent";
       }}
     >
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-controls={bodyId}
+        className="block w-full text-left cursor-pointer sm:cursor-default sm:pointer-events-none px-7 sm:px-10 pt-7 sm:pt-10 pb-4 sm:pb-6 bg-transparent"
+      >
+        <span
+          className="site-ui-label inline-block py-1 px-3 rounded-full mb-4 text-white"
+          style={{ background: variant.tagBg }}
+        >
+          {card.tag}
+        </span>
+
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="site-heading text-[1.45rem]">{card.title}</h3>
+          <span
+            className={`sm:hidden flex-shrink-0 transition-transform duration-200 ${open ? "rotate-45" : ""}`}
+            style={{ color: variant.arrowColor, fontSize: "1.5rem", lineHeight: 1 }}
+            aria-hidden="true"
+          >
+            +
+          </span>
+        </div>
+      </button>
+
       <div
-        className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full opacity-[0.35]"
-        style={{ background: variant.blobColor, animation: "orbitFloat 12s ease-in-out infinite" }}
-      />
-      <div
-        className="absolute top-5 right-5 w-11 h-11 rounded-full border-2 opacity-[0.35]"
-        style={{ borderColor: variant.ringColor, animation: "spinSlow 18s linear infinite" }}
-      />
-
-      <span
-        className="site-ui-label inline-block py-1 px-3 rounded-full mb-4 text-white"
-        style={{ background: variant.tagBg }}
+        id={bodyId}
+        className={`${open ? "" : "hidden"} sm:block px-7 sm:px-10 pb-7 sm:pb-10`}
       >
-        {card.tag}
-      </span>
+        <div
+          className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full opacity-[0.35] pointer-events-none"
+          style={{ background: variant.blobColor, animation: "orbitFloat 12s ease-in-out infinite" }}
+          aria-hidden="true"
+        />
+        <div
+          className="hidden sm:block absolute top-5 right-5 w-11 h-11 rounded-full border-2 opacity-[0.35] pointer-events-none"
+          style={{ borderColor: variant.ringColor, animation: "spinSlow 18s linear infinite" }}
+          aria-hidden="true"
+        />
 
-      <h3
-        className="site-heading text-[1.45rem] mb-4"
-      >
-        {card.title}
-      </h3>
+        <p className="site-body-copy text-[0.95rem] mb-6 relative">{card.body}</p>
 
-      <p
-        className="site-body-copy text-[0.95rem] mb-6"
-      >
-        {card.body}
-      </p>
-
-      <a
-        href={ctaHref}
-        className="site-ui-label inline-flex items-center gap-2 transition-[gap] hover:gap-4"
-        style={{ color: variant.arrowColor, textDecoration: "none" }}
-      >
-        {ctaText}
-      </a>
+        <a
+          href={ctaHref}
+          className="site-ui-label relative inline-flex items-center gap-2 transition-[gap] hover:gap-4"
+          style={{ color: variant.arrowColor, textDecoration: "none" }}
+        >
+          {ctaText}
+        </a>
+      </div>
     </div>
   );
 }

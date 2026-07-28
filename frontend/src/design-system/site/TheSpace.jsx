@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ReadMore from "./ReadMore";
 
 /**
  * V3 The Space - two-column section with photo and color story
@@ -138,14 +139,7 @@ export default function TheSpace({
           <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>{headingEmphasis}</em>
         </h2>
 
-        {paragraphs.map((p, idx) => (
-          <p
-            key={idx}
-            className="site-body-copy text-base mb-4"
-          >
-            {p}
-          </p>
-        ))}
+        <ReadMore paragraphs={paragraphs} toggleColor="var(--teal-deep)" />
 
         <div className="flex flex-wrap gap-3 mt-8">
           {colorStory.map((item, idx) => (

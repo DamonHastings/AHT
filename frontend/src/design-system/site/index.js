@@ -1,5 +1,7 @@
 // Site design system — marketing layout blocks
 export { default as SiteNav } from "./SiteNav";
+export { default as MobileCtaBar } from "./MobileCtaBar";
+export { default as ReadMore } from "./ReadMore";
 export { default as Hero } from "./Hero";
 export { default as PullQuote } from "./PullQuote";
 export { default as FocusAreas } from "./FocusAreas";

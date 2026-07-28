@@ -156,9 +156,12 @@ export function renderBlockComponent(component, index) {
             paragraphs={component.paragraphs}
             modalities={component.modalities}
             images={[
-              responsiveImage("exa1"),
-              responsiveImage("exa2"),
-              responsiveImage("exa3"),
+              { ...responsiveImage("exa1"), alt: "Client expressive-arts piece" },
+              { ...responsiveImage("exa2"), alt: "Client expressive-arts piece" },
+              { ...responsiveImage("exa3"), alt: "Client expressive-arts piece" },
+              { ...responsiveImage("art-feelings"), alt: "Hand-drawn wheel of feelings" },
+              { ...responsiveImage("art-hands"), alt: "Painted stones held in a hand" },
+              { ...responsiveImage("nature-butterfly"), alt: "A butterfly resting on flowering sage" },
             ]}
           />
         </EditableSection>
@@ -218,7 +221,12 @@ export function renderBlockComponent(component, index) {
       );
     }
 
-    case "feesBlock":
+    case "feesBlock": {
+      // Optional CMS banner image, else a calming environment photo to soften
+      // the pricing section and break up its text.
+      const feesImg = component.image
+        ? sanityImage(component.image, { widths: [768, 1200, 1800] })
+        : responsiveImage("nature-sunset");
       return (
         <EditableSection key={key} component={component} className="site-section-fees">
           <Fees
@@ -227,9 +235,14 @@ export function renderBlockComponent(component, index) {
             headingEmphasis={component.headingEmphasis}
             intro={component.intro}
             cards={component.cards}
+            imageSrc={feesImg?.src}
+            imageSrcSet={feesImg?.jpegSrcSet}
+            imageWebpSrcSet={feesImg?.webpSrcSet}
+            imageAlt="Golden evening light over the fields near Davis"
           />
         </EditableSection>
       );
+    }
 
     case "ctaBlock":
       return (

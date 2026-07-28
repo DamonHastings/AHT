@@ -84,10 +84,10 @@ export default function SiteNav({
         borderBottom: "1px solid rgba(91,158,160,0.15)",
       }}
     >
-      <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 md:px-14">
+      <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 px-6 md:px-14">
       <a
         href="/"
-        className="flex items-center gap-3 md:gap-3.5 no-underline shrink-0"
+        className="flex min-w-0 items-center gap-3 md:gap-3.5 no-underline"
         aria-label={logoName}
       >
         <img
@@ -117,7 +117,7 @@ export default function SiteNav({
           
           {tagline && (
             <span
-              className="lg:block mt-1 text-[.8rem]"
+              className="hidden lg:block mt-1 text-[.8rem]"
               style={{ color: "var(--ink)", opacity: 1 }}
             >
               {tagline}
@@ -161,7 +161,7 @@ export default function SiteNav({
       <button
         ref={toggleRef}
         type="button"
-        className="md:hidden flex h-11 w-11 items-center justify-center rounded-full border transition hover:-translate-y-px"
+        className="md:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition hover:-translate-y-px"
         style={{
           borderColor: "rgba(91,158,160,0.25)",
           background: "rgba(255,255,255,0.6)",

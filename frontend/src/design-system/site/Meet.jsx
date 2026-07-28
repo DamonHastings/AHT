@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ReadMore from "./ReadMore";
 
 /**
  * V3 Meet - therapist profile with photo placeholder and credentials
@@ -143,14 +144,7 @@ export default function Meet({
             : heading}
         </h2>
 
-        {paragraphs.map((p, idx) => (
-          <p
-            key={idx}
-            className="site-body-copy text-base mb-4"
-          >
-            {p}
-          </p>
-        ))}
+        <ReadMore paragraphs={paragraphs} />
 
         <div className="flex flex-wrap gap-2 mt-8">
           {credentials.map((c, idx) => (

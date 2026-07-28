@@ -28,6 +28,10 @@ export default function Fees({
   contactPhone,
   ctaText = "Schedule a free consultation",
   ctaHref = "#book",
+  imageSrc,
+  imageSrcSet,
+  imageWebpSrcSet,
+  imageAlt = "",
 }) {
   const renderHeading = () => {
     if (!headingEmphasis || !heading.includes(headingEmphasis)) return heading;
@@ -55,6 +59,29 @@ export default function Fees({
         </span>
         <h2 className="site-heading text-2xl md:text-3xl mb-4 max-w-[24ch]">{renderHeading()}</h2>
         {intro && <p className="site-body-copy text-base mb-10 max-w-[62ch]">{intro}</p>}
+
+        {imageSrc && (
+          <div className="mb-10 overflow-hidden rounded-2xl shadow-md">
+            <picture>
+              {imageWebpSrcSet && (
+                <source
+                  type="image/webp"
+                  srcSet={imageWebpSrcSet}
+                  sizes="(min-width: 1100px) 1040px, 100vw"
+                />
+              )}
+              <img
+                src={imageSrc}
+                srcSet={imageSrcSet}
+                sizes="(min-width: 1100px) 1040px, 100vw"
+                alt={imageAlt}
+                loading="lazy"
+                decoding="async"
+                className="h-44 w-full object-cover md:h-56"
+              />
+            </picture>
+          </div>
+        )}
 
         {resolvedCards.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -140,4 +167,8 @@ Fees.propTypes = {
   contactPhone: PropTypes.string,
   ctaText: PropTypes.string,
   ctaHref: PropTypes.string,
+  imageSrc: PropTypes.string,
+  imageSrcSet: PropTypes.string,
+  imageWebpSrcSet: PropTypes.string,
+  imageAlt: PropTypes.string,
 };

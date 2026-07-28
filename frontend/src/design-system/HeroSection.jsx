@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Button from "./Button";
 import HeroCollage from "./HeroCollage";
+import ReadMore from "./site/ReadMore";
 import { CONTAINER, GRID_12 } from "./layout";
 
 export default function HeroSection({
@@ -139,16 +140,18 @@ export default function HeroSection({
       )}
 
       {subheading && (
-        <div className="mb-11 flex w-full max-w-[460px] flex-col gap-4">
-          {String(subheading)
-            .split(/\n+/)
-            .map((para) => para.trim())
-            .filter(Boolean)
-            .map((para, i) => (
-              <p key={i} className="site-body-copy text-[1.05rem]">
-                {para}
-              </p>
-            ))}
+        // Below md, keep the first two intro paragraphs and collapse the rest so
+        // the CTA and section links sit higher; every paragraph shows from md up.
+        <div className="mb-11 w-full max-w-[460px]">
+          <ReadMore
+            paragraphs={String(subheading)
+              .split(/\n+/)
+              .map((para) => para.trim())
+              .filter(Boolean)}
+            leadCount={2}
+            paragraphClassName="site-body-copy text-[1.05rem] mb-4"
+            toggleColor="var(--teal-deep)"
+          />
         </div>
       )}
 
