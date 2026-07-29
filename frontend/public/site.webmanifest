@@ -1,7 +1,6 @@
 {
-  "name": "Arielle Hastings, LMFT — Expressive Arts Therapy",
+  "name": "Arielle Rae Hastings Therapy",
   "short_name": "ARH",
-  "description": "Expressive arts therapy in Davis, CA.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -16,8 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#b05a4a",
-  "background_color": "#f4f0e8",
-  "display": "standalone",
-  "start_url": "/"
+  "theme_color": "#fdfbf7",
+  "background_color": "#fdfbf7",
+  "display": "standalone"
 }
