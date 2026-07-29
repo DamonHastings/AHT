@@ -40,6 +40,7 @@ const SOURCES = [
   { src: path.join(FRONTEND, "photos", "background.jpg"), name: "background" },
   { src: path.join(FRONTEND, "photos", "nature-butterfly.jpg"), name: "nature-butterfly" },
   { src: path.join(FRONTEND, "photos", "nature-sunset.jpg"), name: "nature-sunset" },
+  { src: path.join(FRONTEND, "photos", "IMG_8155.JPG"), name: "lion" },
 ];
 
 async function fileExists(filePath) {

@@ -157,7 +157,7 @@ export function renderBlockComponent(component, index) {
             modalities={component.modalities}
             images={[
               { ...responsiveImage("exa1"), alt: "Client expressive-arts piece" },
-              { ...responsiveImage("exa2"), alt: "Client expressive-arts piece" },
+              { ...responsiveImage("lion"), alt: "Client expressive-arts piece" },
               { ...responsiveImage("exa3"), alt: "Client expressive-arts piece" },
               { ...responsiveImage("art-feelings"), alt: "Hand-drawn wheel of feelings" },
               { ...responsiveImage("art-hands"), alt: "Painted stones held in a hand" },

@@ -124,7 +124,7 @@ export default function HeroSection({
 
       {heading && (
         <h1
-          className="site-display text-4xl lg:text-[clamp(2.8rem,4.6vw,4.4rem)] mb-8 max-w-[min(100%,34rem)]"
+          className="site-display text-4xl lg:text-[clamp(2.8rem,4.6vw,4.4rem)] mb-8 max-w-[min(100%,38rem)]"
           style={{ color: "var(--ink)" }}
         >
           {headingEmphasis && heading.includes(headingEmphasis) ? (
@@ -142,7 +142,7 @@ export default function HeroSection({
       {subheading && (
         // Below md, keep the first two intro paragraphs and collapse the rest so
         // the CTA and section links sit higher; every paragraph shows from md up.
-        <div className="mb-11 w-full max-w-[460px]">
+        <div className="mb-11 w-full max-w-[500px]">
           <ReadMore
             paragraphs={String(subheading)
               .split(/\n+/)
@@ -274,7 +274,7 @@ export default function HeroSection({
 
   const blobVisual = (
     <div
-      className={`relative flex w-full min-w-0 min-h-0 items-center justify-center items-center py-8 sm:py-10 lg:py-12 ${blobFramePadding}`}
+      className={`relative flex w-full min-w-0 min-h-0 items-center justify-center items-center py-8 sm:py-10 lg:py-20 ${blobFramePadding}`}
     >
       <div className={organicFrameClass}>
         <div className="absolute inset-0 overflow-hidden shadow-2xl" style={maskStyle}>
@@ -329,7 +329,7 @@ export default function HeroSection({
           <div className={`grid w-full min-h-0 max-w-[1400px] mx-auto grid-cols-1 items-stretch ${organicLgGridClass}`}>
             {organicImageSide === "left" && (
               <>
-                <div className="max-md:order-1 order-1 min-w-0 items-center justify-center">{visual}</div>
+                <div className="max-md:order-1 order-1 min-w-0 items-start justify-center">{visual}</div>
                 <div className="max-md:order-2 order-2 flex min-w-0 flex-col justify-center px-6 pt-2 pb-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20">
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
@@ -338,7 +338,7 @@ export default function HeroSection({
             {organicImageSide === "right" && (
               <>
                 <div
-                  className={`max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-6 pt-2 pb-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20 ${
+                  className={`max-md:order-2 order-1 flex min-w-0 flex-col justify-center px-3 pt-2 pb-6 md:py-12 md:px-12 lg:px-[5.5rem] lg:py-20 md:pt-20 ${
                     isCollage ? "max-lg:!pt-3" : ""
                   }`}
                 >

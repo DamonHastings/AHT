@@ -61,39 +61,45 @@ export default function FocusAreas({
           </span>
         )}
 
-        <p
-          className="site-heading text-[clamp(1.5rem,3.4vw,2.4rem)] leading-[1.25]"
-          style={{ minHeight: "2.5em" }}
-        >
-          {leadIn}{" "}
-          {animate ? (
-            <>
-              {/* Animated, decorative: SR users get the static list below instead. */}
+        {animate ? (
+          <div className="grid grid-cols-1 site-heading text-[clamp(1.5rem,3.4vw,2.4rem)] leading-[1.25]">
+            {/* Every phrase is laid out (hidden) in the same grid cell, so this
+                block is always as tall as the longest-wrapping phrase — the
+                content below never jumps as the line rotates, at any width. */}
+            {items.map((it, i) => (
+              <p key={i} className="col-start-1 row-start-1 m-0 invisible" aria-hidden="true">
+                {leadIn}{" "}
+                <span className="italic">{it}</span>
+              </p>
+            ))}
+            {/* The visible, rotating line, overlaid in the same cell. */}
+            <p className="col-start-1 row-start-1 m-0" aria-hidden="true">
+              {leadIn}{" "}
               <span
-                className="inline-flex justify-center items-baseline align-baseline"
-                style={{ minHeight: "1.3em" }}
-                aria-hidden="true"
+                key={index}
+                className="italic"
+                style={{
+                  color: "var(--terracotta)",
+                  animation: "faRise 0.6s ease-out",
+                  willChange: "opacity, transform",
+                }}
               >
-                <span
-                  key={index}
-                  className="italic"
-                  style={{
-                    color: "var(--terracotta)",
-                    animation: "faRise 0.6s ease-out",
-                    willChange: "opacity, transform",
-                  }}
-                >
-                  {items[index]}
-                </span>
+                {items[index]}
               </span>
-              <span className="sr-only">{items.join(", ")}.</span>
-            </>
-          ) : (
+            </p>
+            {/* The motion is decorative; screen readers get the full list once. */}
+            <span className="sr-only">
+              {leadIn} {items.join(", ")}.
+            </span>
+          </div>
+        ) : (
+          <p className="site-heading text-[clamp(1.5rem,3.4vw,2.4rem)] leading-[1.25]">
+            {leadIn}{" "}
             <span className="italic" style={{ color: "var(--terracotta)" }}>
               {items.join(" · ")}
             </span>
-          )}
-        </p>
+          </p>
+        )}
 
         {audienceLine && (
           <p
