@@ -344,7 +344,7 @@ export default function HeroSection({
                 >
                   <div className="w-full max-w-2xl">{organicExpressiveContent}</div>
                 </div>
-                <div className="max-md:order-1 order-2 min-w-0 items-center justify-center flex">{visual}</div>
+                <div className="max-md:order-1 order-2 min-w-0 items-start justify-center flex">{visual}</div>
               </>
             )}
           </div>

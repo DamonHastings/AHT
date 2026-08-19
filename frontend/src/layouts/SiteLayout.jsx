@@ -29,6 +29,21 @@ export default function SiteLayout({ children }) {
     setIsContactModalOpen(false);
   }, []);
 
+  // Open a modal when the page loads with a modal hash in the URL, so a direct
+  // link works the same as an in-page click. This lets external links — a
+  // business card, an email signature, a bookmark — point straight at
+  // arielleraehastings.com/#book and land on the booking scheduler.
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === "#book") {
+      trackEvent("Consultation Started", { source: "direct-link" });
+      setIsConsultationModalOpen(true);
+    } else if (hash === "#contact") {
+      trackEvent("Contact Started", { source: "direct-link" });
+      setIsContactModalOpen(true);
+    }
+  }, []);
+
   // Scroll to a hash anchor on first load. When arriving from outside the site
   // (e.g. a bookmark or a link to /#meet), the target section doesn't exist yet
   // while the page is fetching/rendering, so the browser's native jump finds
